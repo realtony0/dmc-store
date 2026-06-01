@@ -58,21 +58,86 @@
         /* ── HEADER ── */
         .header {
             position: sticky; top: 0; z-index: 100;
-            background: var(--dark);
-            padding: 12px 20px;
+            background: rgba(18,18,20,0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0 24px;
+            height: 64px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,.35);
+            box-shadow: 0 1px 0 rgba(255,255,255,.07), 0 4px 20px rgba(0,0,0,.4);
         }
-        .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #fff; }
+        .logo {
+            font-family: 'Poppins', sans-serif; font-weight: 800;
+            font-size: 22px; color: #fff; letter-spacing: -0.5px;
+            text-decoration: none; flex-shrink: 0;
+        }
         .logo span { color: var(--orange); }
+
+        /* Desktop nav */
+        .nav {
+            display: flex; align-items: center; gap: 6px;
+            list-style: none;
+        }
+        .nav a {
+            color: rgba(255,255,255,.7); text-decoration: none;
+            font-size: 14px; font-weight: 500; padding: 6px 12px;
+            border-radius: 8px; transition: all .2s;
+        }
+        .nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
+
         .header-btn {
             background: var(--red); color: #fff;
-            padding: 8px 16px; border-radius: 20px;
-            font-size: 13px; font-weight: 700;
-            text-decoration: none; transition: background .2s;
-            white-space: nowrap;
+            padding: 9px 20px; border-radius: 22px;
+            font-size: 14px; font-weight: 700;
+            text-decoration: none; transition: all .2s;
+            white-space: nowrap; flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(230,48,18,.4);
         }
-        .header-btn:hover { background: var(--red-dark); }
+        .header-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+        /* Hamburger (mobile) */
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: #fff; border-radius: 2px;
+            transition: all .3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+        /* Mobile nav drawer */
+        .mobile-nav {
+            display: none;
+            position: fixed; top: 64px; left: 0; right: 0;
+            background: rgba(18,18,20,.98);
+            backdrop-filter: blur(12px);
+            padding: 20px 24px 28px;
+            z-index: 99;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            flex-direction: column; gap: 4px;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: rgba(255,255,255,.8); text-decoration: none;
+            font-size: 16px; font-weight: 500; padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .mobile-nav a:last-child { border: none; }
+        .mobile-nav .mob-cta {
+            margin-top: 12px; text-align: center;
+            background: var(--red); color: #fff; padding: 14px;
+            border-radius: 14px; font-weight: 700; font-size: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .nav { display: none; }
+            .header-btn { display: none; }
+            .hamburger { display: flex; }
+        }
 
         /* ── URGENCY BAR ── */
         .urgency-bar {
@@ -99,23 +164,49 @@
 
         /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, #1C1C1E 0%, #2d1a0e 100%);
-            padding: 56px 20px 48px; text-align: center;
+            position: relative;
+            min-height: 92vh;
+            display: flex; align-items: center;
+            background-image: url('PHOTO-2026-05-18-19-26-58.jpg');
+            background-size: cover;
+            background-position: center top;
+            padding: 80px 24px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(0,0,0,.82) 0%,
+                rgba(20,8,0,.78) 50%,
+                rgba(0,0,0,.65) 100%
+            );
+        }
+        .hero-inner {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 680px; margin: 0 auto;
         }
         .hero-badge {
-            display: inline-block;
-            background: rgba(255,149,0,.18); border: 1px solid var(--orange);
-            color: var(--orange); padding: 6px 16px; border-radius: 20px;
-            font-size: 13px; font-weight: 600; margin-bottom: 20px;
-            text-transform: uppercase; letter-spacing: .5px;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,149,0,.15); border: 1px solid rgba(255,149,0,.5);
+            color: var(--orange); padding: 7px 18px; border-radius: 24px;
+            font-size: 13px; font-weight: 600; margin-bottom: 24px;
+            text-transform: uppercase; letter-spacing: .8px;
+            backdrop-filter: blur(8px);
         }
         .hero h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(28px, 8vw, 52px); font-weight: 800;
-            color: #fff; line-height: 1.15; margin-bottom: 16px;
+            font-size: clamp(32px, 9vw, 58px); font-weight: 800;
+            color: #fff; line-height: 1.1; margin-bottom: 18px;
+            text-shadow: 0 2px 20px rgba(0,0,0,.4);
         }
         .hero h1 em { color: var(--red); font-style: normal; }
-        .hero-sub { color: rgba(255,255,255,.72); font-size: clamp(15px, 3vw, 18px); max-width: 500px; margin: 0 auto 28px; }
+        .hero-sub {
+            color: rgba(255,255,255,.78); font-size: clamp(15px, 3vw, 19px);
+            max-width: 520px; margin: 0 auto 32px; line-height: 1.6;
+        }
 
         .product-card {
             border-radius: 20px; overflow: hidden;
@@ -335,9 +426,30 @@
 
 <!-- ─── HEADER ─── -->
 <header class="header">
-    <div class="logo">DMC <span>Store</span></div>
-    <a href="#commander" class="header-btn">Commander →</a>
+    <a href="#" class="logo">DMC <span>Store</span></a>
+
+    <ul class="nav">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#produit">Produit</a></li>
+        <li><a href="#avantages">Avantages</a></li>
+        <li><a href="#avis">Avis clients</a></li>
+    </ul>
+
+    <a href="#commander" class="header-btn">🛒 Commander →</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
 </header>
+
+<!-- Mobile nav -->
+<nav class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="closeMobileNav()">🏠 Accueil</a>
+    <a href="#produit" onclick="closeMobileNav()">📦 Produit</a>
+    <a href="#avantages" onclick="closeMobileNav()">✅ Avantages</a>
+    <a href="#avis" onclick="closeMobileNav()">⭐ Avis clients</a>
+    <a href="#commander" class="mob-cta" onclick="closeMobileNav()">🛒 Commander maintenant</a>
+</nav>
 
 <!-- ─── URGENCY BAR ─── -->
 <div class="urgency-bar">
@@ -345,13 +457,13 @@
 </div>
 
 <!-- ─── HERO ─── -->
-<section class="hero">
-    <div class="container">
+<section class="hero" id="accueil">
+    <div class="hero-inner">
         <div class="hero-badge">🇸🇳 Livraison partout au Sénégal</div>
         <h1>Débouchez vos canalisations en<br><em>moins de 5 minutes</em> !</h1>
-        <p class="hero-sub">Le déboucheur ultra-puissant qui élimine les bouchons les plus résistants. Sans effort, sans plombier.</p>
+        <p class="hero-sub">Le déboucheur ultra-puissant qui élimine les bouchons les plus résistants. Sans effort, sans plombier — livré directement chez vous.</p>
 
-        <div class="product-card">
+        <div class="product-card" id="produit">
             <img class="product-img" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur Puissant DMC Store">
         </div>
 
@@ -402,7 +514,7 @@
         <div class="tag">La solution</div>
         <h2>Pourquoi choisir le Déboucheur DMC Pro ?</h2>
         <p class="sub">Une formule professionnelle accessible à tous</p>
-        <div class="benefits-grid">
+        <div class="benefits-grid" id="avantages">
             <div class="benefit">
                 <span class="benefit-ico">⚡</span>
                 <div class="benefit-title">Action en 5 min</div>
@@ -470,7 +582,7 @@
 </section>
 
 <!-- ─── TÉMOIGNAGES ─── -->
-<section class="testimonials-section">
+<section class="testimonials-section" id="avis">
     <div class="container">
         <div class="tag">Avis clients</div>
         <h2>Ce que disent nos clients</h2>
@@ -719,6 +831,27 @@ document.querySelectorAll('a[href="#commander"]').forEach(a => {
         e.preventDefault();
         document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
     });
+});
+
+// ── Hamburger menu ──
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+});
+
+function closeMobileNav() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+}
+
+// Fermer le menu en cliquant ailleurs
+document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+        closeMobileNav();
+    }
 });
 </script>
 
