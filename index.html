@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Déboucheur ultra-puissant livré à domicile au Sénégal. Débouchez vos canalisations en 5 minutes. Paiement à la livraison.">
+    <title>Déboucheur Ultra-Puissant | DMC Store Sénégal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ============================================================
+         META PIXEL — Remplacez VOTRE_PIXEL_ID par votre vrai Pixel ID
+         ============================================================ -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'VOTRE_PIXEL_ID');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=VOTRE_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --red:        #E63012;
+            --red-dark:   #C0260F;
+            --orange:     #FF9500;
+            --dark:       #1C1C1E;
+            --gray:       #636366;
+            --light:      #F2F2F7;
+            --white:      #FFFFFF;
+            --green:      #34C759;
+            --radius:     12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--dark);
+            padding: 12px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,.35);
+        }
+        .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; color: #fff; }
+        .logo span { color: var(--orange); }
+        .header-btn {
+            background: var(--red); color: #fff;
+            padding: 8px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 700;
+            text-decoration: none; transition: background .2s;
+            white-space: nowrap;
+        }
+        .header-btn:hover { background: var(--red-dark); }
+
+        /* ── URGENCY BAR ── */
+        .urgency-bar {
+            background: var(--orange); color: #fff;
+            text-align: center; padding: 10px 20px;
+            font-size: 14px; font-weight: 600;
+        }
+        .urgency-bar strong { font-weight: 800; }
+
+        /* ── UTILS ── */
+        .container { max-width: 680px; margin: 0 auto; }
+        section { padding: 60px 20px; }
+
+        .tag {
+            text-transform: uppercase; font-size: 11px; font-weight: 700;
+            letter-spacing: 2px; color: var(--red); margin-bottom: 8px;
+        }
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 800; line-height: 1.2; margin-bottom: 12px;
+        }
+        .sub { color: var(--gray); font-size: 16px; margin-bottom: 36px; }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #1C1C1E 0%, #2d1a0e 100%);
+            padding: 56px 20px 48px; text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,149,0,.18); border: 1px solid var(--orange);
+            color: var(--orange); padding: 6px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-bottom: 20px;
+            text-transform: uppercase; letter-spacing: .5px;
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(28px, 8vw, 52px); font-weight: 800;
+            color: #fff; line-height: 1.15; margin-bottom: 16px;
+        }
+        .hero h1 em { color: var(--red); font-style: normal; }
+        .hero-sub { color: rgba(255,255,255,.72); font-size: clamp(15px, 3vw, 18px); max-width: 500px; margin: 0 auto 28px; }
+
+        .product-card {
+            border-radius: 20px; overflow: hidden;
+            max-width: 360px; margin: 0 auto 28px;
+            box-shadow: 0 12px 40px rgba(0,0,0,.5);
+            border: 2px solid rgba(230,48,18,.35);
+        }
+        .product-img {
+            width: 100%; display: block;
+            border-radius: 18px;
+        }
+        .price-row { display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .price-old { color: rgba(255,255,255,.35); font-size: 17px; text-decoration: line-through; }
+        .price-new { color: var(--orange); font-family: 'Poppins', sans-serif; font-size: 34px; font-weight: 800; }
+        .price-unit { color: rgba(255,255,255,.55); font-size: 14px; }
+
+        .btn-main {
+            display: block; width: 100%; max-width: 400px; margin: 0 auto;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff; padding: 18px 32px; border-radius: 50px;
+            font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+            text-decoration: none; text-align: center; border: none; cursor: pointer;
+            box-shadow: 0 8px 25px rgba(230,48,18,.4);
+            transition: transform .25s, box-shadow .25s;
+            animation: pulse-shadow 2s ease-in-out infinite;
+        }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(230,48,18,.55); }
+        .btn-main:active { transform: translateY(0); }
+
+        @keyframes pulse-shadow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(230,48,18,.4); }
+            50%       { box-shadow: 0 8px 35px rgba(230,48,18,.7); }
+        }
+
+        .trust-row {
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 16px; margin-top: 20px;
+        }
+        .trust-item { color: rgba(255,255,255,.65); font-size: 13px; display: flex; align-items: center; gap: 5px; }
+
+        /* ── PROBLEM ── */
+        .problem-section { background: var(--light); }
+        .problems { display: flex; flex-direction: column; gap: 12px; }
+        .problem {
+            display: flex; gap: 14px; align-items: flex-start;
+            background: #fff; padding: 16px; border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        .problem-ico { font-size: 26px; flex-shrink: 0; }
+        .problem strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .problem p { font-size: 14px; color: var(--gray); }
+
+        /* ── BENEFITS ── */
+        .benefits-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+        }
+        .benefit {
+            background: var(--white); border: 1px solid #E5E5EA;
+            border-radius: var(--radius); padding: 20px; text-align: center;
+            transition: box-shadow .2s;
+        }
+        .benefit:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+        .benefit-ico { font-size: 36px; display: block; margin-bottom: 8px; }
+        .benefit-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+        .benefit-desc { font-size: 13px; color: var(--gray); }
+
+        /* ── STEPS ── */
+        .steps-section { background: var(--dark); color: #fff; }
+        .steps-section h2 { color: #fff; }
+        .steps-section .sub { color: rgba(255,255,255,.55); }
+        .steps-section .tag { color: var(--orange); }
+        .steps { display: flex; flex-direction: column; gap: 20px; }
+        .step { display: flex; gap: 16px; align-items: flex-start; }
+        .step-num {
+            width: 44px; height: 44px; min-width: 44px;
+            background: var(--red); border-radius: 50%;
+            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 18px; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 3px; }
+        .step-desc { color: rgba(255,255,255,.6); font-size: 14px; }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials-section { background: var(--light); }
+        .testimonials { display: flex; flex-direction: column; gap: 14px; }
+        .tcard {
+            background: #fff; border-radius: var(--radius); padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.07);
+        }
+        .stars { color: #FFD700; font-size: 17px; margin-bottom: 8px; }
+        .ttext { font-size: 15px; font-style: italic; color: var(--dark); margin-bottom: 14px; line-height: 1.5; }
+        .tauthor { display: flex; align-items: center; gap: 10px; }
+        .avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: #fff; font-weight: 700; font-size: 14px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .tname { font-weight: 600; font-size: 14px; }
+        .tloc { font-size: 12px; color: var(--gray); }
+
+        /* ── OFFER BANNER ── */
+        .offer-section {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff; text-align: center;
+        }
+        .offer-section h2 { color: #fff; }
+        .offer-section .tag { color: rgba(255,255,255,.7); }
+        .offer-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        .offer-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,.12); padding: 14px 18px; border-radius: 10px;
+            font-size: 15px;
+        }
+        .offer-row.best {
+            background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.45);
+        }
+        .badge-pop {
+            background: var(--orange); color: #fff;
+            font-size: 10px; font-weight: 700; padding: 2px 8px;
+            border-radius: 10px; text-transform: uppercase; margin-left: 6px;
+        }
+        .offer-price { font-weight: 700; font-size: 16px; }
+        .countdown-row {
+            display: flex; justify-content: center; align-items: center;
+            gap: 8px; margin-top: 16px;
+            color: rgba(255,255,255,.8); font-size: 14px;
+        }
+        #timer {
+            background: rgba(0,0,0,.3); padding: 3px 10px;
+            border-radius: 6px; font-family: monospace; font-weight: 700; font-size: 16px;
+        }
+
+        /* ── ORDER FORM ── */
+        .form-section { background: var(--white); }
+        .form-section h2 { text-align: center; }
+        .form-section .sub { text-align: center; }
+        .form-section .tag { text-align: center; }
+
+        .order-form {
+            background: #fff; border: 1px solid #E5E5EA;
+            border-radius: 20px; padding: 28px 24px;
+            box-shadow: 0 8px 40px rgba(0,0,0,.1);
+        }
+        .form-group { margin-bottom: 18px; }
+        label {
+            display: block; font-weight: 600; font-size: 14px;
+            margin-bottom: 6px; color: var(--dark);
+        }
+        label em { color: var(--red); font-style: normal; }
+        .inp {
+            width: 100%; padding: 14px 16px;
+            border: 2px solid #E5E5EA; border-radius: var(--radius);
+            font-size: 16px; font-family: 'Inter', sans-serif;
+            background: var(--light); color: var(--dark);
+            transition: border-color .2s, background .2s;
+            -webkit-appearance: none;
+        }
+        .inp:focus { outline: none; border-color: var(--red); background: #fff; }
+
+        .qty-wrap { display: flex; gap: 10px; }
+        .qty-opt {
+            flex: 1; padding: 12px 8px;
+            background: var(--light); border: 2px solid #E5E5EA;
+            border-radius: 10px; font-size: 14px; font-weight: 700;
+            cursor: pointer; color: var(--dark);
+            transition: all .2s; text-align: center;
+        }
+        .qty-opt.on {
+            background: var(--red); border-color: var(--red);
+            color: #fff; box-shadow: 0 4px 12px rgba(230,48,18,.3);
+        }
+        .qty-opt:hover:not(.on) { border-color: var(--red); color: var(--red); }
+
+        .submit-btn {
+            width: 100%; padding: 18px;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff; border: none; border-radius: 50px;
+            font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+            cursor: pointer; margin-top: 8px;
+            box-shadow: 0 8px 25px rgba(230,48,18,.4);
+            transition: transform .25s, box-shadow .25s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(230,48,18,.55); }
+        .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+        .form-note { text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray); }
+
+        /* ── SUCCESS ── */
+        #successState {
+            display: none; text-align: center; padding: 32px 10px;
+        }
+        #successState.show { display: block; }
+        .success-ico { font-size: 64px; margin-bottom: 14px; }
+        .success-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+        .success-msg { color: var(--gray); font-size: 15px; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark); color: rgba(255,255,255,.45);
+            text-align: center; padding: 30px 20px; font-size: 13px;
+        }
+        .footer-logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 18px; color: #fff; margin-bottom: 6px; }
+        .footer-logo span { color: var(--orange); }
+        .footer-banner { width: 100%; max-width: 500px; border-radius: 12px; margin: 0 auto 16px; display: block; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 380px) {
+            .benefits-grid { grid-template-columns: 1fr; }
+            .qty-wrap { flex-wrap: wrap; }
+            .qty-opt { min-width: 45%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="header">
+    <div class="logo">DMC <span>Store</span></div>
+    <a href="#commander" class="header-btn">Commander →</a>
+</header>
+
+<!-- ─── URGENCY BAR ─── -->
+<div class="urgency-bar">
+    🔥 Offre limitée : <strong>-30% + livraison gratuite</strong> aujourd'hui seulement !
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">🇸🇳 Livraison partout au Sénégal</div>
+        <h1>Débouchez vos canalisations en<br><em>moins de 5 minutes</em> !</h1>
+        <p class="hero-sub">Le déboucheur ultra-puissant qui élimine les bouchons les plus résistants. Sans effort, sans plombier.</p>
+
+        <div class="product-card">
+            <img class="product-img" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur Puissant DMC Store">
+        </div>
+
+        <a href="#commander" class="btn-main">🛒 Commander maintenant</a>
+
+        <div class="trust-row">
+            <span class="trust-item">🚚 Livraison rapide</span>
+            <span class="trust-item">✅ Paiement à la livraison</span>
+            <span class="trust-item">⭐ +500 clients satisfaits</span>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PROBLÈME ─── -->
+<section class="problem-section">
+    <div class="container">
+        <div class="tag">Le problème</div>
+        <h2>Vous souffrez de ces situations ?</h2>
+        <div class="problems">
+            <div class="problem">
+                <span class="problem-ico">😤</span>
+                <div>
+                    <strong>Évier ou douche bouché depuis des jours</strong>
+                    <p>L'eau ne coule plus et la mauvaise odeur envahit votre maison</p>
+                </div>
+            </div>
+            <div class="problem">
+                <span class="problem-ico">💸</span>
+                <div>
+                    <strong>Le plombier coûte trop cher</strong>
+                    <p>Des factures de 20 000 à 50 000 FCFA pour un simple bouchon</p>
+                </div>
+            </div>
+            <div class="problem">
+                <span class="problem-ico">😩</span>
+                <div>
+                    <strong>Les autres produits ne fonctionnent pas</strong>
+                    <p>Vous avez tout essayé mais le bouchon résiste toujours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── BÉNÉFICES ─── -->
+<section>
+    <div class="container">
+        <div class="tag">La solution</div>
+        <h2>Pourquoi choisir le Déboucheur DMC Pro ?</h2>
+        <p class="sub">Une formule professionnelle accessible à tous</p>
+        <div class="benefits-grid">
+            <div class="benefit">
+                <span class="benefit-ico">⚡</span>
+                <div class="benefit-title">Action en 5 min</div>
+                <div class="benefit-desc">Résultats visibles presque immédiatement</div>
+            </div>
+            <div class="benefit">
+                <span class="benefit-ico">💪</span>
+                <div class="benefit-title">Ultra-puissant</div>
+                <div class="benefit-desc">Dissout graisses, cheveux et résidus</div>
+            </div>
+            <div class="benefit">
+                <span class="benefit-ico">🔒</span>
+                <div class="benefit-title">Sans abîmer</div>
+                <div class="benefit-desc">Compatible avec toutes vos canalisations</div>
+            </div>
+            <div class="benefit">
+                <span class="benefit-ico">💰</span>
+                <div class="benefit-title">Économique</div>
+                <div class="benefit-desc">10× moins cher qu'un plombier</div>
+            </div>
+            <div class="benefit">
+                <span class="benefit-ico">🏠</span>
+                <div class="benefit-title">Polyvalent</div>
+                <div class="benefit-desc">Évier, douche, WC, baignoire</div>
+            </div>
+            <div class="benefit">
+                <span class="benefit-ico">📦</span>
+                <div class="benefit-title">Livré chez vous</div>
+                <div class="benefit-desc">Dakar et partout au Sénégal</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── COMMENT ÇA MARCHE ─── -->
+<section class="steps-section">
+    <div class="container">
+        <div class="tag">Mode d'emploi</div>
+        <h2>Aussi simple que 1, 2, 3</h2>
+        <p class="sub">Pas besoin d'être plombier !</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <div class="step-title">Versez le produit</div>
+                    <div class="step-desc">Versez directement dans la canalisation bouchée, sans dilution</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <div class="step-title">Attendez 5 minutes</div>
+                    <div class="step-desc">La formule agit en profondeur pour dissoudre graisses et cheveux</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <div class="step-title">Rincez à l'eau chaude</div>
+                    <div class="step-desc">Faites couler de l'eau chaude — canalisation parfaitement débouchée !</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── TÉMOIGNAGES ─── -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="tag">Avis clients</div>
+        <h2>Ce que disent nos clients</h2>
+        <div class="testimonials">
+            <div class="tcard">
+                <div class="stars">★★★★★</div>
+                <div class="ttext">« Incroyable ! Mon évier était bouché depuis 2 semaines. J'ai versé le produit, attendu 5 minutes et l'eau coule parfaitement. Je recommande à toute ma famille ! »</div>
+                <div class="tauthor">
+                    <div class="avatar">A</div>
+                    <div>
+                        <div class="tname">Aïssatou D.</div>
+                        <div class="tloc">Dakar, Médina</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tcard">
+                <div class="stars">★★★★★</div>
+                <div class="ttext">« J'avais appelé un plombier qui m'a demandé 25 000 FCFA. J'ai commandé ce produit à 9 000 F et le problème est réglé en 5 minutes. Énorme économie ! »</div>
+                <div class="tauthor">
+                    <div class="avatar">M</div>
+                    <div>
+                        <div class="tname">Mamadou S.</div>
+                        <div class="tloc">Thiès</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tcard">
+                <div class="stars">★★★★★</div>
+                <div class="ttext">« Livraison rapide, produit très efficace. Ma douche était complètement bouchée à cause des cheveux. Résultat immédiat. Merci DMC Store ! »</div>
+                <div class="tauthor">
+                    <div class="avatar">F</div>
+                    <div>
+                        <div class="tname">Fatou N.</div>
+                        <div class="tloc">Pikine</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OFFRE ─── -->
+<section class="offer-section">
+    <div class="container">
+        <div class="tag">Nos packs</div>
+        <h2>Choisissez votre quantité</h2>
+        <div class="offer-grid">
+            <div class="offer-row">
+                <div>
+                    <span style="font-weight:600">1 Déboucheur</span>
+                    <span style="font-size:12px;opacity:.7;display:block">Idéal pour tester</span>
+                </div>
+                <span class="offer-price">9 000 F CFA</span>
+            </div>
+            <div class="offer-row best">
+                <div>
+                    <span style="font-weight:700">2 Déboucheurs</span>
+                    <span class="badge-pop">⭐ Populaire</span>
+                    <span style="font-size:12px;opacity:.7;display:block">Économisez 2 000 F CFA</span>
+                </div>
+                <span class="offer-price">16 000 F CFA</span>
+            </div>
+            <div class="offer-row">
+                <div>
+                    <span style="font-weight:600">3 Déboucheurs</span>
+                    <span style="font-size:12px;opacity:.7;display:block">Économisez 5 000 F CFA</span>
+                </div>
+                <span class="offer-price">22 000 F CFA</span>
+            </div>
+        </div>
+        <a href="#commander" class="btn-main" style="color:#fff;">🛒 Commander maintenant</a>
+        <div class="countdown-row">
+            ⏰ Offre expire dans : <span id="timer">23:59:59</span>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FORMULAIRE ─── -->
+<section class="form-section" id="commander">
+    <div class="container">
+        <div class="tag">Passer commande</div>
+        <h2>Recevez votre commande à domicile</h2>
+        <p class="sub">Remplissez le formulaire — nous vous appelons pour confirmer la livraison</p>
+
+        <div class="order-form">
+            <div id="formWrap">
+                <form id="orderForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Prénom et Nom <em>*</em></label>
+                        <input class="inp" type="text" id="name" placeholder="Ex: Mamadou Diallo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Numéro de téléphone <em>*</em></label>
+                        <input class="inp" type="tel" id="phone" placeholder="Ex: 77 123 45 67" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Adresse de livraison <em>*</em></label>
+                        <input class="inp" type="text" id="address" placeholder="Ex: Dakar, Médina, Rue 12" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantité <em>*</em></label>
+                        <div class="qty-wrap">
+                            <div class="qty-opt on" data-qty="1" data-price="9000">1<br><small>9 000 F</small></div>
+                            <div class="qty-opt"    data-qty="2" data-price="16000">2<br><small>16 000 F</small></div>
+                            <div class="qty-opt"    data-qty="3" data-price="22000">3<br><small>22 000 F</small></div>
+                        </div>
+                        <input type="hidden" id="qty" value="1">
+                        <input type="hidden" id="total" value="9000">
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">🛒 Confirmer ma commande</button>
+                    <p class="form-note">🔒 Paiement à la livraison · Vos informations sont confidentielles</p>
+                </form>
+            </div>
+
+            <div id="successState">
+                <div class="success-ico">✅</div>
+                <div class="success-title">Commande enregistrée !</div>
+                <p class="success-msg">
+                    Merci <strong id="sName"></strong> !<br><br>
+                    Notre équipe vous appellera au <strong id="sPhone"></strong>
+                    dans les prochaines heures pour confirmer votre livraison.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img class="footer-banner" src="PHOTO-2026-05-18-19-26-58.jpg" alt="DMC Store Sénégal">
+    <div class="footer-logo">DMC <span>Store</span></div>
+    <p>Votre boutique en ligne de confiance au Sénégal</p>
+    <p style="margin-top:6px">© 2025 DMC Store. Tous droits réservés.</p>
+</footer>
+
+<!-- ─────────────────────────────────────────────
+     JAVASCRIPT
+     ───────────────────────────────────────────── -->
+<script>
+// ══════════════════════════════════════════════
+//  CONFIG — Remplacez ces deux valeurs
+//  Voir le fichier SETUP.md pour les instructions
+// ══════════════════════════════════════════════
+const BOT_TOKEN = '8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
+const CHAT_ID   = '8224396442';
+
+// ── Sélecteur de quantité ──
+document.querySelectorAll('.qty-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.qty-opt').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        document.getElementById('qty').value   = btn.dataset.qty;
+        document.getElementById('total').value = btn.dataset.price;
+    });
+});
+
+// ── Minuteur compte à rebours (persiste 24h via localStorage) ──
+(function startTimer() {
+    const key = 'dmcEnd';
+    let end = localStorage.getItem(key);
+    if (!end || Date.now() > +end) {
+        end = Date.now() + 24 * 3600 * 1000;
+        localStorage.setItem(key, end);
+    }
+    setInterval(() => {
+        const rem = +end - Date.now();
+        if (rem <= 0) { document.getElementById('timer').textContent = '00:00:00'; return; }
+        const h = String(Math.floor(rem / 3600000)).padStart(2, '0');
+        const m = String(Math.floor(rem % 3600000 / 60000)).padStart(2, '0');
+        const s = String(Math.floor(rem % 60000 / 1000)).padStart(2, '0');
+        document.getElementById('timer').textContent = `${h}:${m}:${s}`;
+    }, 1000);
+})();
+
+// ── Soumission du formulaire → Telegram ──
+document.getElementById('orderForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const qty     = document.getElementById('qty').value;
+    const total   = parseInt(document.getElementById('total').value).toLocaleString('fr-FR');
+
+    if (!name || !phone || !address) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Envoi en cours…';
+
+    const msg =
+`🛒 *NOUVELLE COMMANDE — DMC Store*
+
+👤 *Nom :* ${name}
+📞 *Téléphone :* ${phone}
+📍 *Adresse :* ${address}
+📦 *Quantité :* ${qty} déboucheur(s)
+💰 *Total :* ${total} FCFA
+
+🕐 *Date :* ${new Date().toLocaleString('fr-SN', { timeZone: 'Africa/Dakar' })}`;
+
+    try {
+        const res = await fetch(
+            `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: 'Markdown' })
+            }
+        );
+        const data = await res.json();
+
+        if (!data.ok) throw new Error(data.description || 'Telegram error');
+
+        // Meta Pixel — événement Lead
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+                content_name: 'Déboucheur DMC Pro',
+                value: parseInt(document.getElementById('total').value),
+                currency: 'XOF'
+            });
+        }
+
+        // Afficher la confirmation
+        document.getElementById('sName').textContent  = name;
+        document.getElementById('sPhone').textContent = phone;
+        document.getElementById('formWrap').style.display = 'none';
+        const s = document.getElementById('successState');
+        s.classList.add('show');
+        s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (err) {
+        console.error(err);
+        btn.disabled = false;
+        btn.textContent = '🛒 Confirmer ma commande';
+        alert('Une erreur est survenue. Vérifiez votre connexion et réessayez.');
+    }
+});
+
+// ── Smooth scroll sur tous les boutons "#commander" ──
+document.querySelectorAll('a[href="#commander"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+
+</body>
+</html>
