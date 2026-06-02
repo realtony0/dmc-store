@@ -727,7 +727,7 @@
 //  Voir le fichier SETUP.md pour les instructions
 // ══════════════════════════════════════════════
 const BOT_TOKEN = '8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
-const CHAT_ID   = '8224396442';
+const CHAT_IDS  = ['8224396442', '5788824923']; // tous les destinataires
 
 // ── Sélecteur de quantité ──
 document.querySelectorAll('.qty-opt').forEach(btn => {
@@ -788,17 +788,18 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
 🕐 *Date :* ${new Date().toLocaleString('fr-SN', { timeZone: 'Africa/Dakar' })}`;
 
     try {
-        const res = await fetch(
-            `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: 'Markdown' })
-            }
+        // Envoyer à tous les destinataires en parallèle
+        const results = await Promise.all(
+            CHAT_IDS.map(id =>
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: id, text: msg, parse_mode: 'Markdown' })
+                }).then(r => r.json())
+            )
         );
-        const data = await res.json();
 
-        if (!data.ok) throw new Error(data.description || 'Telegram error');
+        if (!results.some(d => d.ok)) throw new Error('Telegram error');
 
         // Meta Pixel — événement Lead
         if (typeof fbq !== 'undefined') {
