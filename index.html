@@ -833,12 +833,38 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
     }
 });
 
-// ── Smooth scroll sur tous les boutons "#commander" ──
+// ── Smooth scroll + AddToCart sur les boutons "#commander" ──
 document.querySelectorAll('a[href="#commander"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
         document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
+        // Meta Pixel — AddToCart
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'AddToCart', {
+                content_name: 'Déboucheur Puissant DMC Store',
+                content_ids: ['deboucheur-dmc-001'],
+                content_type: 'product',
+                value: 9000,
+                currency: 'XOF'
+            });
+        }
     });
+});
+
+// ── InitiateCheckout quand le client commence à remplir le formulaire ──
+let checkoutTracked = false;
+document.getElementById('name').addEventListener('focus', () => {
+    if (!checkoutTracked && typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+            content_name: 'Déboucheur Puissant DMC Store',
+            content_ids: ['deboucheur-dmc-001'],
+            content_type: 'product',
+            value: 9000,
+            currency: 'XOF',
+            num_items: 1
+        });
+        checkoutTracked = true;
+    }
 });
 
 // ── Hamburger menu ──
