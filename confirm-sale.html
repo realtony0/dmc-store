@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMC Store — Confirmer une vente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- META PIXEL -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','2474537633073955');
+    fbq('track','PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2474537633073955&ev=PageView&noscript=1"/></noscript>
+
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',sans-serif;background:#F7F7F8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+        .card{background:#fff;border-radius:24px;padding:36px 28px;max-width:420px;width:100%;box-shadow:0 12px 48px rgba(0,0,0,.1);text-align:center}
+        .logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;color:#1A1A1A;margin-bottom:28px}
+        .logo span{color:#FF9500}
+        h1{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;color:#1A1A1A;margin-bottom:8px}
+        .sub{color:#6B6B6B;font-size:14px;margin-bottom:28px;line-height:1.6}
+
+        .order-info{background:#F7F7F8;border-radius:14px;padding:16px 18px;margin-bottom:22px;text-align:left;font-size:14px;line-height:1.8;color:#333}
+        .order-info strong{color:#1A1A1A}
+
+        .btn-confirm{display:block;width:100%;padding:18px;background:linear-gradient(135deg,#2ECC71,#27ae60);color:#fff;border:none;border-radius:50px;font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(46,204,113,.36);transition:transform .2s;margin-bottom:12px}
+        .btn-confirm:hover{transform:translateY(-2px)}
+        .btn-confirm:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+        .btn-cancel{display:block;width:100%;padding:15px;background:none;border:2px solid #E8E8E8;border-radius:50px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#6B6B6B;cursor:pointer;transition:all .2s}
+        .btn-cancel:hover{border-color:#E63012;color:#E63012}
+
+        /* Success */
+        #successView{display:none;text-align:center;padding:16px 0}
+        #successView.show{display:block}
+        .s-ico{font-size:72px;margin-bottom:16px}
+        .s-title{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:#2ECC71;margin-bottom:8px}
+        .s-msg{color:#6B6B6B;font-size:14px;line-height:1.7}
+
+        /* Annulé */
+        #cancelView{display:none;text-align:center;padding:16px 0}
+        #cancelView.show{display:block}
+        .c-ico{font-size:64px;margin-bottom:14px}
+        .c-title{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;color:#E63012;margin-bottom:8px}
+        .c-msg{color:#6B6B6B;font-size:14px;line-height:1.7}
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="logo">DMC <span>Store</span></div>
+
+    <!-- Vue principale -->
+    <div id="mainView">
+        <h1>Confirmer cette vente ?</h1>
+        <p class="sub">Le client a accepté la livraison.<br>Meta sera informé pour optimiser tes publicités.</p>
+
+        <div class="order-info" id="orderInfo">
+            Chargement des infos…
+        </div>
+
+        <button class="btn-confirm" id="btnConfirm">✅ Vente confirmée</button>
+        <button class="btn-cancel" id="btnCancel">❌ Annuler la commande</button>
+    </div>
+
+    <!-- Vue succès -->
+    <div id="successView">
+        <div class="s-ico">🎉</div>
+        <div class="s-title">Vente enregistrée !</div>
+        <p class="s-msg">Meta a été informé.<br>Cette vente sera prise en compte pour optimiser tes prochaines publicités.</p>
+    </div>
+
+    <!-- Vue annulation -->
+    <div id="cancelView">
+        <div class="c-ico">❌</div>
+        <div class="c-title">Commande annulée</div>
+        <p class="c-msg">La commande a été marquée comme annulée.<br>Aucun événement de vente n'a été envoyé à Meta.</p>
+    </div>
+</div>
+
+<script>
+// Lire les paramètres URL
+const params = new URLSearchParams(window.location.search);
+const nom     = params.get('nom')   || 'Client';
+const tel     = params.get('tel')   || '—';
+const adresse = params.get('adresse') || '—';
+const qty     = params.get('qty')   || '1';
+const total   = parseInt(params.get('total') || '9000');
+const totalFormatted = total.toLocaleString('fr-FR');
+
+// Afficher les infos de la commande
+document.getElementById('orderInfo').innerHTML =
+    `<strong>👤 Nom :</strong> ${nom}<br>` +
+    `<strong>📞 Téléphone :</strong> ${tel}<br>` +
+    `<strong>📍 Adresse :</strong> ${adresse}<br>` +
+    `<strong>📦 Quantité :</strong> ${qty} déboucheur(s)<br>` +
+    `<strong>💰 Total :</strong> ${totalFormatted} FCFA`;
+
+// Confirmer la vente → envoyer Purchase à Meta
+document.getElementById('btnConfirm').addEventListener('click', function() {
+    this.disabled = true;
+    this.textContent = '⏳ Envoi à Meta…';
+
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase', {
+            value: total,
+            currency: 'XOF',
+            content_name: 'Déboucheur DMC Pro',
+            content_ids: ['deboucheur-dmc-001'],
+            content_type: 'product',
+            num_items: parseInt(qty)
+        });
+    }
+
+    setTimeout(() => {
+        document.getElementById('mainView').style.display = 'none';
+        document.getElementById('successView').classList.add('show');
+    }, 800);
+});
+
+// Annuler
+document.getElementById('btnCancel').addEventListener('click', function() {
+    document.getElementById('mainView').style.display = 'none';
+    document.getElementById('cancelView').classList.add('show');
+});
+</script>
+</body>
+</html>
