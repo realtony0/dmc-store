@@ -391,7 +391,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
     try{
         const results=await Promise.all(CHAT_IDS.map(id=>fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})}).then(r=>r.json())));
         if(!results.some(d=>d.ok))throw new Error('Telegram error');
-        if(typeof fbq!=='undefined')fbq('track','Lead',{content_name:'Déboucheur DMC Pro',value:parseInt(document.getElementById('total').value),currency:'XOF'});
+        if(typeof fbq!=='undefined')fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
         document.getElementById('sName').textContent=name;document.getElementById('sPhone').textContent=phone;
         document.getElementById('formWrap').style.display='none';
         const s=document.getElementById('successState');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'center'});
