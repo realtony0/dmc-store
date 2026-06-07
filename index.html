@@ -5,665 +5,306 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Déboucheur ultra-puissant livré à domicile au Sénégal. Débouchez vos canalisations en 5 minutes. Paiement à la livraison.">
     <title>Déboucheur Ultra-Puissant | DMC Store Sénégal</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- META PIXEL -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2474537633073955');
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent', {
-        content_name: 'Déboucheur Puissant DMC Store',
-        content_ids: ['deboucheur-dmc-001'],
-        content_type: 'product',
-        value: 9000,
-        currency: 'XOF'
-    });
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','2474537633073955');
+    fbq('track','PageView');
+    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2474537633073955&ev=PageView&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2474537633073955&ev=PageView&noscript=1"/></noscript>
 
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E63012;--red-dark:#C0260F;--orange:#FF9500;
+  --dark:#1C1C1E;--gray:#636366;--light:#F5F5F7;
+  --white:#fff;--green:#34C759;--radius:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-        :root {
-            --red:      #E63012;
-            --red-dark: #C0260F;
-            --orange:   #FF9500;
-            --dark:     #1C1C1E;
-            --gray:     #636366;
-            --light:    #F2F2F7;
-            --white:    #FFFFFF;
-            --green:    #34C759;
-            --radius:   12px;
-        }
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.up{transform:translateY(40px)}
+.reveal.left{transform:translateX(-40px)}
+.reveal.right{transform:translateX(40px)}
+.reveal.scale{transform:scale(.92)}
+.reveal.shown{opacity:1;transform:none}
 
-        html { scroll-behavior: smooth; }
+/* ── HEADER ── */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(18,18,20,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  padding:0 24px;height:64px;
+  display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 1px 0 rgba(255,255,255,.07),0 4px 24px rgba(0,0,0,.5);
+}
+.logo{font-family:'Poppins',sans-serif;font-weight:900;font-size:22px;color:#fff;letter-spacing:-0.5px;text-decoration:none;flex-shrink:0}
+.logo span{color:var(--orange)}
+.nav{display:flex;align-items:center;gap:4px;list-style:none}
+.nav a{color:rgba(255,255,255,.7);text-decoration:none;font-size:14px;font-weight:500;padding:6px 12px;border-radius:8px;transition:all .2s}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.09)}
+.header-btn{background:var(--red);color:#fff;padding:9px 20px;border-radius:22px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;white-space:nowrap;flex-shrink:0;box-shadow:0 4px 14px rgba(230,48,18,.4)}
+.header-btn:hover{background:var(--red-dark);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(18,18,20,.98);backdrop-filter:blur(12px);padding:20px 24px 28px;z-index:99;border-bottom:1px solid rgba(255,255,255,.08);flex-direction:column;gap:4px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{color:rgba(255,255,255,.8);text-decoration:none;font-size:16px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.mobile-nav a:last-child{border:none}
+.mobile-nav .mob-cta{margin-top:12px;text-align:center;background:var(--red);color:#fff;padding:14px;border-radius:14px;font-weight:700;font-size:16px}
+@media(max-width:640px){.nav{display:none}.header-btn{display:none}.hamburger{display:flex}}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--white);
-            color: var(--dark);
-            font-size: 16px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ── TOP BARS ── */
+.urgency-bar{background:var(--red);color:#fff;text-align:center;padding:11px 16px;font-size:14px;font-weight:700}
+.stock-bar{background:#FFF3CD;border-bottom:2px solid #FFD600;text-align:center;padding:9px 16px;font-size:13px;font-weight:600;color:#7A5500}
+.stock-bar strong{color:var(--red)}
+.stats-bar{background:var(--dark);display:flex;justify-content:center;flex-wrap:wrap}
+.stats-bar .stat{display:flex;align-items:center;gap:7px;padding:11px 18px;color:rgba(255,255,255,.8);font-size:13px;font-weight:500;border-right:1px solid rgba(255,255,255,.1)}
+.stats-bar .stat:last-child{border-right:none}
+.stats-bar .stat strong{color:var(--orange);font-size:15px;font-weight:800}
+@media(max-width:480px){.stats-bar .stat{padding:9px 12px;font-size:12px}}
 
-        /* ── HEADER ── */
-        .header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(18,18,20,0.97);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 0 24px;
-            height: 64px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 1px 0 rgba(255,255,255,.07), 0 4px 20px rgba(0,0,0,.4);
-        }
-        .logo {
-            font-family: 'Poppins', sans-serif; font-weight: 800;
-            font-size: 22px; color: #fff; letter-spacing: -0.5px;
-            text-decoration: none; flex-shrink: 0;
-        }
-        .logo span { color: var(--orange); }
+/* ── LIVE TOAST ── */
+.live-toast{position:fixed;bottom:80px;left:16px;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:12px 16px;display:flex;align-items:center;gap:12px;z-index:9999;max-width:290px;transform:translateX(-150%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);border-left:4px solid var(--green)}
+.live-toast.show{transform:translateX(0)}
+.toast-ico{font-size:26px;flex-shrink:0}
+.toast-text strong{display:block;font-size:14px;color:var(--dark)}
+.toast-text span{font-size:12px;color:var(--gray)}
 
-        .nav {
-            display: flex; align-items: center; gap: 6px; list-style: none;
-        }
-        .nav a {
-            color: rgba(255,255,255,.7); text-decoration: none;
-            font-size: 14px; font-weight: 500; padding: 6px 12px;
-            border-radius: 8px; transition: all .2s;
-        }
-        .nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
+/* ── FLOATING CTA (mobile) ── */
+.float-cta{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:linear-gradient(135deg,var(--red),var(--red-dark));
+  color:#fff;text-decoration:none;text-align:center;
+  padding:16px 20px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;
+  box-shadow:0 -4px 20px rgba(230,48,18,.35);
+  transition:opacity .3s;
+}
+@media(max-width:640px){.float-cta{display:block}}
 
-        .header-btn {
-            background: var(--red); color: #fff;
-            padding: 9px 20px; border-radius: 22px;
-            font-size: 14px; font-weight: 700;
-            text-decoration: none; transition: all .2s;
-            white-space: nowrap; flex-shrink: 0;
-            box-shadow: 0 4px 14px rgba(230,48,18,.4);
-        }
-        .header-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+/* ── UTILS ── */
+.container{max-width:720px;margin:0 auto}
+section{padding:70px 20px}
+.tag{text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--red);margin-bottom:10px}
+.tag.white{color:rgba(255,255,255,.7)}
+h2{font-family:'Poppins',sans-serif;font-size:clamp(26px,6vw,40px);font-weight:800;line-height:1.15;margin-bottom:14px}
+.sub{color:var(--gray);font-size:16px;margin-bottom:36px}
+.section-img{width:100%;border-radius:var(--radius);display:block;box-shadow:0 8px 32px rgba(0,0,0,.1)}
 
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px;
-            background: none; border: none; cursor: pointer; padding: 4px;
-        }
-        .hamburger span {
-            display: block; width: 24px; height: 2px;
-            background: #fff; border-radius: 2px; transition: all .3s;
-        }
-        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+/* ── HERO ── */
+.hero{position:relative;min-height:95vh;display:flex;align-items:center;background-image:url('PHOTO-2026-05-18-19-26-58.jpg');background-size:cover;background-position:center top;padding:80px 24px 80px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,0,0,.87) 0%,rgba(15,5,0,.82) 50%,rgba(0,0,0,.7) 100%)}
+.hero-inner{position:relative;z-index:1;width:100%;max-width:700px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,149,0,.15);border:1px solid rgba(255,149,0,.5);color:var(--orange);padding:7px 18px;border-radius:24px;font-size:13px;font-weight:600;margin-bottom:22px;text-transform:uppercase;letter-spacing:.8px;backdrop-filter:blur(8px)}
+.hero h1{font-family:'Poppins',sans-serif;font-size:clamp(34px,9vw,62px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.hero h1 em{color:var(--red);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.8);font-size:clamp(15px,3vw,19px);max-width:540px;margin:0 auto 32px;line-height:1.65}
+.product-card-wrap{position:relative;max-width:340px;margin:0 auto 28px}
+.stock-badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--red);color:#fff;font-size:11px;font-weight:800;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;animation:pulseShadow 2s ease-in-out infinite}
+.product-card{border-radius:20px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.55);border:2px solid rgba(230,48,18,.4)}
+.product-img{width:100%;display:block}
+.price-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}
+.price-old{color:rgba(255,255,255,.35);font-size:17px;text-decoration:line-through}
+.price-new{color:var(--orange);font-family:'Poppins',sans-serif;font-size:38px;font-weight:900}
 
-        .mobile-nav {
-            display: none;
-            position: fixed; top: 64px; left: 0; right: 0;
-            background: rgba(18,18,20,.98);
-            backdrop-filter: blur(12px);
-            padding: 20px 24px 28px;
-            z-index: 99;
-            border-bottom: 1px solid rgba(255,255,255,.08);
-            flex-direction: column; gap: 4px;
-        }
-        .mobile-nav.open { display: flex; }
-        .mobile-nav a {
-            color: rgba(255,255,255,.8); text-decoration: none;
-            font-size: 16px; font-weight: 500; padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,.06);
-        }
-        .mobile-nav a:last-child { border: none; }
-        .mobile-nav .mob-cta {
-            margin-top: 12px; text-align: center;
-            background: var(--red); color: #fff; padding: 14px;
-            border-radius: 14px; font-weight: 700; font-size: 16px;
-        }
+.btn-main{display:block;width:100%;max-width:420px;margin:0 auto;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:19px 32px;border-radius:50px;font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;text-decoration:none;text-align:center;border:none;cursor:pointer;animation:pulseShadow 2s ease-in-out infinite;transition:transform .25s}
+.btn-main:hover{transform:translateY(-2px)}
+.btn-main.static{animation:none;box-shadow:0 8px 25px rgba(230,48,18,.4)}
+.btn-phone-ghost{display:block;width:100%;max-width:420px;margin:12px auto 0;color:rgba(255,255,255,.7);padding:12px;border-radius:50px;font-size:15px;font-weight:600;text-decoration:none;text-align:center;border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.btn-phone-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+@keyframes pulseShadow{0%,100%{box-shadow:0 8px 25px rgba(230,48,18,.4)}50%{box-shadow:0 8px 40px rgba(230,48,18,.75)}}
+.trust-row{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:20px}
+.trust-item{color:rgba(255,255,255,.65);font-size:13px;display:flex;align-items:center;gap:5px}
 
-        @media (max-width: 640px) {
-            .nav { display: none; }
-            .header-btn { display: none; }
-            .hamburger { display: flex; }
-        }
+/* ── PROBLEM ── */
+.problem-section{background:var(--dark);color:#fff;padding:0}
+.problem-section .section-img{border-radius:0;box-shadow:none}
 
-        /* ── URGENCY BAR ── */
-        .urgency-bar {
-            background: var(--red);
-            color: #fff;
-            text-align: center;
-            padding: 11px 20px;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: .3px;
-        }
-        .urgency-bar strong { font-weight: 800; }
+/* ── WOMAN IMAGE BREAK ── */
+.woman-break{background:var(--light);padding:60px 20px;text-align:center}
+.woman-wrap{max-width:720px;margin:0 auto;position:relative}
+.woman-wrap .section-img{border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,.12)}
+.woman-caption{margin-top:20px;font-family:'Poppins',sans-serif;font-size:clamp(20px,5vw,30px);font-weight:800;color:var(--dark)}
+.woman-caption em{color:var(--red);font-style:normal}
 
-        /* ── STOCK BAR ── */
-        .stock-bar {
-            background: #FFF3CD;
-            border-bottom: 1px solid #FFD600;
-            text-align: center;
-            padding: 9px 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #7A5500;
-        }
-        .stock-bar strong { color: #E63012; }
+/* ── BENEFITS ── */
+.benefits-section{background:var(--white);padding:0}
+.benefits-section .section-img{border-radius:0;box-shadow:none}
 
-        /* ── STATS BAR ── */
-        .stats-bar {
-            background: var(--dark);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0;
-        }
-        .stats-bar .stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            color: rgba(255,255,255,.85);
-            font-size: 13px;
-            font-weight: 500;
-            border-right: 1px solid rgba(255,255,255,.1);
-        }
-        .stats-bar .stat:last-child { border-right: none; }
-        .stats-bar .stat strong { color: var(--orange); font-size: 15px; font-weight: 800; }
+/* ── BEFORE AFTER ── */
+.ba-section{background:var(--white);padding:0}
+.ba-section .section-img{border-radius:0;box-shadow:none}
 
-        /* ── LIVE TOAST ── */
-        .live-toast {
-            position: fixed;
-            bottom: 24px; left: 16px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 8px 32px rgba(0,0,0,.18);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 9999;
-            max-width: 300px;
-            transform: translateX(-150%);
-            transition: transform .4s cubic-bezier(.34,1.56,.64,1);
-            border-left: 4px solid var(--green);
-        }
-        .live-toast.show { transform: translateX(0); }
-        .toast-ico { font-size: 28px; flex-shrink: 0; }
-        .toast-text { font-size: 13px; line-height: 1.4; }
-        .toast-text strong { display: block; font-size: 14px; color: var(--dark); }
-        .toast-text span { color: var(--gray); }
+/* ── HOW TO USE ── */
+.howto-section{background:var(--dark);color:#fff;padding:0}
+.howto-section .section-img{border-radius:0;box-shadow:none}
 
-        /* ── UTILS ── */
-        .container { max-width: 680px; margin: 0 auto; }
-        section { padding: 60px 20px; }
+/* ── VIDEO SECTION ── */
+.video-section{background:var(--light);padding:70px 20px}
+.video-section h2{text-align:center}
+.video-section .sub{text-align:center}
+.video-section .tag{text-align:center}
+.video-wrap{max-width:720px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 16px 56px rgba(0,0,0,.15)}
+.video-wrap iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
 
-        .tag {
-            text-transform: uppercase; font-size: 11px; font-weight: 700;
-            letter-spacing: 2px; color: var(--red); margin-bottom: 8px;
-        }
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(24px, 6vw, 36px);
-            font-weight: 800; line-height: 1.2; margin-bottom: 12px;
-        }
-        .sub { color: var(--gray); font-size: 16px; margin-bottom: 36px; }
+/* ── SOLUTION IMAGE ── */
+.solution-section{background:var(--white);padding:0}
+.solution-section .section-img{border-radius:0;box-shadow:none}
 
-        /* ── CTA SECTION MIDDLE ── */
-        .mid-cta {
-            text-align: center;
-            padding: 0 20px 50px;
-        }
+/* ── TRUST BANNER ── */
+.trust-section{background:var(--light);padding:50px 20px;text-align:center}
+.trust-wrap{max-width:480px;margin:0 auto}
+.trust-wrap .section-img{border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.1)}
 
-        /* ── HERO ── */
-        .hero {
-            position: relative;
-            min-height: 92vh;
-            display: flex; align-items: center;
-            background-image: url('PHOTO-2026-05-18-19-26-58.jpg');
-            background-size: cover;
-            background-position: center top;
-            padding: 80px 24px 60px;
-            text-align: center;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(160deg, rgba(0,0,0,.82) 0%, rgba(20,8,0,.78) 50%, rgba(0,0,0,.65) 100%);
-        }
-        .hero-inner {
-            position: relative; z-index: 1;
-            width: 100%; max-width: 680px; margin: 0 auto;
-        }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(255,149,0,.15); border: 1px solid rgba(255,149,0,.5);
-            color: var(--orange); padding: 7px 18px; border-radius: 24px;
-            font-size: 13px; font-weight: 600; margin-bottom: 24px;
-            text-transform: uppercase; letter-spacing: .8px;
-            backdrop-filter: blur(8px);
-        }
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(32px, 9vw, 58px); font-weight: 800;
-            color: #fff; line-height: 1.1; margin-bottom: 18px;
-            text-shadow: 0 2px 20px rgba(0,0,0,.4);
-        }
-        .hero h1 em { color: var(--red); font-style: normal; }
-        .hero-sub {
-            color: rgba(255,255,255,.78); font-size: clamp(15px, 3vw, 19px);
-            max-width: 520px; margin: 0 auto 32px; line-height: 1.6;
-        }
+/* ── TESTIMONIALS ── */
+.testimonials-section{background:var(--light)}
+.rating-summary{display:flex;align-items:center;gap:18px;background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:22px}
+.rating-big{font-family:'Poppins',sans-serif;font-size:52px;font-weight:900;color:var(--dark);line-height:1;flex-shrink:0}
+.rating-details{flex:1}
+.rating-stars{color:#FFD700;font-size:22px;margin-bottom:4px}
+.rating-count{font-size:13px;color:var(--gray)}
+.sbar-label{font-size:12px;color:var(--gray);margin:8px 0 4px}
+.sbar-track{background:#E5E5EA;border-radius:10px;height:9px;overflow:hidden}
+.sbar-fill{background:var(--green);height:100%;border-radius:10px;width:0;transition:width 1.2s ease}
+.testimonials{display:flex;flex-direction:column;gap:14px}
+.tcard{background:#fff;border-radius:var(--radius);padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:box-shadow .2s}
+.tcard:hover{box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.stars{color:#FFD700;font-size:17px;margin-bottom:10px}
+.ttext{font-size:15px;font-style:italic;color:var(--dark);margin-bottom:14px;line-height:1.55}
+.tauthor{display:flex;align-items:center;gap:10px}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tname{font-weight:700;font-size:14px}
+.tloc{font-size:12px;color:var(--gray)}
 
-        .product-card-wrap { position: relative; max-width: 360px; margin: 0 auto 28px; }
-        .stock-badge {
-            position: absolute; top: 12px; left: 12px; z-index: 2;
-            background: var(--red); color: #fff;
-            font-size: 11px; font-weight: 800; padding: 5px 12px;
-            border-radius: 20px; text-transform: uppercase; letter-spacing: .5px;
-            box-shadow: 0 3px 10px rgba(230,48,18,.5);
-            animation: pulse-shadow 2s ease-in-out infinite;
-        }
-        .product-card {
-            border-radius: 20px; overflow: hidden;
-            box-shadow: 0 12px 40px rgba(0,0,0,.5);
-            border: 2px solid rgba(230,48,18,.35);
-        }
-        .product-img { width: 100%; display: block; border-radius: 18px; }
+/* ── FAQ ── */
+.faq-section{background:var(--white)}
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1.5px solid #E5E5EA;border-radius:var(--radius);overflow:hidden;transition:border-color .2s}
+.faq-item.open{border-color:var(--red)}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--dark);cursor:pointer;gap:12px;transition:background .2s}
+.faq-q:hover{background:var(--light)}
+.faq-arrow{font-size:20px;transition:transform .3s;flex-shrink:0;color:var(--red);font-weight:400}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;font-size:14px;color:var(--gray);line-height:1.65;padding:0 20px}
+.faq-item.open .faq-a{max-height:220px;padding:0 20px 18px}
 
-        .price-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; }
-        .price-old { color: rgba(255,255,255,.35); font-size: 17px; text-decoration: line-through; }
-        .price-new { color: var(--orange); font-family: 'Poppins', sans-serif; font-size: 34px; font-weight: 800; }
-        .price-unit { color: rgba(255,255,255,.55); font-size: 14px; }
+/* ── OFFER ── */
+.offer-section{background:linear-gradient(135deg,#C0260F,#8B1200);color:#fff;text-align:center}
+.offer-section h2{color:#fff}
+.offer-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+.offer-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.12);padding:16px 20px;border-radius:12px;font-size:15px}
+.offer-row.best{background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.5)}
+.badge-pop{background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;text-transform:uppercase;margin-left:6px}
+.offer-price{font-weight:800;font-size:17px}
+.countdown-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px;color:rgba(255,255,255,.8);font-size:14px}
+#timer{background:rgba(0,0,0,.35);padding:4px 12px;border-radius:8px;font-family:monospace;font-weight:700;font-size:17px}
+.guarantee-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius);padding:18px 20px;margin:20px 0 0;display:flex;align-items:flex-start;gap:14px;text-align:left}
+.guarantee-box .g-ico{font-size:30px;flex-shrink:0}
+.guarantee-box strong{display:block;font-size:15px;margin-bottom:3px}
+.guarantee-box p{font-size:13px;color:rgba(255,255,255,.75)}
 
-        .btn-main {
-            display: block; width: 100%; max-width: 400px; margin: 0 auto;
-            background: linear-gradient(135deg, var(--red), var(--red-dark));
-            color: #fff; padding: 18px 32px; border-radius: 50px;
-            font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
-            text-decoration: none; text-align: center; border: none; cursor: pointer;
-            box-shadow: 0 8px 25px rgba(230,48,18,.4);
-            transition: transform .25s, box-shadow .25s;
-            animation: pulse-shadow 2s ease-in-out infinite;
-        }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(230,48,18,.55); }
-        .btn-main:active { transform: translateY(0); }
+/* ── PHONE CTA ── */
+.phone-cta-section{background:var(--dark);text-align:center;padding:50px 20px}
+.phone-cta-section p{color:rgba(255,255,255,.6);font-size:15px;margin-bottom:18px}
+.phone-big-btn{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:17px 40px;border-radius:50px;font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;text-decoration:none;box-shadow:0 8px 28px rgba(52,199,89,.4);transition:all .2s}
+.phone-big-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(52,199,89,.5)}
 
-        .btn-phone {
-            display: block; width: 100%; max-width: 400px; margin: 12px auto 0;
-            background: transparent;
-            color: rgba(255,255,255,.75); padding: 12px 32px; border-radius: 50px;
-            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
-            text-decoration: none; text-align: center; border: 1px solid rgba(255,255,255,.25);
-            transition: all .2s;
-        }
-        .btn-phone:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+/* ── FORM ── */
+.form-section{background:var(--white)}
+.form-section h2,.form-section .sub,.form-section .tag{text-align:center}
+.order-form{background:#fff;border:1.5px solid #E5E5EA;border-radius:22px;padding:30px 26px;box-shadow:0 12px 50px rgba(0,0,0,.1)}
+.form-group{margin-bottom:18px}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:7px;color:var(--dark)}
+label em{color:var(--red);font-style:normal}
+.inp{width:100%;padding:15px 16px;border:2px solid #E5E5EA;border-radius:var(--radius);font-size:16px;font-family:'Inter',sans-serif;background:var(--light);color:var(--dark);transition:border-color .2s,background .2s;-webkit-appearance:none}
+.inp:focus{outline:none;border-color:var(--red);background:#fff}
+.qty-wrap{display:flex;gap:10px}
+.qty-opt{flex:1;padding:13px 8px;background:var(--light);border:2px solid #E5E5EA;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;color:var(--dark);transition:all .2s;text-align:center}
+.qty-opt.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 14px rgba(230,48,18,.3)}
+.qty-opt:hover:not(.on){border-color:var(--red);color:var(--red)}
+.submit-btn{width:100%;padding:19px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;border:none;border-radius:50px;font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;cursor:pointer;margin-top:8px;box-shadow:0 8px 25px rgba(230,48,18,.4);transition:transform .25s,box-shadow .25s}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(230,48,18,.55)}
+.submit-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.form-note{text-align:center;margin-top:12px;font-size:13px;color:var(--gray)}
+.form-or{text-align:center;color:var(--gray);font-size:13px;margin:22px 0 14px;position:relative}
+.form-or::before,.form-or::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:#E5E5EA}
+.form-or::before{left:0}.form-or::after{right:0}
+.form-phone-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--light);border:2px solid #E5E5EA;border-radius:50px;padding:15px 20px;text-decoration:none;font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:var(--dark);transition:all .2s}
+.form-phone-link:hover{border-color:var(--green);color:var(--green)}
 
-        @keyframes pulse-shadow {
-            0%, 100% { box-shadow: 0 8px 25px rgba(230,48,18,.4); }
-            50%       { box-shadow: 0 8px 35px rgba(230,48,18,.7); }
-        }
+/* ── SUCCESS ── */
+#successState{display:none;text-align:center;padding:36px 10px}
+#successState.show{display:block}
+.success-ico{font-size:68px;margin-bottom:14px}
+.success-title{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--green);margin-bottom:8px}
+.success-msg{color:var(--gray);font-size:15px;line-height:1.6}
 
-        .trust-row {
-            display: flex; justify-content: center; flex-wrap: wrap;
-            gap: 16px; margin-top: 20px;
-        }
-        .trust-item { color: rgba(255,255,255,.65); font-size: 13px; display: flex; align-items: center; gap: 5px; }
+/* ── FOOTER ── */
+footer{background:var(--dark);color:rgba(255,255,255,.45);text-align:center;padding:40px 20px;font-size:13px}
+.footer-logo{font-family:'Poppins',sans-serif;font-weight:900;font-size:20px;color:#fff;margin-bottom:6px}
+.footer-logo span{color:var(--orange)}
+.footer-banner{width:100%;max-width:460px;border-radius:14px;margin:0 auto 18px;display:block;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.footer-phone{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:20px;font-weight:700;text-decoration:none;margin:10px 0 18px}
 
-        /* ── PROBLEM ── */
-        .problem-section { background: var(--light); }
-        .problems { display: flex; flex-direction: column; gap: 12px; }
-        .problem {
-            display: flex; gap: 14px; align-items: flex-start;
-            background: #fff; padding: 16px; border-radius: var(--radius);
-            box-shadow: 0 2px 8px rgba(0,0,0,.06);
-        }
-        .problem-ico { font-size: 26px; flex-shrink: 0; }
-        .problem strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-        .problem p { font-size: 14px; color: var(--gray); }
-
-        /* ── BENEFITS ── */
-        .benefits-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-        }
-        .benefit {
-            background: var(--white); border: 1px solid #E5E5EA;
-            border-radius: var(--radius); padding: 20px; text-align: center;
-            transition: box-shadow .2s;
-        }
-        .benefit:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
-        .benefit-ico { font-size: 36px; display: block; margin-bottom: 8px; }
-        .benefit-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-        .benefit-desc { font-size: 13px; color: var(--gray); }
-
-        /* ── STEPS ── */
-        .steps-section { background: var(--dark); color: #fff; }
-        .steps-section h2 { color: #fff; }
-        .steps-section .sub { color: rgba(255,255,255,.55); }
-        .steps-section .tag { color: var(--orange); }
-        .steps { display: flex; flex-direction: column; gap: 20px; }
-        .step { display: flex; gap: 16px; align-items: flex-start; }
-        .step-num {
-            width: 44px; height: 44px; min-width: 44px;
-            background: var(--red); border-radius: 50%;
-            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 18px; color: #fff;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 3px; }
-        .step-desc { color: rgba(255,255,255,.6); font-size: 14px; }
-
-        /* ── AVANT / APRÈS ── */
-        .ba-section { background: var(--white); }
-        .ba-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;
-        }
-        .ba-card {
-            border-radius: var(--radius); padding: 22px 18px;
-        }
-        .ba-card.before {
-            background: #FFF0EE; border: 2px solid #FFCCC5;
-        }
-        .ba-card.after {
-            background: #EFFFEF; border: 2px solid #A8E6A3;
-        }
-        .ba-label {
-            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 17px;
-            margin-bottom: 14px;
-        }
-        .ba-card.before .ba-label { color: var(--red); }
-        .ba-card.after  .ba-label { color: #1A7A2E; }
-        .ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .ba-list li { font-size: 14px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-        .ba-card.before .ba-list li::before { content: '✗'; color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-        .ba-card.after  .ba-list li::before { content: '✓'; color: #1A7A2E; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-
-        @media (max-width: 400px) {
-            .ba-grid { grid-template-columns: 1fr; }
-        }
-
-        /* ── TESTIMONIALS ── */
-        .testimonials-section { background: var(--light); }
-        .rating-summary {
-            display: flex; align-items: center; gap: 16px;
-            background: #fff; border-radius: var(--radius); padding: 18px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,.07); margin-bottom: 20px;
-        }
-        .rating-big {
-            font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 800;
-            color: var(--dark); line-height: 1; flex-shrink: 0;
-        }
-        .rating-details { flex: 1; }
-        .rating-stars { color: #FFD700; font-size: 20px; margin-bottom: 4px; }
-        .rating-count { font-size: 13px; color: var(--gray); }
-        .satisfaction-bar { margin-top: 8px; }
-        .sbar-label { font-size: 12px; color: var(--gray); margin-bottom: 4px; }
-        .sbar-track { background: #E5E5EA; border-radius: 10px; height: 8px; overflow: hidden; }
-        .sbar-fill { background: var(--green); height: 100%; border-radius: 10px; }
-
-        .testimonials { display: flex; flex-direction: column; gap: 14px; }
-        .tcard {
-            background: #fff; border-radius: var(--radius); padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,.07);
-        }
-        .stars { color: #FFD700; font-size: 17px; margin-bottom: 8px; }
-        .ttext { font-size: 15px; font-style: italic; color: var(--dark); margin-bottom: 14px; line-height: 1.5; }
-        .tauthor { display: flex; align-items: center; gap: 10px; }
-        .avatar {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--red), var(--orange));
-            color: #fff; font-weight: 700; font-size: 14px;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
-        .tname { font-weight: 600; font-size: 14px; }
-        .tloc { font-size: 12px; color: var(--gray); }
-
-        /* ── FAQ ── */
-        .faq-section { background: var(--white); }
-        .faq-list { display: flex; flex-direction: column; gap: 10px; }
-        .faq-item {
-            border: 1px solid #E5E5EA; border-radius: var(--radius); overflow: hidden;
-        }
-        .faq-q {
-            width: 100%; text-align: left; background: none; border: none;
-            padding: 18px 20px; display: flex; justify-content: space-between; align-items: center;
-            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
-            color: var(--dark); cursor: pointer; gap: 12px;
-            transition: background .2s;
-        }
-        .faq-q:hover { background: var(--light); }
-        .faq-arrow { font-size: 18px; transition: transform .3s; flex-shrink: 0; color: var(--red); }
-        .faq-item.open .faq-arrow { transform: rotate(45deg); }
-        .faq-a {
-            max-height: 0; overflow: hidden;
-            transition: max-height .35s ease, padding .3s;
-            font-size: 14px; color: var(--gray); line-height: 1.6;
-            padding: 0 20px;
-        }
-        .faq-item.open .faq-a {
-            max-height: 200px;
-            padding: 0 20px 18px;
-        }
-
-        /* ── OFFER BANNER ── */
-        .offer-section {
-            background: linear-gradient(135deg, var(--red), var(--red-dark));
-            color: #fff; text-align: center;
-        }
-        .offer-section h2 { color: #fff; }
-        .offer-section .tag { color: rgba(255,255,255,.7); }
-        .offer-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-        .offer-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,.12); padding: 14px 18px; border-radius: 10px; font-size: 15px;
-        }
-        .offer-row.best {
-            background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.45);
-        }
-        .badge-pop {
-            background: var(--orange); color: #fff;
-            font-size: 10px; font-weight: 700; padding: 2px 8px;
-            border-radius: 10px; text-transform: uppercase; margin-left: 6px;
-        }
-        .offer-price { font-weight: 700; font-size: 16px; }
-        .countdown-row {
-            display: flex; justify-content: center; align-items: center;
-            gap: 8px; margin-top: 16px;
-            color: rgba(255,255,255,.8); font-size: 14px;
-        }
-        #timer {
-            background: rgba(0,0,0,.3); padding: 3px 10px;
-            border-radius: 6px; font-family: monospace; font-weight: 700; font-size: 16px;
-        }
-        .guarantee-box {
-            background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.3);
-            border-radius: var(--radius); padding: 16px 20px;
-            margin: 20px 0 0; display: flex; align-items: flex-start; gap: 12px; text-align: left;
-        }
-        .guarantee-box .g-ico { font-size: 28px; flex-shrink: 0; }
-        .guarantee-box strong { display: block; font-size: 15px; margin-bottom: 3px; }
-        .guarantee-box p { font-size: 13px; color: rgba(255,255,255,.75); }
-
-        /* ── PHONE CTA SECTION ── */
-        .phone-cta-section {
-            background: var(--light);
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .phone-cta-section p { color: var(--gray); font-size: 15px; margin-bottom: 16px; }
-        .phone-big-btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: var(--green); color: #fff;
-            padding: 16px 36px; border-radius: 50px;
-            font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800;
-            text-decoration: none; box-shadow: 0 6px 20px rgba(52,199,89,.4);
-            transition: all .2s;
-        }
-        .phone-big-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(52,199,89,.5); }
-
-        /* ── ORDER FORM ── */
-        .form-section { background: var(--white); }
-        .form-section h2 { text-align: center; }
-        .form-section .sub { text-align: center; }
-        .form-section .tag { text-align: center; }
-
-        .order-form {
-            background: #fff; border: 1px solid #E5E5EA;
-            border-radius: 20px; padding: 28px 24px;
-            box-shadow: 0 8px 40px rgba(0,0,0,.1);
-        }
-        .form-group { margin-bottom: 18px; }
-        label {
-            display: block; font-weight: 600; font-size: 14px;
-            margin-bottom: 6px; color: var(--dark);
-        }
-        label em { color: var(--red); font-style: normal; }
-        .inp {
-            width: 100%; padding: 14px 16px;
-            border: 2px solid #E5E5EA; border-radius: var(--radius);
-            font-size: 16px; font-family: 'Inter', sans-serif;
-            background: var(--light); color: var(--dark);
-            transition: border-color .2s, background .2s;
-            -webkit-appearance: none;
-        }
-        .inp:focus { outline: none; border-color: var(--red); background: #fff; }
-
-        .qty-wrap { display: flex; gap: 10px; }
-        .qty-opt {
-            flex: 1; padding: 12px 8px;
-            background: var(--light); border: 2px solid #E5E5EA;
-            border-radius: 10px; font-size: 14px; font-weight: 700;
-            cursor: pointer; color: var(--dark);
-            transition: all .2s; text-align: center;
-        }
-        .qty-opt.on {
-            background: var(--red); border-color: var(--red);
-            color: #fff; box-shadow: 0 4px 12px rgba(230,48,18,.3);
-        }
-        .qty-opt:hover:not(.on) { border-color: var(--red); color: var(--red); }
-
-        .submit-btn {
-            width: 100%; padding: 18px;
-            background: linear-gradient(135deg, var(--red), var(--red-dark));
-            color: #fff; border: none; border-radius: 50px;
-            font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
-            cursor: pointer; margin-top: 8px;
-            box-shadow: 0 8px 25px rgba(230,48,18,.4);
-            transition: transform .25s, box-shadow .25s;
-        }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(230,48,18,.55); }
-        .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
-
-        .form-note { text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray); }
-        .form-or {
-            text-align: center; color: var(--gray); font-size: 13px;
-            margin: 20px 0 12px; position: relative;
-        }
-        .form-or::before, .form-or::after {
-            content: ''; position: absolute; top: 50%; width: 35%; height: 1px;
-            background: #E5E5EA;
-        }
-        .form-or::before { left: 0; }
-        .form-or::after { right: 0; }
-        .form-phone-link {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--light); border: 2px solid #E5E5EA; border-radius: 50px;
-            padding: 14px 20px; text-decoration: none;
-            font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700;
-            color: var(--dark); transition: all .2s;
-        }
-        .form-phone-link:hover { border-color: var(--green); color: var(--green); }
-
-        /* ── SUCCESS ── */
-        #successState { display: none; text-align: center; padding: 32px 10px; }
-        #successState.show { display: block; }
-        .success-ico { font-size: 64px; margin-bottom: 14px; }
-        .success-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
-        .success-msg { color: var(--gray); font-size: 15px; }
-
-        /* ── FOOTER ── */
-        footer {
-            background: var(--dark); color: rgba(255,255,255,.45);
-            text-align: center; padding: 36px 20px; font-size: 13px;
-        }
-        .footer-logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 18px; color: #fff; margin-bottom: 6px; }
-        .footer-logo span { color: var(--orange); }
-        .footer-banner { width: 100%; max-width: 500px; border-radius: 12px; margin: 0 auto 16px; display: block; }
-        .footer-phone {
-            display: inline-flex; align-items: center; gap: 8px;
-            color: var(--green); font-size: 18px; font-weight: 700;
-            text-decoration: none; margin: 10px 0 16px;
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 380px) {
-            .benefits-grid { grid-template-columns: 1fr; }
-            .qty-wrap { flex-wrap: wrap; }
-            .qty-opt { min-width: 45%; }
-            .stats-bar .stat { padding: 10px 12px; font-size: 12px; }
-        }
-    </style>
+/* ── CTA INTERMÉDIAIRE ── */
+.mid-cta{text-align:center;padding:10px 20px 60px}
+.mid-cta p{color:var(--gray);font-size:15px;margin-bottom:18px}
+</style>
 </head>
 <body>
 
-<!-- ── LIVE ORDER TOAST ── -->
+<!-- LIVE TOAST -->
 <div class="live-toast" id="liveToast">
     <div class="toast-ico">🛍️</div>
     <div class="toast-text">
         <strong id="toastName">Fatou de Dakar</strong>
-        <span id="toastMsg">vient de commander il y a 3 min</span>
+        <span id="toastMsg">vient de commander il y a 2 min</span>
     </div>
 </div>
 
-<!-- ── HEADER ── -->
+<!-- FLOATING CTA (mobile) -->
+<a href="#commander" class="float-cta" id="floatCta">🛒 Commander — 9 000 F CFA</a>
+
+<!-- HEADER -->
 <header class="header">
     <a href="#" class="logo">DMC <span>Store</span></a>
     <ul class="nav">
         <li><a href="#">Accueil</a></li>
         <li><a href="#produit">Produit</a></li>
-        <li><a href="#avantages">Avantages</a></li>
-        <li><a href="#avis">Avis clients</a></li>
+        <li><a href="#video">Vidéo</a></li>
+        <li><a href="#avis">Avis</a></li>
         <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#commander" class="header-btn">🛒 Commander →</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 
-<!-- Mobile nav -->
 <nav class="mobile-nav" id="mobileNav">
     <a href="#" onclick="closeMobileNav()">🏠 Accueil</a>
     <a href="#produit" onclick="closeMobileNav()">📦 Produit</a>
-    <a href="#avantages" onclick="closeMobileNav()">✅ Avantages</a>
+    <a href="#video" onclick="closeMobileNav()">🎬 Vidéo</a>
     <a href="#avis" onclick="closeMobileNav()">⭐ Avis clients</a>
     <a href="#faq" onclick="closeMobileNav()">❓ FAQ</a>
     <a href="#commander" class="mob-cta" onclick="closeMobileNav()">🛒 Commander maintenant</a>
 </nav>
 
-<!-- ── URGENCY BAR ── -->
-<div class="urgency-bar">
-    🔥 <strong>Offre spéciale aujourd'hui !</strong> Livraison gratuite à domicile partout au Sénégal
-</div>
-
-<!-- ── STOCK BAR ── -->
-<div class="stock-bar">
-    ⚠️ Stock limité — Il reste seulement <strong>8 unités disponibles aujourd'hui !</strong>
-</div>
-
-<!-- ── STATS BAR ── -->
+<!-- TOP BARS -->
+<div class="urgency-bar">🔥 <strong>Offre spéciale aujourd'hui !</strong> — Livraison gratuite partout au Sénégal</div>
+<div class="stock-bar">⚠️ Stock limité — Il reste seulement <strong>8 unités disponibles aujourd'hui !</strong></div>
 <div class="stats-bar">
     <div class="stat">⭐ Note <strong>4.9/5</strong></div>
     <div class="stat">📦 <strong>+500</strong> commandes</div>
@@ -671,29 +312,29 @@
     <div class="stat">🚚 Livraison <strong>24h</strong></div>
 </div>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero" id="accueil">
     <div class="hero-inner">
-        <div class="hero-badge">🇸🇳 Livraison partout au Sénégal</div>
-        <h1>Débouchez vos canalisations en<br><em>moins de 5 minutes</em> !</h1>
-        <p class="hero-sub">Le déboucheur ultra-puissant qui élimine les bouchons les plus résistants. Sans effort, sans plombier — livré directement chez vous.</p>
+        <div class="hero-badge reveal">🇸🇳 Livraison partout au Sénégal</div>
+        <h1 class="reveal">Débouchez vos canalisations en<br><em>moins de 5 minutes</em> !</h1>
+        <p class="hero-sub reveal">Le déboucheur ultra-puissant qui élimine les bouchons les plus résistants. Sans effort, sans plombier — livré directement chez vous.</p>
 
-        <div class="product-card-wrap" id="produit">
+        <div class="product-card-wrap reveal scale" id="produit">
             <div class="stock-badge">⚠️ Stock limité</div>
             <div class="product-card">
-                <img class="product-img" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur Puissant DMC Store">
+                <img class="product-img" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur Puissant DMC Store" loading="eager">
             </div>
         </div>
 
-        <div class="price-row">
+        <div class="price-row reveal">
             <span class="price-old">15 000 F</span>
             <span class="price-new">9 000 F CFA</span>
         </div>
 
-        <a href="#commander" class="btn-main">🛒 Je veux commander maintenant</a>
-        <a href="tel:+221764163415" class="btn-phone">📞 Commander par téléphone : 76 416 34 15</a>
+        <a href="#commander" class="btn-main reveal">🛒 Je veux commander maintenant</a>
+        <a href="tel:+221764163415" class="btn-phone-ghost reveal">📞 Commander par téléphone : 76 416 34 15</a>
 
-        <div class="trust-row">
+        <div class="trust-row reveal">
             <span class="trust-item">🚚 Livraison rapide</span>
             <span class="trust-item">✅ Paiement à la livraison</span>
             <span class="trust-item">⭐ +500 clients satisfaits</span>
@@ -701,317 +342,202 @@
     </div>
 </section>
 
-<!-- ── PROBLÈME ── -->
+<!-- PROBLÈME (image from afriglow) -->
 <section class="problem-section">
-    <div class="container">
-        <div class="tag">Le problème</div>
-        <h2>Vous souffrez de ces situations ?</h2>
-        <div class="problems">
-            <div class="problem">
-                <span class="problem-ico">😤</span>
-                <div>
-                    <strong>Évier ou douche bouché depuis des jours</strong>
-                    <p>L'eau ne coule plus et la mauvaise odeur envahit votre maison</p>
-                </div>
-            </div>
-            <div class="problem">
-                <span class="problem-ico">💸</span>
-                <div>
-                    <strong>Le plombier coûte trop cher</strong>
-                    <p>Des factures de 20 000 à 50 000 FCFA pour un simple bouchon</p>
-                </div>
-            </div>
-            <div class="problem">
-                <span class="problem-ico">😩</span>
-                <div>
-                    <strong>Les autres produits ne fonctionnent pas</strong>
-                    <p>Vous avez tout essayé mais le bouchon résiste toujours</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <img class="section-img reveal" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_01_13_55.png?v=1779664682&width=1500" alt="Problèmes de canalisations" loading="lazy">
 </section>
 
-<!-- ── BÉNÉFICES ── -->
-<section>
-    <div class="container">
-        <div class="tag">La solution</div>
-        <h2>Pourquoi choisir le Déboucheur DMC Pro ?</h2>
-        <p class="sub">Une formule professionnelle accessible à tous</p>
-        <div class="benefits-grid" id="avantages">
-            <div class="benefit">
-                <span class="benefit-ico">⚡</span>
-                <div class="benefit-title">Action en 5 min</div>
-                <div class="benefit-desc">Résultats visibles presque immédiatement</div>
-            </div>
-            <div class="benefit">
-                <span class="benefit-ico">💪</span>
-                <div class="benefit-title">Ultra-puissant</div>
-                <div class="benefit-desc">Dissout graisses, cheveux et résidus</div>
-            </div>
-            <div class="benefit">
-                <span class="benefit-ico">🔒</span>
-                <div class="benefit-title">Sans abîmer</div>
-                <div class="benefit-desc">Compatible avec toutes vos canalisations</div>
-            </div>
-            <div class="benefit">
-                <span class="benefit-ico">💰</span>
-                <div class="benefit-title">Économique</div>
-                <div class="benefit-desc">10× moins cher qu'un plombier</div>
-            </div>
-            <div class="benefit">
-                <span class="benefit-ico">🏠</span>
-                <div class="benefit-title">Polyvalent</div>
-                <div class="benefit-desc">Évier, douche, WC, baignoire</div>
-            </div>
-            <div class="benefit">
-                <span class="benefit-ico">📦</span>
-                <div class="benefit-title">Livré chez vous</div>
-                <div class="benefit-desc">Dakar et partout au Sénégal</div>
-            </div>
-        </div>
+<!-- FEMME UTILISANT LE PRODUIT -->
+<div class="woman-break">
+    <div class="woman-wrap">
+        <img class="section-img reveal scale" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_00_57_56.png?v=1779663505&width=1946" alt="Utilisation du déboucheur" loading="lazy">
+        <div class="woman-caption reveal">Fini les bouchons, <em>fini les soucis !</em></div>
     </div>
+</div>
+
+<!-- AVANTAGES (image from afriglow) -->
+<section class="benefits-section">
+    <img class="section-img reveal" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_01_03_50.png?v=1779663858&width=1946" alt="Les avantages du déboucheur DMC" loading="lazy">
 </section>
 
 <!-- CTA intermédiaire -->
 <div class="mid-cta">
-    <a href="#commander" class="btn-main" style="animation:none;">🛒 Je veux commander — 9 000 F CFA</a>
+    <p>Convaincu ? Il suffit de 2 minutes pour commander</p>
+    <a href="#commander" class="btn-main static reveal">🛒 Je commande — 9 000 F CFA</a>
 </div>
 
-<!-- ── COMMENT ÇA MARCHE ── -->
-<section class="steps-section">
-    <div class="container">
-        <div class="tag">Mode d'emploi</div>
-        <h2>Aussi simple que 1, 2, 3</h2>
-        <p class="sub">Pas besoin d'être plombier !</p>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <div>
-                    <div class="step-title">Versez le produit</div>
-                    <div class="step-desc">Versez directement dans la canalisation bouchée, sans dilution</div>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div>
-                    <div class="step-title">Attendez 5 minutes</div>
-                    <div class="step-desc">La formule agit en profondeur pour dissoudre graisses et cheveux</div>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div>
-                    <div class="step-title">Rincez à l'eau chaude</div>
-                    <div class="step-desc">Faites couler de l'eau chaude — canalisation parfaitement débouchée !</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── AVANT / APRÈS ── -->
+<!-- AVANT / APRÈS (image from afriglow) -->
 <section class="ba-section">
+    <img class="section-img reveal" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_01_01_06.png?v=1779663710&width=1946" alt="Avant après déboucheur" loading="lazy">
+</section>
+
+<!-- MODE D'EMPLOI (image from afriglow) -->
+<section class="howto-section">
+    <img class="section-img reveal" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_26_mai_2026_11_12_29.png?v=1779786853&width=1500" alt="Mode d'emploi déboucheur" loading="lazy">
+</section>
+
+<!-- SOLUTION (image from afriglow) -->
+<section class="solution-section">
+    <img class="section-img reveal" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_01_25_43.png?v=1779665189&width=1500" alt="La solution simple rapide et efficace" loading="lazy">
+</section>
+
+<!-- VIDÉO YOUTUBE -->
+<section class="video-section" id="video">
     <div class="container">
-        <div class="tag">Résultats</div>
-        <h2>La différence est immédiate</h2>
-        <p class="sub">Avant et après l'utilisation du Déboucheur DMC Pro</p>
-        <div class="ba-grid">
-            <div class="ba-card before">
-                <div class="ba-label">❌ Avant</div>
-                <ul class="ba-list">
-                    <li>Eau stagnante depuis des jours</li>
-                    <li>Odeurs nauséabondes</li>
-                    <li>Plombier à 25 000 F</li>
-                    <li>Stress et inconfort</li>
-                    <li>Maison insalubre</li>
-                </ul>
-            </div>
-            <div class="ba-card after">
-                <div class="ba-label">✅ Après</div>
-                <ul class="ba-list">
-                    <li>Eau coule librement</li>
-                    <li>Maison propre et fraîche</li>
-                    <li>9 000 F seulement</li>
-                    <li>Résultat en 5 minutes</li>
-                    <li>Tranquillité d'esprit</li>
-                </ul>
-            </div>
+        <div class="tag">Démonstration</div>
+        <h2>Voyez le résultat par vous-même</h2>
+        <p class="sub">En quelques secondes, un bouchon résistant est complètement éliminé</p>
+        <div class="video-wrap reveal scale">
+            <iframe
+                src="https://www.youtube.com/embed/oxl-0DlFR2w"
+                title="Comment déboucher une canalisation en quelques secondes"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
         </div>
     </div>
 </section>
 
-<!-- ── TÉMOIGNAGES ── -->
+<!-- TRUST / DMC STORE BANNER -->
+<div class="trust-section">
+    <div class="trust-wrap">
+        <img class="section-img reveal scale" src="PHOTO-2026-05-18-19-54-50.jpg" alt="DMC Store Sénégal - Votre boutique en ligne de confiance" loading="lazy">
+    </div>
+</div>
+
+<!-- CTA intermédiaire 2 -->
+<div class="mid-cta" style="padding-top:40px">
+    <p>Rejoignez +500 clients satisfaits au Sénégal</p>
+    <a href="#commander" class="btn-main static reveal">🛒 Je veux commander maintenant</a>
+</div>
+
+<!-- TÉMOIGNAGES -->
 <section class="testimonials-section" id="avis">
     <div class="container">
         <div class="tag">Avis clients</div>
         <h2>Ce que disent nos clients</h2>
-
-        <!-- Résumé des notes -->
-        <div class="rating-summary">
+        <div class="rating-summary reveal">
             <div class="rating-big">4.9</div>
             <div class="rating-details">
                 <div class="rating-stars">★★★★★</div>
                 <div class="rating-count">Basé sur +500 commandes livrées</div>
-                <div class="satisfaction-bar">
-                    <div class="sbar-label">89% de clients satisfaits</div>
-                    <div class="sbar-track"><div class="sbar-fill" style="width:89%"></div></div>
-                </div>
+                <div class="sbar-label">89% de clients satisfaits</div>
+                <div class="sbar-track"><div class="sbar-fill" id="sbarFill"></div></div>
             </div>
         </div>
-
         <div class="testimonials">
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« Incroyable ! Mon évier était bouché depuis 2 semaines. J'ai versé le produit, attendu 5 minutes et l'eau coule parfaitement. Je recommande à toute ma famille ! »</div>
-                <div class="tauthor">
-                    <div class="avatar">A</div>
-                    <div><div class="tname">Aïssatou D.</div><div class="tloc">📍 Dakar, Médina</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">A</div><div><div class="tname">Aïssatou D.</div><div class="tloc">📍 Dakar, Médina</div></div></div>
             </div>
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« J'avais appelé un plombier qui m'a demandé 25 000 FCFA. J'ai commandé ce produit à 9 000 F et le problème est réglé en 5 minutes. Énorme économie ! »</div>
-                <div class="tauthor">
-                    <div class="avatar">M</div>
-                    <div><div class="tname">Mamadou S.</div><div class="tloc">📍 Thiès</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">M</div><div><div class="tname">Mamadou S.</div><div class="tloc">📍 Thiès</div></div></div>
             </div>
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« Livraison rapide, produit très efficace. Ma douche était complètement bouchée à cause des cheveux. Résultat immédiat. Merci DMC Store ! »</div>
-                <div class="tauthor">
-                    <div class="avatar">F</div>
-                    <div><div class="tname">Fatou N.</div><div class="tloc">📍 Pikine</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">F</div><div><div class="tname">Fatou N.</div><div class="tloc">📍 Pikine</div></div></div>
             </div>
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« Service client rapide et professionnel. J'ai commandé le soir, livré le lendemain matin. Le produit fonctionne vraiment, je garde toujours un pot à la maison ! »</div>
-                <div class="tauthor">
-                    <div class="avatar">K</div>
-                    <div><div class="tname">Khady B.</div><div class="tloc">📍 Guédiawaye</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">K</div><div><div class="tname">Khady B.</div><div class="tloc">📍 Guédiawaye</div></div></div>
             </div>
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« J'en ai commandé 2. Un pour chez moi, un pour ma mère. Les deux canalisations débouchées en quelques minutes. Produit de qualité, prix correct. »</div>
-                <div class="tauthor">
-                    <div class="avatar">O</div>
-                    <div><div class="tname">Omar T.</div><div class="tloc">📍 Rufisque</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">O</div><div><div class="tname">Omar T.</div><div class="tloc">📍 Rufisque</div></div></div>
             </div>
-            <div class="tcard">
+            <div class="tcard reveal">
                 <div class="stars">★★★★★</div>
                 <div class="ttext">« Même les WC les plus bouchés n'y résistent pas ! J'avais essayé beaucoup d'autres produits en vain. Celui-ci est vraiment différent. Je recommande les yeux fermés. »</div>
-                <div class="tauthor">
-                    <div class="avatar">N</div>
-                    <div><div class="tname">Ndeye M.</div><div class="tloc">📍 Saint-Louis</div></div>
-                </div>
+                <div class="tauthor"><div class="avatar">N</div><div><div class="tname">Ndeye M.</div><div class="tloc">📍 Saint-Louis</div></div></div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CTA intermédiaire 2 -->
-<div class="mid-cta" style="padding-top:50px;">
-    <p style="color:var(--gray);font-size:15px;margin-bottom:16px;">Rejoignez +500 clients satisfaits au Sénégal</p>
-    <a href="#commander" class="btn-main" style="animation:none;">🛒 Je commande maintenant — 9 000 F CFA</a>
-</div>
-
-<!-- ── FAQ ── -->
+<!-- FAQ -->
 <section class="faq-section" id="faq">
     <div class="container">
         <div class="tag">Questions fréquentes</div>
         <h2>Tout ce que vous devez savoir</h2>
         <p class="sub">Des réponses claires avant de commander</p>
         <div class="faq-list">
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <button class="faq-q">Est-ce que le produit fonctionne vraiment en 5 minutes ? <span class="faq-arrow">+</span></button>
                 <div class="faq-a">Oui ! La formule professionnelle commence à agir dès les premières secondes. Pour les bouchons légers, 2-3 minutes suffisent. Pour les bouchons très résistants, 5-10 minutes. Les résultats sont garantis.</div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <button class="faq-q">Comment se passe la livraison ? <span class="faq-arrow">+</span></button>
                 <div class="faq-a">Après votre commande, nous vous appelons pour confirmer l'adresse. La livraison se fait sous 24 à 48h à Dakar et dans les grandes villes. Le paiement se fait à la réception — vous payez uniquement quand vous avez le produit en main.</div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <button class="faq-q">Le produit est-il dangereux pour mes canalisations ? <span class="faq-arrow">+</span></button>
                 <div class="faq-a">Non, la formule est spécialement conçue pour être efficace contre les bouchons tout en respectant les canalisations en PVC, métal et plastique. Il est compatible avec tous les types de tuyauterie.</div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <button class="faq-q">Pour quels types de canalisations peut-on l'utiliser ? <span class="faq-arrow">+</span></button>
                 <div class="faq-a">Le Déboucheur DMC Pro fonctionne sur tous les types de canalisations : évier de cuisine, lavabo, douche, baignoire, WC et canalisation extérieure. Un seul produit pour toute la maison !</div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <button class="faq-q">Que faire si je ne suis pas satisfait ? <span class="faq-arrow">+</span></button>
                 <div class="faq-a">Nous faisons confiance à notre produit. Si vous n'êtes pas satisfait des résultats, contactez-nous directement au 76 416 34 15. Nous trouvons toujours une solution pour nos clients.</div>
             </div>
-            <div class="faq-item">
-                <button class="faq-q">Est-ce qu'on livre partout au Sénégal ? <span class="faq-arrow">+</span></button>
-                <div class="faq-a">Oui, nous livrons dans toutes les régions du Sénégal : Dakar, Thiès, Saint-Louis, Ziguinchor, Touba, Kaolack et partout ailleurs. Les délais varient selon la ville, appelez-nous pour plus d'infos au 76 416 34 15.</div>
+            <div class="faq-item reveal">
+                <button class="faq-q">Livrez-vous partout au Sénégal ? <span class="faq-arrow">+</span></button>
+                <div class="faq-a">Oui, nous livrons dans toutes les régions : Dakar, Thiès, Saint-Louis, Ziguinchor, Touba, Kaolack et partout ailleurs. Appelez-nous au 76 416 34 15 pour plus d'infos sur votre ville.</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── OFFRE ── -->
+<!-- OFFRE -->
 <section class="offer-section">
     <div class="container">
-        <div class="tag">Nos packs</div>
+        <div class="tag white">Nos packs</div>
         <h2>Choisissez votre quantité</h2>
         <div class="offer-grid">
-            <div class="offer-row">
-                <div>
-                    <span style="font-weight:600">1 Déboucheur</span>
-                    <span style="font-size:12px;opacity:.7;display:block">Idéal pour tester</span>
-                </div>
+            <div class="offer-row reveal">
+                <div><span style="font-weight:600">1 Déboucheur</span><span style="font-size:12px;opacity:.7;display:block">Idéal pour tester</span></div>
                 <span class="offer-price">9 000 F CFA</span>
             </div>
-            <div class="offer-row best">
-                <div>
-                    <span style="font-weight:700">2 Déboucheurs</span>
-                    <span class="badge-pop">⭐ Populaire</span>
-                    <span style="font-size:12px;opacity:.7;display:block">Économisez 2 000 F CFA</span>
-                </div>
+            <div class="offer-row best reveal">
+                <div><span style="font-weight:700">2 Déboucheurs</span><span class="badge-pop">⭐ Populaire</span><span style="font-size:12px;opacity:.7;display:block">Économisez 2 000 F CFA</span></div>
                 <span class="offer-price">16 000 F CFA</span>
             </div>
-            <div class="offer-row">
-                <div>
-                    <span style="font-weight:600">3 Déboucheurs</span>
-                    <span style="font-size:12px;opacity:.7;display:block">Économisez 5 000 F CFA</span>
-                </div>
+            <div class="offer-row reveal">
+                <div><span style="font-weight:600">3 Déboucheurs</span><span style="font-size:12px;opacity:.7;display:block">Économisez 5 000 F CFA</span></div>
                 <span class="offer-price">22 000 F CFA</span>
             </div>
         </div>
-        <a href="#commander" class="btn-main" style="color:#fff;">🛒 Je veux commander maintenant</a>
-        <div class="countdown-row">
-            ⏰ Offre expire dans : <span id="timer">23:59:59</span>
-        </div>
-        <div class="guarantee-box">
+        <a href="#commander" class="btn-main reveal" style="color:#fff;">🛒 Je veux commander maintenant</a>
+        <div class="countdown-row reveal">⏰ Offre expire dans : <span id="timer">23:59:59</span></div>
+        <div class="guarantee-box reveal">
             <div class="g-ico">🛡️</div>
-            <div>
-                <strong>Paiement uniquement à la livraison</strong>
-                <p>Vous payez seulement quand vous avez le produit entre les mains. Zéro risque pour vous.</p>
-            </div>
+            <div><strong>Paiement uniquement à la livraison</strong><p>Vous payez seulement quand vous avez le produit entre les mains. Zéro risque pour vous.</p></div>
         </div>
     </div>
 </section>
 
-<!-- ── COMMANDER PAR TÉLÉPHONE ── -->
+<!-- TÉLÉPHONE -->
 <div class="phone-cta-section">
     <p>Vous préférez commander directement par téléphone ?</p>
-    <a href="tel:+221764163415" class="phone-big-btn">📞 76 416 34 15</a>
-    <p style="margin-top:14px;font-size:13px;">Disponible tous les jours · Réponse rapide</p>
+    <a href="tel:+221764163415" class="phone-big-btn reveal">📞 76 416 34 15</a>
+    <p style="margin-top:14px;font-size:13px;color:rgba(255,255,255,.4)">Disponible tous les jours · Réponse rapide</p>
 </div>
 
-<!-- ── FORMULAIRE ── -->
+<!-- FORMULAIRE -->
 <section class="form-section" id="commander">
     <div class="container">
         <div class="tag">Passer commande</div>
         <h2>Recevez votre commande à domicile</h2>
         <p class="sub">Remplissez le formulaire — nous vous appelons pour confirmer la livraison</p>
-
-        <div class="order-form">
+        <div class="order-form reveal">
             <div id="formWrap">
                 <form id="orderForm" novalidate>
                     <div class="form-group">
@@ -1030,74 +556,97 @@
                         <label>Quantité <em>*</em></label>
                         <div class="qty-wrap">
                             <div class="qty-opt on" data-qty="1" data-price="9000">1<br><small>9 000 F</small></div>
-                            <div class="qty-opt"    data-qty="2" data-price="16000">2<br><small>16 000 F</small></div>
-                            <div class="qty-opt"    data-qty="3" data-price="22000">3<br><small>22 000 F</small></div>
+                            <div class="qty-opt" data-qty="2" data-price="16000">2<br><small>16 000 F</small></div>
+                            <div class="qty-opt" data-qty="3" data-price="22000">3<br><small>22 000 F</small></div>
                         </div>
                         <input type="hidden" id="qty" value="1">
                         <input type="hidden" id="total" value="9000">
                     </div>
                     <button type="submit" class="submit-btn" id="submitBtn">🛒 Confirmer ma commande</button>
-                    <p class="form-note">🔒 Paiement à la livraison · Vos informations sont confidentielles</p>
+                    <p class="form-note">🔒 Paiement à la livraison · Informations confidentielles</p>
                 </form>
-
                 <div class="form-or">ou</div>
-                <a href="tel:+221764163415" class="form-phone-link">
-                    📞 Commander par téléphone : <strong>76 416 34 15</strong>
-                </a>
+                <a href="tel:+221764163415" class="form-phone-link">📞 Commander par téléphone : <strong>76 416 34 15</strong></a>
             </div>
-
             <div id="successState">
                 <div class="success-ico">✅</div>
                 <div class="success-title">Commande enregistrée !</div>
-                <p class="success-msg">
-                    Merci <strong id="sName"></strong> !<br><br>
-                    Notre équipe vous appellera au <strong id="sPhone"></strong>
-                    dans les prochaines heures pour confirmer votre livraison.
-                </p>
+                <p class="success-msg">Merci <strong id="sName"></strong> !<br><br>Notre équipe vous appellera au <strong id="sPhone"></strong> dans les prochaines heures pour confirmer votre livraison.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
     <img class="footer-banner" src="PHOTO-2026-05-18-19-26-58.jpg" alt="DMC Store Sénégal">
     <div class="footer-logo">DMC <span>Store</span></div>
     <p>Votre boutique de confiance au Sénégal</p>
     <a href="tel:+221764163415" class="footer-phone">📞 76 416 34 15</a>
-    <p style="margin-top:6px">© 2025 DMC Store. Tous droits réservés.</p>
+    <p>© 2025 DMC Store. Tous droits réservés.</p>
 </footer>
 
 <script>
-// ── CONFIG TELEGRAM ──
+// ── TELEGRAM CONFIG ──
 const BOT_TOKEN = '8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
 const CHAT_IDS  = ['8224396442', '5788824923'];
 
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('shown');
+            revealObs.unobserve(entry.target);
+            // Animate satisfaction bar when visible
+            if (entry.target.id === 'sbarFill' || entry.target.querySelector && entry.target.querySelector('#sbarFill')) {
+                setTimeout(() => { document.getElementById('sbarFill').style.width = '89%'; }, 300);
+            }
+        }
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Animate satisfaction bar separately
+const sbarObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        setTimeout(() => { document.getElementById('sbarFill').style.width = '89%'; }, 400);
+        sbarObs.disconnect();
+    }
+}, { threshold: 0.5 });
+const sbarEl = document.getElementById('sbarFill');
+if (sbarEl) sbarObs.observe(sbarEl);
+
+// ── FLOATING CTA: hide when form is visible ──
+const floatCta = document.getElementById('floatCta');
+const formSection = document.getElementById('commander');
+const formObs = new IntersectionObserver((entries) => {
+    floatCta.style.opacity = entries[0].isIntersecting ? '0' : '1';
+    floatCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+}, { threshold: 0.2 });
+if (formSection) formObs.observe(formSection);
+
 // ── LIVE ORDER TOAST ──
-const toastNotifications = [
+const toastData = [
     { name: 'Fatou de Dakar',       msg: 'vient de commander il y a 2 min' },
     { name: 'Mamadou de Thiès',     msg: 'vient de commander il y a 5 min' },
     { name: 'Aïssatou de Pikine',   msg: 'vient de commander il y a 8 min' },
-    { name: 'Khady de Guédiawaye',  msg: 'vient de commander il y a 11 min' },
-    { name: 'Omar de Rufisque',     msg: 'vient de commander il y a 14 min' },
-    { name: 'Ndeye de Saint-Louis', msg: 'vient de commander il y a 19 min' },
+    { name: 'Khady de Guédiawaye',  msg: 'vient de commander il y a 12 min' },
+    { name: 'Omar de Rufisque',     msg: 'vient de commander il y a 17 min' },
+    { name: 'Ndeye de Saint-Louis', msg: 'vient de commander il y a 21 min' },
 ];
-let toastIndex = 0;
+let toastIdx = 0;
 function showToast() {
-    const toast = document.getElementById('liveToast');
-    const n = toastNotifications[toastIndex % toastNotifications.length];
-    document.getElementById('toastName').textContent = n.name;
-    document.getElementById('toastMsg').textContent  = n.msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-    toastIndex++;
+    const t = document.getElementById('liveToast');
+    const d = toastData[toastIdx % toastData.length];
+    document.getElementById('toastName').textContent = d.name;
+    document.getElementById('toastMsg').textContent  = d.msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4500);
+    toastIdx++;
 }
-setTimeout(() => {
-    showToast();
-    setInterval(showToast, 18000);
-}, 6000);
+setTimeout(() => { showToast(); setInterval(showToast, 20000); }, 7000);
 
-// ── SÉLECTEUR DE QUANTITÉ ──
+// ── QUANTITY SELECTOR ──
 document.querySelectorAll('.qty-opt').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.qty-opt').forEach(b => b.classList.remove('on'));
@@ -1107,43 +656,32 @@ document.querySelectorAll('.qty-opt').forEach(btn => {
     });
 });
 
-// ── MINUTEUR COMPTE À REBOURS (persiste 24h via localStorage) ──
-(function startTimer() {
-    const key = 'dmcEnd';
+// ── COUNTDOWN TIMER ──
+(function() {
+    const key = 'dmcEnd2';
     let end = localStorage.getItem(key);
-    if (!end || Date.now() > +end) {
-        end = Date.now() + 24 * 3600 * 1000;
-        localStorage.setItem(key, end);
-    }
+    if (!end || Date.now() > +end) { end = Date.now() + 24*3600*1000; localStorage.setItem(key, end); }
     setInterval(() => {
         const rem = +end - Date.now();
         if (rem <= 0) { document.getElementById('timer').textContent = '00:00:00'; return; }
-        const h = String(Math.floor(rem / 3600000)).padStart(2, '0');
-        const m = String(Math.floor(rem % 3600000 / 60000)).padStart(2, '0');
-        const s = String(Math.floor(rem % 60000 / 1000)).padStart(2, '0');
+        const h = String(Math.floor(rem/3600000)).padStart(2,'0');
+        const m = String(Math.floor(rem%3600000/60000)).padStart(2,'0');
+        const s = String(Math.floor(rem%60000/1000)).padStart(2,'0');
         document.getElementById('timer').textContent = `${h}:${m}:${s}`;
     }, 1000);
 })();
 
-// ── SOUMISSION DU FORMULAIRE → TELEGRAM ──
+// ── FORM SUBMIT → TELEGRAM ──
 document.getElementById('orderForm').addEventListener('submit', async e => {
     e.preventDefault();
-
     const name    = document.getElementById('name').value.trim();
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
     const qty     = document.getElementById('qty').value;
     const total   = parseInt(document.getElementById('total').value).toLocaleString('fr-FR');
-
-    if (!name || !phone || !address) {
-        alert('Veuillez remplir tous les champs obligatoires.');
-        return;
-    }
-
+    if (!name || !phone || !address) { alert('Veuillez remplir tous les champs obligatoires.'); return; }
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Envoi en cours…';
-
+    btn.disabled = true; btn.textContent = '⏳ Envoi en cours…';
     const msg =
 `🛒 *NOUVELLE COMMANDE — DMC Store*
 
@@ -1153,40 +691,25 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
 📦 *Quantité :* ${qty} déboucheur(s)
 💰 *Total :* ${total} FCFA
 
-🕐 *Date :* ${new Date().toLocaleString('fr-SN', { timeZone: 'Africa/Dakar' })}`;
-
+🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}`;
     try {
         const results = await Promise.all(
-            CHAT_IDS.map(id =>
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: id, text: msg, parse_mode: 'Markdown' })
-                }).then(r => r.json())
-            )
+            CHAT_IDS.map(id => fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({chat_id:id, text:msg, parse_mode:'Markdown'})
+            }).then(r=>r.json()))
         );
-
-        if (!results.some(d => d.ok)) throw new Error('Telegram error');
-
-        if (typeof fbq !== 'undefined') {
-            fbq('track', 'Lead', {
-                content_name: 'Déboucheur DMC Pro',
-                value: parseInt(document.getElementById('total').value),
-                currency: 'XOF'
-            });
-        }
-
+        if (!results.some(d=>d.ok)) throw new Error('Telegram error');
+        if (typeof fbq!=='undefined') fbq('track','Lead',{content_name:'Déboucheur DMC Pro',value:parseInt(document.getElementById('total').value),currency:'XOF'});
         document.getElementById('sName').textContent  = name;
         document.getElementById('sPhone').textContent = phone;
         document.getElementById('formWrap').style.display = 'none';
         const s = document.getElementById('successState');
         s.classList.add('show');
-        s.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    } catch (err) {
+        s.scrollIntoView({behavior:'smooth',block:'center'});
+    } catch(err) {
         console.error(err);
-        btn.disabled = false;
-        btn.textContent = '🛒 Confirmer ma commande';
+        btn.disabled = false; btn.textContent = '🛒 Confirmer ma commande';
         alert('Une erreur est survenue. Vérifiez votre connexion et réessayez.');
     }
 });
@@ -1195,31 +718,16 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
 document.querySelectorAll('a[href="#commander"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
-        document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
-        if (typeof fbq !== 'undefined') {
-            fbq('track', 'AddToCart', {
-                content_name: 'Déboucheur Puissant DMC Store',
-                content_ids: ['deboucheur-dmc-001'],
-                content_type: 'product',
-                value: 9000,
-                currency: 'XOF'
-            });
-        }
+        document.getElementById('commander').scrollIntoView({behavior:'smooth'});
+        if (typeof fbq!=='undefined') fbq('track','AddToCart',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
     });
 });
 
 // ── INITIATECHECKOUT ──
 let checkoutTracked = false;
 document.getElementById('name').addEventListener('focus', () => {
-    if (!checkoutTracked && typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', {
-            content_name: 'Déboucheur Puissant DMC Store',
-            content_ids: ['deboucheur-dmc-001'],
-            content_type: 'product',
-            value: 9000,
-            currency: 'XOF',
-            num_items: 1
-        });
+    if (!checkoutTracked && typeof fbq!=='undefined') {
+        fbq('track','InitiateCheckout',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF',num_items:1});
         checkoutTracked = true;
     }
 });
@@ -1237,23 +745,9 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 // ── HAMBURGER MENU ──
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileNav.classList.toggle('open');
-});
-
-function closeMobileNav() {
-    hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
-}
-
-document.addEventListener('click', e => {
-    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-        closeMobileNav();
-    }
-});
+hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+function closeMobileNav() { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); }
+document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) closeMobileNav(); });
 </script>
-
 </body>
 </html>
