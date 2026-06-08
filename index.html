@@ -374,7 +374,7 @@ function showToast(){const t=document.getElementById('liveToast'),d=toastData[ti
 setTimeout(()=>{showToast();setInterval(showToast,22000);},6000);
 
 // Qty selector
-document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;});});
+document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});});});
 
 // Countdown
 (function(){const key='dmcEnd4';let end=localStorage.getItem(key);if(!end||Date.now()>+end){end=Date.now()+24*3600*1000;localStorage.setItem(key,end);}setInterval(()=>{const rem=+end-Date.now();if(rem<=0){document.getElementById('timer').textContent='00:00:00';return;}document.getElementById('timer').textContent=String(Math.floor(rem/3600000)).padStart(2,'0')+':'+String(Math.floor(rem%3600000/60000)).padStart(2,'0')+':'+String(Math.floor(rem%60000/1000)).padStart(2,'0');},1000);})();
@@ -402,7 +402,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
 document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});});});
 
 // InitiateCheckout
-let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF',num_items:1});ctk=true;}});
+let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
