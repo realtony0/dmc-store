@@ -385,7 +385,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
     const name=document.getElementById('name').value.trim(),phone=document.getElementById('phone').value.trim(),address=document.getElementById('address').value.trim(),qty=document.getElementById('qty').value,total=parseInt(document.getElementById('total').value).toLocaleString('fr-FR');
     if(!name||!phone||!address){alert('Veuillez remplir tous les champs.');return;}
     const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='⏳ Envoi en cours…';
-    const siteUrl = 'https://cosmic-frangipane-63e6e5.netlify.app';
+    const siteUrl = 'https://cosmic-frangipane-dd411c.netlify.app';
     const confirmUrl = `${siteUrl}/confirm-sale.html?nom=${encodeURIComponent(name)}&tel=${encodeURIComponent(phone)}&adresse=${encodeURIComponent(address)}&qty=${qty}&total=${document.getElementById('total').value}`;
     const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
     try{
