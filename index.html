@@ -12,8 +12,8 @@
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','1329031995962961');
-    fbq('track','PageView',{},{test_event_code:'TEST16979'});
-    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'},{test_event_code:'TEST16979'});
+    fbq('track','PageView',{});
+    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1329031995962961&ev=PageView&noscript=1"/></noscript>
 
@@ -359,6 +359,16 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
 const BOT_TOKEN='8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
 const CHAT_IDS=['8224396442'];
 
+// Capture des paramètres publicitaires (pour savoir quelle pub génère quelle vente)
+const urlParams=new URLSearchParams(window.location.search);
+const adSource={
+    campaign: urlParams.get('utm_campaign') || urlParams.get('campaign_name') || '—',
+    adset: urlParams.get('utm_medium') || urlParams.get('adset_name') || '—',
+    ad: urlParams.get('utm_content') || urlParams.get('ad_name') || '—',
+    source: urlParams.get('utm_source') || (document.referrer.includes('facebook')||document.referrer.includes('instagram')?'Meta (organique)':(document.referrer?new URL(document.referrer).hostname:'Direct'))
+};
+sessionStorage.setItem('dmcAdSource', JSON.stringify(adSource));
+
 // Scroll reveal
 const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});},{threshold:0.12});
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
@@ -375,7 +385,7 @@ function showToast(){const t=document.getElementById('liveToast'),d=toastData[ti
 setTimeout(()=>{showToast();setInterval(showToast,22000);},6000);
 
 // Qty selector
-document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)},{test_event_code:'TEST16979'});});});
+document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});});});
 
 // Countdown
 (function(){const key='dmcEnd4';let end=localStorage.getItem(key);if(!end||Date.now()>+end){end=Date.now()+24*3600*1000;localStorage.setItem(key,end);}setInterval(()=>{const rem=+end-Date.now();if(rem<=0){document.getElementById('timer').textContent='00:00:00';return;}document.getElementById('timer').textContent=String(Math.floor(rem/3600000)).padStart(2,'0')+':'+String(Math.floor(rem%3600000/60000)).padStart(2,'0')+':'+String(Math.floor(rem%60000/1000)).padStart(2,'0');},1000);})();
@@ -388,7 +398,8 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
     const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='⏳ Envoi en cours…';
     const siteUrl = 'https://cosmic-frangipane-dd411c.netlify.app';
     const confirmUrl = `${siteUrl}/confirm-sale.html?nom=${encodeURIComponent(name)}&tel=${encodeURIComponent(phone)}&adresse=${encodeURIComponent(address)}&qty=${qty}&total=${document.getElementById('total').value}`;
-    const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
+    const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
+    const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🎯 *Campagne :* ${src.campaign||'—'}\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
     try{
         const results=await Promise.all(CHAT_IDS.map(id=>fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})}).then(r=>r.json())));
         if(!results.some(d=>d.ok))throw new Error('Telegram error');
@@ -396,7 +407,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
             const nameParts=name.trim().toLowerCase().split(/\s+/);
             const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
             fbq('init','1329031995962961',{fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone,ct:'dakar',country:'sn'});
-            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',num_items:parseInt(document.getElementById('qty').value)},{test_event_code:'TEST16979'});
+            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
         }
         document.getElementById('sName').textContent=name;document.getElementById('sPhone').textContent=phone;
         document.getElementById('formWrap').style.display='none';
@@ -405,10 +416,10 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
 });
 
 // Smooth scroll + AddToCart
-document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'},{test_event_code:'TEST16979'});});});
+document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});});});
 
 // InitiateCheckout
-let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:_total,currency:'XOF',num_items:_qty},{test_event_code:'TEST16979'});ctk=true;}});
+let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
