@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="PHOTO-2026-05-18-19-26-58.jpg">
+    <link rel="preload" as="image" href="PHOTO-2026-05-18-19-29-44.jpg">
 
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -114,6 +116,10 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .video-section{background:var(--white);padding:64px 22px;text-align:center}
 .video-wrap{max-width:640px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 12px 44px rgba(0,0,0,.13)}
 .video-wrap iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
+.video-facade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:none;padding:0;cursor:pointer;background:#000}
+.video-facade img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;padding-left:6px;box-shadow:0 8px 30px rgba(230,48,18,.55);transition:transform .2s}
+.video-facade:hover .play-btn{transform:translate(-50%,-50%) scale(1.1)}
 
 /* TÉMOIGNAGES */
 .testi-section{background:var(--light);padding:64px 22px}
@@ -278,7 +284,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <span class="tag rv">Résultats</span>
         <h2 class="rv">La différence est immédiate</h2>
         <p class="sub rv">Avant et après le Déboucheur DMC Pro — résultats en 5 minutes</p>
-        <img class="ba-img rv" src="https://www.afriglow.store/cdn/shop/files/ChatGPT_Image_25_mai_2026_01_01_06.png?v=1779663710&width=1946" alt="Avant après déboucheur canalisation" loading="lazy">
+        <img class="ba-img rv" src="avant-apres.jpg" alt="Avant après déboucheur canalisation" loading="lazy" width="640" height="640">
     </div>
 </section>
 
@@ -302,8 +308,11 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <span class="tag rv">Démonstration</span>
         <h2 class="rv">Voyez le résultat par vous-même</h2>
         <p class="sub rv">Un bouchon résistant éliminé en quelques secondes</p>
-        <div class="video-wrap rv">
-            <iframe src="https://www.youtube.com/embed/oxl-0DlFR2w" title="Déboucheur démonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="video-wrap rv" id="videoWrap">
+            <button class="video-facade" id="videoFacade" aria-label="Lire la vidéo">
+                <img src="https://i.ytimg.com/vi/oxl-0DlFR2w/hqdefault.jpg" alt="Vidéo démonstration déboucheur" loading="lazy" width="480" height="360">
+                <span class="play-btn">▶</span>
+            </button>
         </div>
     </div>
 </section>
@@ -514,6 +523,12 @@ document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener
 
 // InitiateCheckout
 let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _product=document.getElementById('product').value;const _p=PRODUCTS[_product];const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
+
+// Vidéo : chargement au clic seulement (économise ~1 MB au chargement)
+document.getElementById('videoFacade').addEventListener('click',function(){
+    const wrap=document.getElementById('videoWrap');
+    wrap.innerHTML='<iframe src="https://www.youtube.com/embed/oxl-0DlFR2w?autoplay=1" title="Déboucheur démonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+});
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
