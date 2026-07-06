@@ -89,13 +89,16 @@ const adresse = params.get('adresse') || '—';
 const qty     = params.get('qty')   || '1';
 const total   = parseInt(params.get('total') || '9000');
 const totalFormatted = total.toLocaleString('fr-FR');
+const productName = params.get('product') || 'Déboucheur DMC Pro';
+const productId   = params.get('pid') || 'deboucheur-dmc-001';
 
 // Afficher les infos de la commande
 document.getElementById('orderInfo').innerHTML =
+    `<strong>🏷️ Produit :</strong> ${productName}<br>` +
     `<strong>👤 Nom :</strong> ${nom}<br>` +
     `<strong>📞 Téléphone :</strong> ${tel}<br>` +
     `<strong>📍 Adresse :</strong> ${adresse}<br>` +
-    `<strong>📦 Quantité :</strong> ${qty} déboucheur(s)<br>` +
+    `<strong>📦 Quantité :</strong> ${qty}<br>` +
     `<strong>💰 Total :</strong> ${totalFormatted} FCFA`;
 
 // Confirmer la vente → envoyer Purchase à Meta
@@ -107,8 +110,8 @@ document.getElementById('btnConfirm').addEventListener('click', function() {
         fbq('track', 'Purchase', {
             value: total,
             currency: 'XOF',
-            content_name: 'Déboucheur DMC Pro',
-            content_ids: ['deboucheur-dmc-001'],
+            content_name: productName,
+            content_ids: [productId],
             content_type: 'product',
             num_items: parseInt(qty)
         });

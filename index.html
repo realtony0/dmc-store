@@ -138,6 +138,31 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;font-size:14px;color:var(--gray);line-height:1.65;padding:0 18px}
 .faq-item.open .faq-a{max-height:200px;padding:0 18px 16px}
 
+/* PRODUIT BONUS */
+.bonus-section{background:var(--white);padding:64px 22px}
+.bonus-grid{display:flex;flex-direction:column;gap:22px}
+.bonus-gallery{display:flex;gap:10px}
+.bonus-gallery img{width:33.33%;border-radius:14px;object-fit:cover;aspect-ratio:1/1;box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.bonus-info{text-align:left}
+.bonus-offer-badge{display:inline-block;background:var(--green);color:#fff;font-size:12px;font-weight:800;padding:6px 16px;border-radius:20px;margin-bottom:14px}
+.bonus-info h3{font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;margin-bottom:10px}
+.bonus-info p{color:var(--gray);font-size:14px;line-height:1.7;margin-bottom:16px}
+.bonus-price-row{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.bonus-price-old{color:#bbb;text-decoration:line-through;font-size:15px}
+.bonus-price-new{font-family:'Poppins',sans-serif;font-weight:900;font-size:26px;color:var(--red)}
+.btn-bonus{display:block;width:100%;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:16px;border-radius:50px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;text-align:center;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(230,48,18,.32)}
+
+/* TABS PRODUIT */
+.product-tabs{display:flex;gap:8px;margin-bottom:20px}
+.ptab{flex:1;padding:12px 8px;background:var(--white);border:2px solid #E8E8E8;border-radius:12px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--gray);transition:all .2s;text-align:center}
+.ptab.on{border-color:var(--red);color:var(--red);background:#FFF3F0}
+.product-block{display:none}
+.product-block.active{display:block}
+.ruban-offer-card{background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;border-radius:16px;padding:18px 20px;margin-bottom:18px;text-align:center;box-shadow:0 8px 26px rgba(230,48,18,.3)}
+.ruban-offer-card .ro-badge{display:inline-block;background:rgba(255,255,255,.2);font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:8px}
+.ruban-offer-card .ro-price{font-family:'Poppins',sans-serif;font-size:28px;font-weight:900}
+.ruban-offer-card .ro-desc{font-size:13px;opacity:.9;margin-top:4px}
+
 /* OFFRE + FORMULAIRE */
 .offer-form-section{background:var(--light);padding:64px 22px}
 .offer-form-section h2,.offer-form-section .sub,.offer-form-section .tag{text-align:center}
@@ -309,17 +334,58 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
     </div>
 </section>
 
+<!-- ══ PRODUIT BONUS ══ -->
+<section class="bonus-section" id="ruban">
+    <div class="container">
+        <span class="tag rv">Offre complémentaire</span>
+        <h2 class="rv">Un problème de moustiquaire déchirée ?</h2>
+        <p class="sub rv">Réparez vos moustiquaires de fenêtres en quelques secondes, sans outils.</p>
+        <div class="bonus-grid rv">
+            <div class="bonus-gallery">
+                <img src="ruban-1.jpg" alt="Ruban adhésif réparation moustiquaire" loading="lazy">
+                <img src="ruban-2.jpg" alt="Ruban adhésif réparation moustiquaire application" loading="lazy">
+                <img src="ruban-3.jpg" alt="Ruban adhésif réparation moustiquaire résultat" loading="lazy">
+            </div>
+            <div class="bonus-info">
+                <span class="bonus-offer-badge">🎁 1 acheté = 1 offert</span>
+                <h3>Ruban Adhésif de Réparation Moustiquaire</h3>
+                <p>Fibre de verre haute qualité en rouleau de 2 mètres. Répare déchirures et trous sur moustiquaires de fenêtres, portes, tentes et bâches en quelques secondes, sans outils. Intérieur et extérieur.</p>
+                <div class="bonus-price-row">
+                    <span class="bonus-price-new">10 000 F CFA</span>
+                    <span style="color:var(--gray);font-size:13px">— recevez 2 rubans</span>
+                </div>
+                <button type="button" class="btn-bonus" onclick="selectProductAndScroll('ruban')">🛒 Je commande cette offre</button>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ══ OFFRE + FORMULAIRE ══ -->
 <section class="offer-form-section" id="commander">
     <div class="container">
         <span class="tag">Commander</span>
-        <h2>Choisissez votre pack</h2>
+        <h2>Choisissez votre produit</h2>
         <p class="sub">Livraison gratuite · Paiement à la réception</p>
 
-        <div class="offer-grid">
-            <div class="offer-row"><div><span style="font-weight:600">1 Déboucheur</span></div><span class="offer-price">9 000 F CFA</span></div>
-            <div class="offer-row best"><div><span style="font-weight:700">2 Déboucheurs</span><span class="badge-pop">Populaire</span></div><span class="offer-price">16 000 F CFA</span></div>
-            <div class="offer-row"><div><span style="font-weight:600">3 Déboucheurs</span><span style="font-size:12px;opacity:.7;display:block">Économisez 5 000 F</span></div><span class="offer-price">22 000 F CFA</span></div>
+        <div class="product-tabs">
+            <button type="button" class="ptab on" id="tabDeboucheur" onclick="selectProduct('deboucheur')">🚰 Déboucheur</button>
+            <button type="button" class="ptab" id="tabRuban" onclick="selectProduct('ruban')">🪟 Ruban Moustiquaire</button>
+        </div>
+
+        <div class="product-block active" id="blockDeboucheur">
+            <div class="offer-grid">
+                <div class="offer-row"><div><span style="font-weight:600">1 Déboucheur</span></div><span class="offer-price">9 000 F CFA</span></div>
+                <div class="offer-row best"><div><span style="font-weight:700">2 Déboucheurs</span><span class="badge-pop">Populaire</span></div><span class="offer-price">16 000 F CFA</span></div>
+                <div class="offer-row"><div><span style="font-weight:600">3 Déboucheurs</span><span style="font-size:12px;opacity:.7;display:block">Économisez 5 000 F</span></div><span class="offer-price">22 000 F CFA</span></div>
+            </div>
+        </div>
+
+        <div class="product-block" id="blockRuban">
+            <div class="ruban-offer-card">
+                <span class="ro-badge">🎁 1 acheté = 1 offert</span>
+                <div class="ro-price">10 000 F CFA</div>
+                <div class="ro-desc">Vous recevez 2 rubans de réparation moustiquaire</div>
+            </div>
         </div>
 
         <div class="countdown-row">⏰ Offre expire dans : <span id="timer">23:59:59</span></div>
@@ -330,16 +396,17 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
                     <div class="form-group"><label for="name">Prénom et Nom <em>*</em></label><input class="inp" type="text" id="name" placeholder="Ex: Mamadou Diallo" required></div>
                     <div class="form-group"><label for="phone">Téléphone <em>*</em></label><input class="inp" type="tel" id="phone" placeholder="Ex: 77 123 45 67" required></div>
                     <div class="form-group"><label for="address">Adresse de livraison <em>*</em></label><input class="inp" type="text" id="address" placeholder="Ex: Dakar, Médina, Rue 12" required></div>
-                    <div class="form-group">
+                    <div class="form-group" id="qtyGroupDeboucheur">
                         <label>Quantité <em>*</em></label>
                         <div class="qty-wrap">
                             <div class="qty-opt" data-qty="1" data-price="9000">1<br><small>9 000 F</small></div>
                             <div class="qty-opt on" data-qty="2" data-price="16000"><span class="qty-badge">🔥 Populaire</span>2<br><small>16 000 F</small><small class="qty-save">Économise 2 000 F</small></div>
                             <div class="qty-opt" data-qty="3" data-price="22000"><span class="qty-badge gold">💎 Meilleure offre</span>3<br><small>22 000 F</small><small class="qty-save">Économise 5 000 F</small></div>
                         </div>
-                        <input type="hidden" id="qty" value="2">
-                        <input type="hidden" id="total" value="16000">
                     </div>
+                    <input type="hidden" id="product" value="deboucheur">
+                    <input type="hidden" id="qty" value="2">
+                    <input type="hidden" id="total" value="16000">
                     <button type="submit" class="submit-btn" id="submitBtn">🛒 Confirmer ma commande</button>
                     <p class="form-note">🔒 Paiement à la livraison · Informations confidentielles</p>
                 </form>
@@ -366,6 +433,22 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
 
 <script>
 const BOT_TOKEN='8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
+const PRODUCTS={
+    deboucheur:{name:'Déboucheur DMC Pro',id:'deboucheur-dmc-001',label:'déboucheur(s)',qty:2,total:16000},
+    ruban:{name:'Ruban Réparation Moustiquaire DMC',id:'ruban-moustiquaire-dmc-001',label:'ruban(s) adhésif(s) (1 acheté = 1 offert)',qty:2,total:10000}
+};
+function selectProduct(p){
+    document.getElementById('tabDeboucheur').classList.toggle('on',p==='deboucheur');
+    document.getElementById('tabRuban').classList.toggle('on',p==='ruban');
+    document.getElementById('blockDeboucheur').classList.toggle('active',p==='deboucheur');
+    document.getElementById('blockRuban').classList.toggle('active',p==='ruban');
+    document.getElementById('qtyGroupDeboucheur').style.display=p==='deboucheur'?'block':'none';
+    document.getElementById('product').value=p;
+    document.getElementById('qty').value=PRODUCTS[p].qty;
+    document.getElementById('total').value=PRODUCTS[p].total;
+    if(typeof fbq!=='undefined')fbq('track','ViewContent',{content_name:PRODUCTS[p].name,content_ids:[PRODUCTS[p].id],content_type:'product',value:PRODUCTS[p].total,currency:'XOF'});
+}
+function selectProductAndScroll(p){selectProduct(p);document.getElementById('commander').scrollIntoView({behavior:'smooth'});}
 const CHAT_IDS=['8224396442'];
 
 // Capture des paramètres publicitaires (pour savoir quelle pub génère quelle vente)
@@ -394,7 +477,7 @@ function showToast(){const t=document.getElementById('liveToast'),d=toastData[ti
 setTimeout(()=>{showToast();setInterval(showToast,22000);},6000);
 
 // Qty selector
-document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});});});
+document.querySelectorAll('.qty-opt').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.qty-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});});});
 
 // Countdown
 (function(){const key='dmcEnd4';let end=localStorage.getItem(key);if(!end||Date.now()>+end){end=Date.now()+24*3600*1000;localStorage.setItem(key,end);}setInterval(()=>{const rem=+end-Date.now();if(rem<=0){document.getElementById('timer').textContent='00:00:00';return;}document.getElementById('timer').textContent=String(Math.floor(rem/3600000)).padStart(2,'0')+':'+String(Math.floor(rem%3600000/60000)).padStart(2,'0')+':'+String(Math.floor(rem%60000/1000)).padStart(2,'0');},1000);})();
@@ -405,10 +488,12 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
     const name=document.getElementById('name').value.trim(),phone=document.getElementById('phone').value.trim(),address=document.getElementById('address').value.trim(),qty=document.getElementById('qty').value,total=parseInt(document.getElementById('total').value).toLocaleString('fr-FR');
     if(!name||!phone||!address){alert('Veuillez remplir tous les champs.');return;}
     const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='⏳ Envoi en cours…';
+    const product=document.getElementById('product').value;
+    const p=PRODUCTS[product];
     const siteUrl = 'https://cosmic-frangipane-dd411c.netlify.app';
-    const confirmUrl = `${siteUrl}/confirm-sale.html?nom=${encodeURIComponent(name)}&tel=${encodeURIComponent(phone)}&adresse=${encodeURIComponent(address)}&qty=${qty}&total=${document.getElementById('total').value}`;
+    const confirmUrl = `${siteUrl}/confirm-sale.html?nom=${encodeURIComponent(name)}&tel=${encodeURIComponent(phone)}&adresse=${encodeURIComponent(address)}&qty=${qty}&total=${document.getElementById('total').value}&product=${encodeURIComponent(p.name)}&pid=${encodeURIComponent(p.id)}`;
     const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
-    const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🎯 *Campagne :* ${src.campaign||'—'}\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
+    const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n🏷️ *Produit :* ${p.name}\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} ${p.label}\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🎯 *Campagne :* ${src.campaign||'—'}\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
     try{
         const results=await Promise.all(CHAT_IDS.map(id=>fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})}).then(r=>r.json())));
         if(!results.some(d=>d.ok))throw new Error('Telegram error');
@@ -416,7 +501,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
             const nameParts=name.trim().toLowerCase().split(/\s+/);
             const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
             fbq('init','1329031995962961',{fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone,ct:'dakar',country:'sn'});
-            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
+            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
         }
         document.getElementById('sName').textContent=name;document.getElementById('sPhone').textContent=phone;
         document.getElementById('formWrap').style.display='none';
@@ -425,10 +510,10 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
 });
 
 // Smooth scroll + AddToCart
-document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});});});
+document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();selectProduct('deboucheur');document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:9000,currency:'XOF'});});});
 
 // InitiateCheckout
-let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:'Déboucheur DMC Pro',content_ids:['deboucheur-dmc-001'],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
+let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _product=document.getElementById('product').value;const _p=PRODUCTS[_product];const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
