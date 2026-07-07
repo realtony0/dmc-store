@@ -425,6 +425,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
     try{
         const results=await Promise.all(CHAT_IDS.map(id=>fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})}).then(r=>r.json())));
         if(!results.some(d=>d.ok))throw new Error('Telegram error');
+        orderSubmitted=true;
         if(typeof fbq!=='undefined'){
             const nameParts=name.trim().toLowerCase().split(/\s+/);
             const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
@@ -451,6 +452,36 @@ document.getElementById('videoFacade').addEventListener('click',function(){
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
+
+// ══ CAPTURE PANIERS ABANDONNÉS ══
+// Si le client tape son numéro puis quitte sans valider → alerte Telegram pour le relancer
+let orderSubmitted=false, abandonSent=false;
+function sendAbandonAlert(){
+    if(orderSubmitted||abandonSent)return;
+    const phone=document.getElementById('phone').value.trim();
+    const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
+    // On n'envoie que si un numéro plausible a été saisi
+    if(cleanPhone.replace(/\D/g,'').length<7)return;
+    abandonSent=true;
+    const name=document.getElementById('name').value.trim()||'(non renseigné)';
+    const address=document.getElementById('address').value.trim()||'(non renseigné)';
+    const qty=document.getElementById('qty').value;
+    const total=parseInt(document.getElementById('total').value).toLocaleString('fr-FR');
+    const digits=cleanPhone.replace(/\D/g,'');
+    const wa=digits.startsWith('221')?digits:('221'+digits);
+    const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
+    const msg=`⚠️ *PANIER ABANDONNÉ — DMC Store*\n\nCe client a rempli le formulaire mais n'a pas validé. Relance-le vite !\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🕐 *${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}*\n\n💬 [Relancer sur WhatsApp](https://wa.me/${wa})`;
+    CHAT_IDS.forEach(id=>{
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+            method:'POST',keepalive:true,
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})
+        });
+    });
+}
+// Déclencheurs : quand la page se ferme ou passe en arrière-plan (mobile)
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')sendAbandonAlert();});
+window.addEventListener('pagehide',sendAbandonAlert);
 
 // Hamburger
 const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
