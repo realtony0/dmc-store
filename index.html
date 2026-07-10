@@ -28,8 +28,15 @@
 
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','1338834767680705');
-    fbq('track','PageView',{});
+    // external_id persistant : relie tous les événements d'un même visiteur (meilleur matching)
+    var _eid=localStorage.getItem('dmc_eid');
+    if(!_eid){_eid='dmc-'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem('dmc_eid',_eid);}
+    window.__dmcEid=_eid;
+    // Récupère les données déjà connues du visiteur (s'il est déjà venu / a déjà tapé son tel)
+    function dmcMatch(extra){var m={external_id:window.__dmcEid};try{var s=JSON.parse(localStorage.getItem('dmc_match')||'{}');if(s.ph)m.ph=s.ph;if(s.fn)m.fn=s.fn;if(s.ln)m.ln=s.ln;}catch(e){}m.ct='dakar';m.country='sn';if(extra)for(var k in extra)m[k]=extra[k];return m;}
+    window.dmcMatch=dmcMatch;
+    fbq('init','1338834767680705',dmcMatch());
+    fbq('track','PageView');
     fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1338834767680705&ev=PageView&noscript=1"/></noscript>
@@ -444,7 +451,8 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
         if(typeof fbq!=='undefined'){
             const nameParts=name.trim().toLowerCase().split(/\s+/);
             const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
-            fbq('init','1338834767680705',{fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone,ct:'dakar',country:'sn'});
+            try{localStorage.setItem('dmc_match',JSON.stringify({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));}catch(e){}
+            fbq('init','1338834767680705',dmcMatch({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));
             fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
         }
         document.getElementById('sName').textContent=name;document.getElementById('sPhone').textContent=phone;
@@ -454,10 +462,13 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
 });
 
 // Smooth scroll + AddToCart
-document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:9000,currency:'XOF'});});});
+document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined'){const _t=parseInt(document.getElementById('total').value)||9000,_q=parseInt(document.getElementById('qty').value)||1;fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:_t,currency:'XOF',num_items:_q});}});});
 
 // InitiateCheckout
 let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _p=PRODUCTS.deboucheur;const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
+
+// Capture le téléphone dès qu'il est saisi -> matching avancé pour les événements suivants et les prochaines visites
+document.getElementById('phone').addEventListener('change',function(){const cp=this.value.replace(/[\s\-\(\)\.]/g,'');if(cp.replace(/\D/g,'').length>=7){try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ph=cp;localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}if(typeof fbq!=='undefined')fbq('init','1338834767680705',dmcMatch({ph:cp}));}});
 
 // Vidéo : chargement au clic seulement (économise ~1 MB au chargement)
 document.getElementById('videoFacade').addEventListener('click',function(){
