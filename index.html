@@ -119,6 +119,31 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .btn-ghost{display:block;max-width:400px;margin:12px auto 0;color:rgba(255,255,255,.68);padding:11px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;text-align:center;border:1.5px solid rgba(255,255,255,.24);transition:all .2s}
 .btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5)}
 
+/* RÉASSURANCE STRIP */
+.reassure{background:var(--white);border-bottom:1px solid #eee;padding:18px 16px}
+.reassure-grid{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.reassure-item{text-align:center;font-size:12px;font-weight:600;color:var(--dark);line-height:1.35}
+.reassure-item .ri-ico{font-size:24px;display:block;margin-bottom:5px}
+@media(max-width:520px){.reassure-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
+
+/* GALERIE PRODUIT */
+.gallery-section{background:var(--white);padding:56px 22px;text-align:center}
+.gallery-grid{max-width:640px;margin:24px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.1);cursor:pointer;transition:transform .2s}
+.gallery-grid img:hover{transform:scale(1.03)}
+.gallery-main{width:100%;max-width:420px;margin:0 auto;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.15);display:block}
+
+/* STATISTIQUES */
+.stats-section{background:linear-gradient(135deg,var(--dark),#2a2a2a);padding:60px 22px;text-align:center}
+.stats-section .tag{color:var(--orange)}
+.stats-section h2{color:#fff}
+.stats-section .sub{color:rgba(255,255,255,.55)}
+.stats-grid{max-width:640px;margin:32px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px 12px}
+.stat-num{font-family:'Poppins',sans-serif;font-size:clamp(32px,9vw,44px);font-weight:900;color:var(--orange);line-height:1}
+.stat-label{color:rgba(255,255,255,.75);font-size:12px;margin-top:8px;line-height:1.4}
+@media(max-width:480px){.stats-grid{gap:10px}.stat-card{padding:18px 8px}}
+
 /* AVANT/APRÈS */
 .ba-section{background:var(--light);padding:64px 22px;text-align:center}
 .ba-img{width:100%;max-width:640px;border-radius:20px;display:block;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,.12)}
@@ -275,6 +300,26 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
     </div>
 </section>
 
+<!-- ══ RÉASSURANCE ══ -->
+<div class="reassure">
+    <div class="reassure-grid">
+        <div class="reassure-item"><span class="ri-ico">🚚</span>Livraison express au Sénégal</div>
+        <div class="reassure-item"><span class="ri-ico">💵</span>Paiement à la livraison</div>
+        <div class="reassure-item"><span class="ri-ico">⚡</span>Résultat en 5 minutes</div>
+        <div class="reassure-item"><span class="ri-ico">🛡️</span>Satisfait ou remboursé</div>
+    </div>
+</div>
+
+<!-- ══ GALERIE PRODUIT ══ -->
+<section class="gallery-section">
+    <div class="container">
+        <span class="tag rv">Le produit</span>
+        <h2 class="rv">Déboucheur Puissant DMC Pro</h2>
+        <p class="sub rv">Formule concentrée professionnelle — action rapide, sûre pour tous types de canalisations</p>
+        <img class="gallery-main rv" id="galleryMain" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur DMC Pro" loading="lazy">
+    </div>
+</section>
+
 <!-- ══ AVANT / APRÈS ══ -->
 <section class="ba-section" id="avant-apres">
     <div class="container">
@@ -323,6 +368,20 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
             <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Mon évier était bouché depuis 2 semaines. J'ai versé le produit, attendu 5 minutes et l'eau coule parfaitement. Je recommande à toute ma famille ! »</div><div class="tauthor"><div class="avatar">A</div><div><div class="tname">Aïssatou D.</div><div class="tloc">📍 Dakar, Médina</div></div></div></div>
             <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« J'avais appelé un plombier qui demandait 25 000 FCFA. J'ai commandé à 9 000 F et le problème est réglé en 5 minutes. Énorme économie ! »</div><div class="tauthor"><div class="avatar">M</div><div><div class="tname">Mamadou S.</div><div class="tloc">📍 Thiès</div></div></div></div>
             <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Livraison rapide, produit très efficace. Ma douche était bouchée à cause des cheveux. Résultat immédiat. Merci DMC Store ! »</div><div class="tauthor"><div class="avatar">F</div><div><div class="tname">Fatou N.</div><div class="tloc">📍 Pikine</div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ STATISTIQUES ══ -->
+<section class="stats-section">
+    <div class="container">
+        <span class="tag rv">Ils sont convaincus</span>
+        <h2 class="rv">Des résultats qui parlent</h2>
+        <p class="sub rv">D'après les retours de nos clients au Sénégal</p>
+        <div class="stats-grid">
+            <div class="stat-card rv"><div class="stat-num" data-target="94">0%</div><div class="stat-label">ont éliminé les mauvaises odeurs</div></div>
+            <div class="stat-card rv"><div class="stat-num" data-target="89">0%</div><div class="stat-label">ont économisé sur le plombier</div></div>
+            <div class="stat-card rv"><div class="stat-num" data-target="97">0%</div><div class="stat-label">recommandent le produit</div></div>
         </div>
     </div>
 </section>
@@ -415,6 +474,10 @@ sessionStorage.setItem('dmcAdSource', JSON.stringify(adSource));
 // Scroll reveal
 const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});},{threshold:0.12});
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+// Animation des compteurs de statistiques (0 -> valeur cible)
+const statObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,target=parseInt(el.dataset.target);let cur=0;const step=Math.max(1,Math.round(target/40));const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t);}el.textContent=cur+'%';},22);statObs.unobserve(el);}});},{threshold:0.5});
+document.querySelectorAll('.stat-num').forEach(el=>statObs.observe(el));
 
 // Floating CTA hide at form
 const floatCta=document.getElementById('floatCta');
