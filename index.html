@@ -144,6 +144,21 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .stat-label{color:rgba(255,255,255,.75);font-size:12px;margin-top:8px;line-height:1.4}
 @media(max-width:480px){.stats-grid{gap:10px}.stat-card{padding:18px 8px}}
 
+/* PROBLÈME / SOLUTION */
+.ps-section{background:var(--light);padding:60px 22px}
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:600px){.ps-grid{grid-template-columns:1fr}}
+.ps-card{background:var(--white);border-radius:var(--radius);padding:24px 20px;box-shadow:0 3px 16px rgba(0,0,0,.07)}
+.ps-card.problem{border-top:4px solid var(--red)}
+.ps-card.solution{border-top:4px solid var(--green)}
+.ps-card h3{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ps-card.problem h3{color:var(--red)}
+.ps-card.solution h3{color:#1a9e55}
+.ps-list{list-style:none;padding:0;margin:0}
+.ps-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--dark);line-height:1.5;margin-bottom:12px}
+.ps-list li:last-child{margin-bottom:0}
+.ps-list .ic{flex-shrink:0;font-size:16px;margin-top:1px}
+
 /* AVANT/APRÈS */
 .ba-section{background:var(--light);padding:64px 22px;text-align:center}
 .ba-img{width:100%;max-width:640px;border-radius:20px;display:block;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,.12)}
@@ -317,6 +332,36 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <h2 class="rv">Déboucheur Puissant DMC Pro</h2>
         <p class="sub rv">Formule concentrée professionnelle — action rapide, sûre pour tous types de canalisations</p>
         <img class="gallery-main rv" id="galleryMain" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur DMC Pro" loading="lazy">
+    </div>
+</section>
+
+<!-- ══ PROBLÈME / SOLUTION ══ -->
+<section class="ps-section">
+    <div class="container">
+        <span class="tag rv">Ça vous parle ?</span>
+        <h2 class="rv">Fini les canalisations bouchées</h2>
+        <p class="sub rv">Vous en avez marre de ces galères du quotidien ? On a la solution.</p>
+        <div class="ps-grid">
+            <div class="ps-card problem rv">
+                <h3>⚠️ Le problème</h3>
+                <ul class="ps-list">
+                    <li><span class="ic">😤</span>Évier ou lavabo qui se vide au ralenti</li>
+                    <li><span class="ic">🤢</span>Mauvaises odeurs qui remontent des tuyaux</li>
+                    <li><span class="ic">🚿</span>Douche bouchée par les cheveux et le savon</li>
+                    <li><span class="ic">💸</span>Un plombier qui vous facture 20 000 à 30 000 F</li>
+                </ul>
+            </div>
+            <div class="ps-card solution rv">
+                <h3>✅ La solution</h3>
+                <ul class="ps-list">
+                    <li><span class="ic">⚡</span>Action ultra-rapide : résultat en 5 minutes</li>
+                    <li><span class="ic">🙌</span>Aucun effort, aucun outil, aucun plombier</li>
+                    <li><span class="ic">🌿</span>Dissout cheveux, graisse, savon et résidus</li>
+                    <li><span class="ic">💰</span>Seulement 9 000 F — vous économisez gros</li>
+                </ul>
+            </div>
+        </div>
+        <a href="#commander" class="btn-red rv" style="margin-top:28px">🛒 Je veux commander maintenant</a>
     </div>
 </section>
 
