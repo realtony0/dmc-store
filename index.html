@@ -307,11 +307,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         </div>
         <a href="#commander" class="btn-red rv">🛒 Je veux commander maintenant</a>
         <a href="tel:+221764163415" class="btn-ghost rv">📞 Commander par téléphone : 76 416 34 15</a>
-        <div class="trust-row rv">
-            <span class="trust-item">🚚 Livraison rapide</span>
-            <span class="trust-item">✅ Paiement à la livraison</span>
-            <span class="trust-item">⭐ +500 clients satisfaits</span>
-        </div>
     </div>
 </section>
 
@@ -324,16 +319,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <div class="reassure-item"><span class="ri-ico">🛡️</span>Satisfait ou remboursé</div>
     </div>
 </div>
-
-<!-- ══ GALERIE PRODUIT ══ -->
-<section class="gallery-section">
-    <div class="container">
-        <span class="tag rv">Le produit</span>
-        <h2 class="rv">Déboucheur Puissant DMC Pro</h2>
-        <p class="sub rv">Formule concentrée professionnelle — action rapide, sûre pour tous types de canalisations</p>
-        <img class="gallery-main rv" id="galleryMain" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur DMC Pro" loading="lazy">
-    </div>
-</section>
 
 <!-- ══ PROBLÈME / SOLUTION ══ -->
 <section class="ps-section">
@@ -462,9 +447,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <div class="form-box">
             <div id="formWrap">
                 <form id="orderForm" novalidate>
-                    <div class="form-group"><label for="name">Prénom et Nom <em>*</em></label><input class="inp" type="text" id="name" placeholder="Ex: Mamadou Diallo" required></div>
-                    <div class="form-group"><label for="phone">Téléphone <em>*</em></label><input class="inp" type="tel" id="phone" placeholder="Ex: 77 123 45 67" required></div>
-                    <div class="form-group"><label for="address">Adresse de livraison <em>*</em></label><input class="inp" type="text" id="address" placeholder="Ex: Dakar, Médina, Rue 12" required></div>
+                    <div class="form-group"><label for="name">Prénom et Nom <em>*</em></label><input class="inp" type="text" id="name" placeholder="Ex: Mamadou Diallo" autocomplete="name" required></div>
+                    <div class="form-group"><label for="phone">Téléphone <em>*</em></label><input class="inp" type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="Ex: 77 123 45 67" required></div>
+                    <div class="form-group"><label for="address">Adresse de livraison <em>*</em></label><input class="inp" type="text" id="address" autocomplete="street-address" placeholder="Ex: Dakar, Médina, Rue 12" required></div>
                     <div class="form-group">
                         <label>Quantité <em>*</em></label>
                         <div class="qty-wrap">
