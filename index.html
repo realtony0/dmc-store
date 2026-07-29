@@ -110,8 +110,6 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .price-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
 .price-old{color:rgba(255,255,255,.3);font-size:16px;text-decoration:line-through}
 .price-new{color:var(--orange);font-family:'Poppins',sans-serif;font-size:36px;font-weight:900}
-.trust-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:18px}
-.trust-item{color:rgba(255,255,255,.6);font-size:13px;display:flex;align-items:center;gap:5px}
 .btn-ghost{display:block;max-width:400px;margin:12px auto 0;color:rgba(255,255,255,.68);padding:11px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;text-align:center;border:1.5px solid rgba(255,255,255,.24);transition:all .2s}
 .btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5)}
 
@@ -123,11 +121,6 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 @media(max-width:520px){.reassure-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
 
 /* GALERIE PRODUIT */
-.gallery-section{background:var(--white);padding:56px 22px;text-align:center}
-.gallery-grid{max-width:640px;margin:24px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.gallery-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.1);cursor:pointer;transition:transform .2s}
-.gallery-grid img:hover{transform:scale(1.03)}
-.gallery-main{width:100%;max-width:420px;margin:0 auto;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.15);display:block}
 
 /* STATISTIQUES */
 .stats-section{background:linear-gradient(135deg,var(--dark),#2a2a2a);padding:60px 22px;text-align:center}
@@ -170,14 +163,6 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .step-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:3px}
 .step-desc{color:rgba(255,255,255,.55);font-size:14px}
 
-/* VIDÉO */
-.video-section{background:var(--white);padding:64px 22px;text-align:center}
-.video-wrap{max-width:640px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 12px 44px rgba(0,0,0,.13)}
-.video-wrap iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
-.video-facade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:none;padding:0;cursor:pointer;background:#000}
-.video-facade img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
-.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;padding-left:6px;box-shadow:0 8px 30px rgba(230,48,18,.55);transition:transform .2s}
-.video-facade:hover .play-btn{transform:translate(-50%,-50%) scale(1.1)}
 
 /* TÉMOIGNAGES */
 .testi-section{background:var(--light);padding:64px 22px}
@@ -279,7 +264,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
 </header>
 <nav class="mobile-nav" id="mobileNav">
     <a href="#avant-apres" onclick="closeMobileNav()">🔍 Avant / Après</a>
-    <a href="#video" onclick="closeMobileNav()">🎬 Vidéo</a>
     <a href="#avis" onclick="closeMobileNav()">⭐ Avis clients</a>
     <a href="#faq" onclick="closeMobileNav()">❓ FAQ</a>
     <a href="#commander" class="mob-cta" onclick="closeMobileNav()">🛒 Commander maintenant</a>
@@ -373,20 +357,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
     </div>
 </section>
 
-<!-- ══ VIDÉO ══ -->
-<section class="video-section" id="video">
-    <div class="container">
-        <span class="tag rv">Démonstration</span>
-        <h2 class="rv">Voyez le résultat par vous-même</h2>
-        <p class="sub rv">Un bouchon résistant éliminé en quelques secondes</p>
-        <div class="video-wrap rv" id="videoWrap">
-            <button class="video-facade" id="videoFacade" aria-label="Lire la vidéo">
-                <img src="https://i.ytimg.com/vi/oxl-0DlFR2w/hqdefault.jpg" alt="Vidéo démonstration déboucheur" loading="lazy" width="480" height="360">
-                <span class="play-btn">▶</span>
-            </button>
-        </div>
-    </div>
-</section>
 
 <!-- ══ TÉMOIGNAGES ══ -->
 <section class="testi-section" id="avis">
@@ -576,12 +546,6 @@ let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!
 
 // Capture le téléphone dès qu'il est saisi -> matching avancé pour les événements suivants et les prochaines visites
 document.getElementById('phone').addEventListener('change',function(){const cp=this.value.replace(/[\s\-\(\)\.]/g,'');if(cp.replace(/\D/g,'').length>=7){try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ph=cp;localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}if(typeof fbq!=='undefined')fbq('init','2474537633073955',dmcMatch({ph:cp}));}});
-
-// Vidéo : chargement au clic seulement (économise ~1 MB au chargement)
-document.getElementById('videoFacade').addEventListener('click',function(){
-    const wrap=document.getElementById('videoWrap');
-    wrap.innerHTML='<iframe src="https://www.youtube.com/embed/oxl-0DlFR2w?autoplay=1" title="Déboucheur démonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-});
 
 // FAQ
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
