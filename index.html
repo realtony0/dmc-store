@@ -202,8 +202,12 @@ h2{font-family:'Poppins',sans-serif;font-size:clamp(24px,5.5vw,36px);font-weight
 .bundle-info{flex:1;text-align:left}
 .bundle-title{font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;color:var(--dark)}
 .bundle-sub{font-size:12.5px;color:#1a9e55;font-weight:600;margin-top:2px}
+.bundle-price-wrap{text-align:right}
 .bundle-price{font-family:'Poppins',sans-serif;font-weight:900;font-size:20px;color:var(--blue)}
+.bundle-unit{font-size:10.5px;color:var(--gray);font-weight:600;margin-top:2px}
+.bundle.on .bundle-unit{color:#1a5490}
 .bundle-tag{position:absolute;top:-11px;left:16px;background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:.3px;text-transform:uppercase}
+.bundle-tag.gold{background:linear-gradient(135deg,#F59E0B,#D97706)}
 .bundle.soldout{cursor:not-allowed;opacity:.6;background:#f3f3f3}
 .bundle.soldout .bundle-price,.bundle.soldout .bundle-title{color:#9a9a9a}
 .bundle.soldout .bundle-sub{color:#b5b5b5;font-weight:600}
@@ -407,33 +411,44 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
         <p class="sub">Livraison gratuite · Paiement à la réception</p>
 
         <div class="bundles">
-            <div class="bundle" data-qty="1" data-price="9000">
+            <div class="bundle on" data-qty="1" data-price="9000">
                 <span class="bundle-radio"></span>
                 <div class="bundle-info">
                     <div class="bundle-title">1 Déboucheur</div>
                     <div class="bundle-sub" style="color:var(--gray);font-weight:500">Pour dépanner une fois</div>
                 </div>
-                <div class="bundle-price">9 000 F</div>
+                <div class="bundle-price-wrap">
+                    <div class="bundle-price">9 000 F</div>
+                    <div class="bundle-unit">9 000 F/unité</div>
+                </div>
             </div>
-            <div class="bundle on" data-qty="2" data-price="16000">
+            <div class="bundle" data-qty="2" data-price="15000">
                 <span class="bundle-tag">🔥 Le plus populaire</span>
                 <span class="bundle-radio"></span>
                 <div class="bundle-info">
                     <div class="bundle-title">2 Déboucheurs</div>
-                    <div class="bundle-sub">💰 Économisez 2 000 F</div>
+                    <div class="bundle-sub">💰 Économisez 3 000 F</div>
                 </div>
-                <div class="bundle-price">16 000 F</div>
+                <div class="bundle-price-wrap">
+                    <div class="bundle-price">15 000 F</div>
+                    <div class="bundle-unit">7 500 F/unité</div>
+                </div>
             </div>
-            <div class="bundle soldout" data-qty="3" data-price="22000">
-                <span class="bundle-tag sold">Épuisé</span>
+            <div class="bundle" data-qty="3" data-price="20000">
+                <span class="bundle-tag gold">💎 Meilleure valeur</span>
                 <span class="bundle-radio"></span>
                 <div class="bundle-info">
                     <div class="bundle-title">3 Déboucheurs</div>
-                    <div class="bundle-sub">Rupture de stock</div>
+                    <div class="bundle-sub">💰 Économisez 7 000 F</div>
                 </div>
-                <div class="bundle-price">22 000 F</div>
+                <div class="bundle-price-wrap">
+                    <div class="bundle-price">20 000 F</div>
+                    <div class="bundle-unit">≈ 6 667 F/unité</div>
+                </div>
             </div>
         </div>
+
+        <p style="text-align:center;font-size:12.5px;color:var(--gray);margin-bottom:18px">⚠️ Merci de ne commander que si vous êtes prêt(e) à réceptionner et payer votre colis à la livraison.</p>
 
         <div class="countdown-row">⏰ Offre expire dans : <span id="timer">23:59:59</span></div>
 
@@ -443,8 +458,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
                     <div class="form-group"><label for="name">Prénom et Nom <em>*</em></label><input class="inp" type="text" id="name" placeholder="Ex: Mamadou Diallo" autocomplete="name" required></div>
                     <div class="form-group"><label for="phone">Téléphone <em>*</em></label><input class="inp" type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="Ex: 77 123 45 67" required></div>
                     <div class="form-group"><label for="address">Adresse de livraison <em>*</em></label><input class="inp" type="text" id="address" autocomplete="street-address" placeholder="Ex: Dakar, Médina, Rue 12" required></div>
-                    <input type="hidden" id="qty" value="2">
-                    <input type="hidden" id="total" value="16000">
+                    <input type="hidden" id="qty" value="1">
+                    <input type="hidden" id="total" value="9000">
                     <button type="submit" class="submit-btn" id="submitBtn">✅ Je commande maintenant</button>
                     <p class="form-note">🔒 Paiement à la livraison · Informations confidentielles</p>
                 </form>
@@ -472,7 +487,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;paddi
 <script>
 const BOT_TOKEN='8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
 const PRODUCTS={
-    deboucheur:{name:'Déboucheur DMC Pro',id:'deboucheur-dmc-001',label:'déboucheur(s)',qty:2,total:16000}
+    deboucheur:{name:'Déboucheur DMC Pro',id:'deboucheur-dmc-001',label:'déboucheur(s)',qty:1,total:9000}
 };
 const CHAT_IDS=['8224396442'];
 
