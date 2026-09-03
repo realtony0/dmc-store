@@ -37,8 +37,8 @@
     function dmcMatch(extra){var m={external_id:window.__dmcEid};try{var s=JSON.parse(localStorage.getItem('dmc_match')||'{}');if(s.ph)m.ph=s.ph;if(s.fn)m.fn=s.fn;if(s.ln)m.ln=s.ln;}catch(e){}m.ct='dakar';m.country='sn';if(extra)for(var k in extra)m[k]=extra[k];return m;}
     window.dmcMatch=dmcMatch;
     fbq('init','2020255135270613',dmcMatch());
-    fbq('track','PageView',{},{test_event_code:'TEST2216'});
-    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'},{test_event_code:'TEST2216'});
+    fbq('track','PageView');
+    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2020255135270613&ev=PageView&noscript=1"/></noscript>
 
@@ -571,7 +571,7 @@ function showToast(){const t=document.getElementById('liveToast'),d=toastData[ti
 setTimeout(()=>{showToast();setInterval(showToast,22000);},6000);
 
 // Qty selector
-document.querySelectorAll('.bundle').forEach(btn=>{btn.addEventListener('click',()=>{if(btn.classList.contains('soldout'))return;document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)},{test_event_code:'TEST2216'});});});
+document.querySelectorAll('.bundle').forEach(btn=>{btn.addEventListener('click',()=>{if(btn.classList.contains('soldout'))return;document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('qty').value=btn.dataset.qty;document.getElementById('total').value=btn.dataset.price;if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});});});
 
 // Countdown
 (function(){const key='dmcEnd4';let end=localStorage.getItem(key);if(!end||Date.now()>+end){end=Date.now()+24*3600*1000;localStorage.setItem(key,end);}setInterval(()=>{const rem=+end-Date.now();if(rem<=0){document.getElementById('timer').textContent='00:00:00';return;}document.getElementById('timer').textContent=String(Math.floor(rem/3600000)).padStart(2,'0')+':'+String(Math.floor(rem%3600000/60000)).padStart(2,'0')+':'+String(Math.floor(rem%60000/1000)).padStart(2,'0');},1000);})();
@@ -596,7 +596,7 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
             const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
             try{localStorage.setItem('dmc_match',JSON.stringify({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));}catch(e){}
             fbq('init','2020255135270613',dmcMatch({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));
-            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt(document.getElementById('qty').value)},{test_event_code:'TEST2216'});
+            fbq('track','Purchase',{value:parseInt(document.getElementById('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt(document.getElementById('qty').value)});
         }
         document.getElementById('sName').textContent=name;document.getElementById('sPhone').textContent=phone;
         document.getElementById('formWrap').style.display='none';
@@ -605,10 +605,10 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
 });
 
 // Smooth scroll + AddToCart
-document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined'){const _t=parseInt(document.getElementById('total').value)||9000,_q=parseInt(document.getElementById('qty').value)||1;fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:_t,currency:'XOF',num_items:_q},{test_event_code:'TEST2216'});}});});
+document.querySelectorAll('a[href="#commander"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('commander').scrollIntoView({behavior:'smooth'});if(typeof fbq!=='undefined'){const _t=parseInt(document.getElementById('total').value)||9000,_q=parseInt(document.getElementById('qty').value)||1;fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:_t,currency:'XOF',num_items:_q});}});});
 
 // InitiateCheckout
-let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _p=PRODUCTS.deboucheur;const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty},{test_event_code:'TEST2216'});ctk=true;}});
+let ctk=false;document.getElementById('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _p=PRODUCTS.deboucheur;const _qty=parseInt(document.getElementById('qty').value)||1;const _total=parseInt(document.getElementById('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
 
 // Capture le téléphone dès qu'il est saisi -> matching avancé pour les événements suivants et les prochaines visites
 document.getElementById('phone').addEventListener('change',function(){const cp=this.value.replace(/[\s\-\(\)\.]/g,'');if(cp.replace(/\D/g,'').length>=7){try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ph=cp;localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}if(typeof fbq!=='undefined')fbq('init','2020255135270613',dmcMatch({ph:cp}));}});
