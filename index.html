@@ -34,11 +34,14 @@
     if(!_eid){_eid='dmc-'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem('dmc_eid',_eid);}
     window.__dmcEid=_eid;
     // Récupère les données déjà connues du visiteur (s'il est déjà venu / a déjà tapé son tel)
-    function dmcMatch(extra){var m={external_id:window.__dmcEid};try{var s=JSON.parse(localStorage.getItem('dmc_match')||'{}');if(s.ph)m.ph=s.ph;if(s.fn)m.fn=s.fn;if(s.ln)m.ln=s.ln;}catch(e){}m.ct='dakar';m.country='sn';if(extra)for(var k in extra)m[k]=extra[k];return m;}
+    function dmcMatch(extra){var m={external_id:window.__dmcEid};try{var s=JSON.parse(localStorage.getItem('dmc_match')||'{}');if(s.ph)m.ph=s.ph;if(s.fn)m.fn=s.fn;if(s.ln)m.ln=s.ln;if(s.ct)m.ct=s.ct;}catch(e){}if(!m.ct)m.ct='dakar';m.country='sn';if(extra)for(var k in extra)m[k]=extra[k];return m;}
     window.dmcMatch=dmcMatch;
+    // event_id unique par événement : permet à Meta de dédupliquer navigateur + serveur
+    function dmcEvt(name,id){return {eventID:id||(name+'.'+window.__dmcEid+'.'+Date.now().toString(36)+Math.random().toString(36).slice(2,6))};}
+    window.dmcEvt=dmcEvt;
     fbq('init','2020255135270613',dmcMatch());
-    fbq('track','PageView');
-    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'});
+    fbq('track','PageView',{},dmcEvt('PageView'));
+    fbq('track','ViewContent',{content_name:'Déboucheur Puissant DMC Store',content_ids:['deboucheur-dmc-001'],content_type:'product',value:9000,currency:'XOF'},dmcEvt('ViewContent'));
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2020255135270613&ev=PageView&noscript=1"/></noscript>
 
@@ -124,8 +127,6 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 .pill-stock{display:inline-flex;align-items:center;gap:6px;background:var(--green-soft);color:#0F7A38;font-size:12.5px;font-weight:700;padding:4px 11px;border-radius:20px}
 .price-box{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
 .p-now{font-family:'Poppins',sans-serif;font-size:clamp(34px,9vw,42px);font-weight:900;color:var(--ink);letter-spacing:-.03em}
-.p-old{font-size:19px;color:var(--muted);text-decoration:line-through}
-.p-off{background:var(--accent-soft);color:#C25400;font-size:13px;font-weight:800;padding:4px 11px;border-radius:8px}
 .p-note{font-size:13px;color:var(--muted);margin-bottom:18px}
 .usp{list-style:none;display:grid;gap:10px;margin-bottom:20px}
 .usp li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;font-weight:500}
@@ -193,8 +194,6 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 
 .notice{display:flex;gap:9px;background:#FFF8E8;border:1px solid #F5E3B8;border-radius:12px;padding:11px 13px;font-size:13px;color:#7A5A12;line-height:1.5;margin-bottom:16px}
 .notice .e{flex-shrink:0}
-.countdown{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--accent-soft);border:1px dashed #F3C293;border-radius:12px;padding:11px;font-size:14px;font-weight:600;color:#B45309;margin-bottom:26px}
-.countdown b{font-family:'Poppins',sans-serif;font-variant-numeric:tabular-nums;font-size:16px;color:#8A3E06}
 
 /* form */
 .fg{margin-bottom:15px}
@@ -203,6 +202,8 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 .fg .hint{font-weight:400;color:var(--muted);font-size:13px}
 .inp{width:100%;height:56px;border:1.5px solid var(--line);border-radius:var(--r);padding:0 16px;font-family:'Inter',sans-serif;font-size:16.5px;color:var(--ink);background:#fff;transition:border-color .18s,box-shadow .18s}
 .inp::placeholder{color:#AAB6C4}
+select.inp{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%236E7F91' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 16px center;padding-right:44px}
+select.inp:invalid{color:#AAB6C4}
 .inp:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(11,99,206,.12)}
 .inp.err{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.10)}
 .errmsg{display:none;font-size:13px;color:#DC2626;font-weight:600;margin-top:6px}
@@ -265,15 +266,6 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 .stat-label{font-size:12.5px;color:var(--ink-2);margin-top:9px;line-height:1.4}
 
 /* ── REVIEWS ── */
-.rev-head{display:flex;gap:20px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 22px;margin-bottom:20px;box-shadow:var(--sh-sm);flex-wrap:wrap}
-.rev-score{text-align:center;flex-shrink:0}
-.rev-score .n{font-family:'Poppins',sans-serif;font-size:42px;font-weight:900;line-height:1;letter-spacing:-.03em}
-.rev-score .s{color:#F5A524;font-size:15px;letter-spacing:1px}
-.rev-score .c{font-size:12.5px;color:var(--muted);margin-top:3px}
-.rev-bars{flex:1;min-width:190px;display:grid;gap:5px}
-.rev-bar{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted)}
-.rev-bar .track{flex:1;height:7px;background:var(--line);border-radius:6px;overflow:hidden}
-.rev-bar .fill{height:100%;background:#F5A524;border-radius:6px}
 .tcards{display:grid;gap:14px}
 @media(min-width:760px){.tcards{grid-template-columns:repeat(3,1fr)}}
 .tcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 19px;box-shadow:var(--sh-sm);display:flex;flex-direction:column}
@@ -282,7 +274,6 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 .tauthor{display:flex;align-items:center;gap:11px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;flex-shrink:0}
 .tname{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
-.verified{color:var(--green);font-size:12px;font-weight:700}
 .tloc{font-size:12.5px;color:var(--muted)}
 
 /* ── FAQ ── */
@@ -320,13 +311,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
 .sticky .btn{flex:1;padding:14px 16px;font-size:16px}
 @media(max-width:900px){.sticky{display:flex}body{padding-bottom:78px}}
 
-/* ── TOAST ── */
-.toast{visibility:hidden;position:fixed;left:14px;bottom:92px;z-index:65;background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:var(--r);box-shadow:var(--sh-lg);padding:11px 15px;display:flex;align-items:center;gap:11px;max-width:280px;transform:translateX(-140%);transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
-.toast.show{visibility:visible;transform:none}
-.toast .e{font-size:24px;flex-shrink:0}
-.toast strong{display:block;font-size:13.5px;font-weight:700}
-.toast span{font-size:11.5px;color:var(--muted)}
-@media(min-width:901px){.toast{bottom:18px}}
 </style>
 </head>
 <body>
@@ -350,16 +334,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
         <div class="p-title">
             <h1>Déboucheur Ultra-Puissant DMC Pro</h1>
             <div class="rating">
-                <span class="stars">★★★★★</span>
-                <b>4,9</b> · 312 avis clients
                 <span class="pill-stock">✔ En stock</span>
+                <span>Livraison 24-48h · Paiement à la réception</span>
             </div>
         </div>
 
         <!-- Galerie -->
         <div class="gallery">
             <div class="gal-main">
-                <span class="gal-flag">-40 % aujourd'hui</span>
+                <span class="gal-flag">🚚 Livraison gratuite</span>
                 <img id="galMain" src="PHOTO-2026-05-18-19-29-44.jpg" alt="Déboucheur Ultra-Puissant DMC Pro" fetchpriority="high">
             </div>
             <div class="gal-thumbs" id="galThumbs">
@@ -375,8 +358,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
         <div class="buy">
             <div class="price-box">
                 <span class="p-now">9 000 F</span>
-                <span class="p-old">15 000 F</span>
-                <span class="p-off">−40 %</span>
             </div>
             <p class="p-note">Prix TTC · Livraison offerte partout au Sénégal</p>
 
@@ -408,7 +389,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
         <div class="strip-item"><span class="e">🇸🇳</span><div><b>Partout au Sénégal</b><span>Dakar, Thiès, Touba, Saint-Louis…</span></div></div>
         <div class="strip-item"><span class="e">💵</span><div><b>Paiement à la livraison</b><span>Aucune avance, zéro risque</span></div></div>
         <div class="strip-item"><span class="e">📞</span><div><b>On vous appelle</b><span>Confirmation avant expédition</span></div></div>
-        <div class="strip-item"><span class="e">⚡</span><div><b>Résultat en 5 min</b><span>Ou remboursé, c'est promis</span></div></div>
+        <div class="strip-item"><span class="e">⚡</span><div><b>Résultat en 5 min</b><span>Sans plombier, sans outil</span></div></div>
     </div>
 </div>
 
@@ -471,8 +452,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
 
                     <div class="notice"><span class="e">⚠️</span><div>Merci de ne commander que si vous êtes prêt(e) à réceptionner et à payer votre colis à la livraison.</div></div>
 
-                    <div class="countdown">⏰ Offre valable encore <b id="timer">23:59:59</b></div>
-
                     <!-- ÉTAPE 2 -->
                     <div class="stepline">
                         <span class="n">2</span>
@@ -488,13 +467,42 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                         <div class="fg" id="fgPhone">
                             <label for="phone">Numéro de téléphone <em>*</em> <span class="hint">— on vous appelle pour confirmer</span></label>
                             <input class="inp" type="tel" id="phone" inputmode="tel" autocomplete="tel" placeholder="Ex : 77 123 45 67" required>
-                            <div class="errmsg">Merci d'entrer un numéro de téléphone valide.</div>
+                            <div class="errmsg">Numéro sénégalais à 9 chiffres, par exemple 77 123 45 67.</div>
+                        </div>
+                        <div class="fg" id="fgCity">
+                            <label for="city">Votre ville <em>*</em></label>
+                            <select class="inp" id="city" autocomplete="address-level2" required>
+                                <option value="">— Choisissez votre ville —</option>
+                                <option>Dakar</option>
+                                <option>Pikine</option>
+                                <option>Guédiawaye</option>
+                                <option>Keur Massar</option>
+                                <option>Rufisque</option>
+                                <option>Thiès</option>
+                                <option>Mbour</option>
+                                <option>Touba</option>
+                                <option>Diourbel</option>
+                                <option>Kaolack</option>
+                                <option>Saint-Louis</option>
+                                <option>Louga</option>
+                                <option>Ziguinchor</option>
+                                <option>Tambacounda</option>
+                                <option>Kolda</option>
+                                <option>Fatick</option>
+                                <option>Kaffrine</option>
+                                <option>Kédougou</option>
+                                <option>Matam</option>
+                                <option>Sédhiou</option>
+                                <option>Autre ville</option>
+                            </select>
+                            <div class="errmsg">Merci de choisir votre ville.</div>
                         </div>
                         <div class="fg" id="fgAddress">
-                            <label for="address">Adresse de livraison <em>*</em> <span class="hint">— ville + quartier</span></label>
-                            <input class="inp" type="text" id="address" autocomplete="street-address" placeholder="Ex : Dakar, Médina, Rue 12" required>
-                            <div class="errmsg">Merci d'indiquer votre ville et votre quartier.</div>
+                            <label for="address">Quartier / adresse <em>*</em> <span class="hint">— pour le livreur</span></label>
+                            <input class="inp" type="text" id="address" autocomplete="street-address" placeholder="Ex : Médina, Rue 12, près de la pharmacie" required>
+                            <div class="errmsg">Merci d'indiquer votre quartier.</div>
                         </div>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
                         <input type="hidden" id="qty" value="1">
                         <input type="hidden" id="total" value="9000">
@@ -502,6 +510,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                         <!-- RÉCAP -->
                         <div class="recap">
                             <div class="recap-row"><span>Votre pack</span><b id="recapPack">1 Déboucheur</b></div>
+                            <div class="recap-row" id="recapCityRow" hidden><span>Livraison à</span><b id="recapCity"></b></div>
                             <div class="recap-row"><span>Livraison</span><b class="free">GRATUITE</b></div>
                             <div class="recap-row"><span>Paiement</span><b>À la livraison</b></div>
                             <div class="recap-row recap-total"><span>Total à payer</span><b id="recapTotal">9 000 F</b></div>
@@ -615,28 +624,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
             <h2 class="rv">Ce que disent nos clients</h2>
         </div>
 
-        <div class="rev-head rv">
-            <div class="rev-score">
-                <div class="n">4,9</div>
-                <div class="s">★★★★★</div>
-                <div class="c">312 avis</div>
-            </div>
-            <div class="rev-bars">
-                <div class="rev-bar">5★<div class="track"><div class="fill" style="width:92%"></div></div>92%</div>
-                <div class="rev-bar">4★<div class="track"><div class="fill" style="width:6%"></div></div>6%</div>
-                <div class="rev-bar">3★<div class="track"><div class="fill" style="width:1%"></div></div>1%</div>
-                <div class="rev-bar">2★<div class="track"><div class="fill" style="width:1%"></div></div>1%</div>
-                <div class="rev-bar">1★<div class="track"><div class="fill" style="width:0%"></div></div>0%</div>
-            </div>
-        </div>
 
         <div class="tcards">
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Mon évier était bouché depuis 2 semaines. J'ai versé le produit, attendu 5 minutes et l'eau coule parfaitement. Je recommande à toute ma famille ! »</div><div class="tauthor"><div class="avatar">A</div><div><div class="tname">Aïssatou D. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Dakar, Médina</div></div></div></div>
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« J'avais appelé un plombier qui demandait 25 000 FCFA. J'ai commandé à 9 000 F et le problème est réglé en 5 minutes. Énorme économie ! »</div><div class="tauthor"><div class="avatar">M</div><div><div class="tname">Mamadou S. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Thiès</div></div></div></div>
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Livraison rapide, produit très efficace. Ma douche était bouchée à cause des cheveux. Résultat immédiat. Merci DMC Store ! »</div><div class="tauthor"><div class="avatar">F</div><div><div class="tname">Fatou N. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Pikine</div></div></div></div>
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Mes toilettes se vidaient très lentement depuis des mois. Une seule utilisation a suffi. Je garde toujours un flacon d'avance à la maison. »</div><div class="tauthor"><div class="avatar">N</div><div><div class="tname">Ndèye B. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Guédiawaye</div></div></div></div>
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Je l'utilise une fois par mois en prévention. Depuis, plus aucun bouchon ni mauvaise odeur dans la cuisine. »</div><div class="tauthor"><div class="avatar">O</div><div><div class="tname">Ousmane D. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Rufisque</div></div></div></div>
-            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Deuxième commande. Le premier a réglé la douche, celui-ci c'est pour ma sœur. Service sérieux et livraison respectée. »</div><div class="tauthor"><div class="avatar">K</div><div><div class="tname">Khady S. <span class="verified">✔ Vérifié</span></div><div class="tloc">📍 Saint-Louis</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Mon évier était bouché depuis 2 semaines. J'ai versé le produit, attendu 5 minutes et l'eau coule parfaitement. Je recommande à toute ma famille ! »</div><div class="tauthor"><div class="avatar">A</div><div><div class="tname">Aïssatou D.</div><div class="tloc">📍 Dakar, Médina</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« J'avais appelé un plombier qui demandait 25 000 FCFA. J'ai commandé à 9 000 F et le problème est réglé en 5 minutes. Énorme économie ! »</div><div class="tauthor"><div class="avatar">M</div><div><div class="tname">Mamadou S.</div><div class="tloc">📍 Thiès</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Livraison rapide, produit très efficace. Ma douche était bouchée à cause des cheveux. Résultat immédiat. Merci DMC Store ! »</div><div class="tauthor"><div class="avatar">F</div><div><div class="tname">Fatou N.</div><div class="tloc">📍 Pikine</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Mes toilettes se vidaient très lentement depuis des mois. Une seule utilisation a suffi. Je garde toujours un flacon d'avance à la maison. »</div><div class="tauthor"><div class="avatar">N</div><div><div class="tname">Ndèye B.</div><div class="tloc">📍 Guédiawaye</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Je l'utilise une fois par mois en prévention. Depuis, plus aucun bouchon ni mauvaise odeur dans la cuisine. »</div><div class="tauthor"><div class="avatar">O</div><div><div class="tname">Ousmane D.</div><div class="tloc">📍 Rufisque</div></div></div></div>
+            <div class="tcard rv"><div class="stars">★★★★★</div><div class="ttext">« Deuxième commande. Le premier a réglé la douche, celui-ci c'est pour ma sœur. Service sérieux et livraison respectée. »</div><div class="tauthor"><div class="avatar">K</div><div><div class="tname">Khady S.</div><div class="tloc">📍 Saint-Louis</div></div></div></div>
         </div>
     </div>
 </section>
@@ -719,25 +714,26 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
     <a href="#commander" class="btn btn-buy" data-cta>🛒 Commander</a>
 </div>
 
-<!-- ══════ TOAST ══════ -->
-<div class="toast" id="liveToast">
-    <span class="e">🛍️</span>
-    <div>
-        <strong id="toastName">Fatou de Dakar</strong>
-        <span id="toastMsg">vient de commander il y a 2 min</span>
-    </div>
-</div>
 
 <script>
 /* ═══════════ CONFIG ═══════════ */
-const BOT_TOKEN='8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
+// Les commandes passent par /.netlify/functions/order : la clé du bot Telegram n'est plus dans la page.
+const ORDER_ENDPOINT='/.netlify/functions/order';
 const PRODUCTS={
     deboucheur:{name:'Déboucheur DMC Pro',id:'deboucheur-dmc-001',label:'déboucheur(s)',qty:1,total:9000}
 };
-const CHAT_IDS=['8224396442'];
 const PIXEL_ID='2020255135270613';
 const $=id=>document.getElementById(id);
-const fmt=n=>parseInt(n).toLocaleString('fr-FR').replace(/ | /g,' ');
+const fmt=n=>parseInt(n).toLocaleString('fr-FR').replace(/[  ]/g,' ');
+
+// Numéro sénégalais : 9 chiffres commençant par 70-78 ou 33 (+221 / 00221 acceptés)
+function snPhone(raw){
+    let d=String(raw||'').replace(/\D/g,'');
+    if(d.startsWith('00221'))d=d.slice(5);else if(d.startsWith('221')&&d.length===12)d=d.slice(3);
+    return /^(7[0-8]|33)\d{7}$/.test(d)?d:null;
+}
+// Ville au format attendu par Meta : minuscules, sans accents ni espaces
+const metaCity=c=>c.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,'');
 
 /* ═══════════ SOURCE PUBLICITAIRE ═══════════ */
 const urlParams=new URLSearchParams(window.location.search);
@@ -771,12 +767,6 @@ const sticky=$('sticky');
 const stickyObs=new IntersectionObserver(entries=>{sticky.classList.toggle('hide',entries[0].isIntersecting);},{threshold:0.08});
 stickyObs.observe($('commander'));
 
-/* ═══════════ NOTIFICATIONS ═══════════ */
-const toastData=[{name:'Fatou de Dakar',msg:'vient de commander il y a 2 min'},{name:'Mamadou de Thiès',msg:'vient de commander il y a 6 min'},{name:'Aïssatou de Pikine',msg:'vient de commander il y a 11 min'},{name:'Omar de Rufisque',msg:'vient de commander il y a 18 min'}];
-let ti=0;
-function showToast(){const t=$('liveToast'),d=toastData[ti%toastData.length];$('toastName').textContent=d.name;$('toastMsg').textContent=d.msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4500);ti++;}
-setTimeout(()=>{showToast();setInterval(showToast,22000);},7000);
-
 /* ═══════════ CHOIX DU PACK + RÉCAP ═══════════ */
 function refreshRecap(){
     const sel=document.querySelector('.bundle.on');
@@ -784,6 +774,13 @@ function refreshRecap(){
     $('recapPack').textContent=sel.dataset.label;
     $('recapTotal').textContent=fmt(price)+' F';
     $('stickyTotal').textContent=fmt(price)+' F';
+    const c=$('city').value;
+    $('recapCityRow').hidden=!c;
+    $('recapCity').textContent=c;
+}
+function trackAddToCart(){
+    if(typeof fbq==='undefined')return;
+    fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:parseInt($('total').value)||9000,currency:'XOF',num_items:parseInt($('qty').value)||1},dmcEvt('AddToCart'));
 }
 document.querySelectorAll('.bundle').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -792,57 +789,70 @@ document.querySelectorAll('.bundle').forEach(btn=>{
         $('qty').value=btn.dataset.qty;
         $('total').value=btn.dataset.price;
         refreshRecap();
-        if(typeof fbq!=='undefined')fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:parseInt(btn.dataset.price),currency:'XOF',num_items:parseInt(btn.dataset.qty)});
+        trackAddToCart();
     });
+});
+$('city').addEventListener('change',()=>{
+    refreshRecap();
+    const c=$('city').value;
+    if(c&&c!=='Autre ville'){
+        try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ct=metaCity(c);localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}
+    }
 });
 refreshRecap();
 
-/* ═══════════ COMPTE À REBOURS ═══════════ */
-(function(){const key='dmcEnd4';let end=localStorage.getItem(key);if(!end||Date.now()>+end){end=Date.now()+24*3600*1000;localStorage.setItem(key,end);}setInterval(()=>{const rem=+end-Date.now();if(rem<=0){$('timer').textContent='00:00:00';return;}$('timer').textContent=String(Math.floor(rem/3600000)).padStart(2,'0')+':'+String(Math.floor(rem%3600000/60000)).padStart(2,'0')+':'+String(Math.floor(rem%60000/1000)).padStart(2,'0');},1000);})();
-
 /* ═══════════ VALIDATION SIMPLE ET CLAIRE ═══════════ */
 function setErr(groupId,bad){const g=$(groupId);g.classList.toggle('bad',bad);g.querySelector('.inp').classList.toggle('err',bad);}
-['name','phone','address'].forEach(id=>{
-    $(id).addEventListener('input',()=>{
-        const g='fg'+id.charAt(0).toUpperCase()+id.slice(1);
-        if($(g).classList.contains('bad'))setErr(g,false);
-    });
+[['name','fgName'],['phone','fgPhone'],['city','fgCity'],['address','fgAddress']].forEach(([id,g])=>{
+    $(id).addEventListener(id==='city'?'change':'input',()=>{if($(g).classList.contains('bad'))setErr(g,false);});
 });
+$('phone').addEventListener('blur',function(){if(this.value.trim())setErr('fgPhone',!snPhone(this.value));});
 
-/* ═══════════ ENVOI DE LA COMMANDE ═══════════ */
+/* ═══════════ ENVOI AU SERVEUR ═══════════ */
+function orderPayload(type){
+    const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
+    return {type,name:$('name').value.trim(),phone:$('phone').value.trim(),city:$('city').value,address:$('address').value.trim(),qty:parseInt($('qty').value)||1,source:src.source||'',campaign:src.campaign||'',website:$('website').value};
+}
+
+let orderSubmitted=false, abandonSent=false;
+
 document.getElementById('orderForm').addEventListener('submit',async e=>{
     e.preventDefault();
-    const name=$('name').value.trim(),phone=$('phone').value.trim(),address=$('address').value.trim();
-    const qty=$('qty').value,total=fmt($('total').value);
+    const name=$('name').value.trim(),address=$('address').value.trim(),city=$('city').value;
+    const phone=snPhone($('phone').value);
 
     let ok=true;
     if(name.length<3){setErr('fgName',true);ok=false;}
-    if(phone.replace(/\D/g,'').length<7){setErr('fgPhone',true);ok=false;}
-    if(address.length<4){setErr('fgAddress',true);ok=false;}
+    if(!phone){setErr('fgPhone',true);ok=false;}
+    if(!city){setErr('fgCity',true);ok=false;}
+    if(address.length<2){setErr('fgAddress',true);ok=false;}
     if(!ok){document.querySelector('.fg.bad').scrollIntoView({behavior:'smooth',block:'center'});return;}
 
     const btn=$('submitBtn');btn.disabled=true;btn.textContent='⏳ Envoi en cours…';
     const p=PRODUCTS.deboucheur;
-    const siteUrl='https://cosmic-frangipane-dd411c.netlify.app';
-    const confirmUrl=`${siteUrl}/confirm-sale.html?nom=${encodeURIComponent(name)}&tel=${encodeURIComponent(phone)}&adresse=${encodeURIComponent(address)}&qty=${qty}&total=${$('total').value}&product=${encodeURIComponent(p.name)}&pid=${encodeURIComponent(p.id)}`;
-    const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
-    const msg=`🛒 *NOUVELLE COMMANDE — DMC Store*\n\n🏷️ *Produit :* ${p.name}\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} ${p.label}\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🎯 *Campagne :* ${src.campaign||'—'}\n\n🕐 *Date :* ${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}\n\n✅ [Confirmer la vente](${confirmUrl})`;
     try{
-        const results=await Promise.all(CHAT_IDS.map(id=>fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})}).then(r=>r.json())));
-        if(!results.some(d=>d.ok))throw new Error('Telegram error');
+        const res=await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(orderPayload('order'))});
+        const data=await res.json().catch(()=>({}));
+        if(!res.ok||!data.ok)throw new Error(data.error||('HTTP '+res.status));
         orderSubmitted=true;
         if(typeof fbq!=='undefined'){
-            const nameParts=name.trim().toLowerCase().split(/\s+/);
-            const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
-            try{localStorage.setItem('dmc_match',JSON.stringify({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));}catch(e){}
-            fbq('init',PIXEL_ID,dmcMatch({fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:cleanPhone}));
-            fbq('track','Purchase',{value:parseInt($('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt($('qty').value)});
+            const nameParts=name.toLowerCase().split(/\s+/);
+            const match={fn:nameParts[0]||'',ln:nameParts.slice(1).join(' ')||'',ph:'221'+phone};
+            if(city!=='Autre ville')match.ct=metaCity(city);
+            try{localStorage.setItem('dmc_match',JSON.stringify(match));}catch(e){}
+            fbq('init',PIXEL_ID,dmcMatch(match));
+            fbq('track','Purchase',{value:parseInt($('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt($('qty').value)},dmcEvt('Purchase'));
         }
-        $('sName').textContent=name;$('sPhone').textContent=phone;
+        $('sName').textContent=name;$('sPhone').textContent=phone.replace(/^(\d{2})(\d{3})(\d{2})(\d{2})$/,'$1 $2 $3 $4');
         $('formWrap').style.display='none';
         const s=$('successState');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'center'});
         sticky.classList.add('hide');
-    }catch(err){console.error(err);btn.disabled=false;btn.textContent='✅ Valider ma commande';alert('Une erreur est survenue. Merci de réessayer, ou appelez le 76 416 34 15.');}
+    }catch(err){
+        console.error(err);
+        btn.disabled=false;btn.textContent='✅ Valider ma commande';
+        if(String(err.message)==='phone'){setErr('fgPhone',true);$('fgPhone').scrollIntoView({behavior:'smooth',block:'center'});return;}
+        alert('Une erreur est survenue. Merci de réessayer, ou appelez le 76 416 34 15.');
+    }
 });
 
 /* ═══════════ BOUTONS "COMMANDER" ═══════════ */
@@ -850,47 +860,27 @@ document.querySelectorAll('a[href="#commander"]').forEach(a=>{
     a.addEventListener('click',e=>{
         e.preventDefault();
         $('commander').scrollIntoView({behavior:'smooth'});
-        if(a.hasAttribute('data-cta')&&typeof fbq!=='undefined'){
-            const _t=parseInt($('total').value)||9000,_q=parseInt($('qty').value)||1;
-            fbq('track','AddToCart',{content_name:PRODUCTS.deboucheur.name,content_ids:[PRODUCTS.deboucheur.id],content_type:'product',value:_t,currency:'XOF',num_items:_q});
-        }
+        if(a.hasAttribute('data-cta'))trackAddToCart();
     });
 });
 
 /* ═══════════ InitiateCheckout ═══════════ */
 let ctk=false;
-$('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _p=PRODUCTS.deboucheur;const _qty=parseInt($('qty').value)||1;const _total=parseInt($('total').value)||9000;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:_total,currency:'XOF',num_items:_qty});ctk=true;}});
+$('name').addEventListener('focus',()=>{if(!ctk&&typeof fbq!=='undefined'){const _p=PRODUCTS.deboucheur;fbq('track','InitiateCheckout',{content_name:_p.name,content_ids:[_p.id],content_type:'product',value:parseInt($('total').value)||9000,currency:'XOF',num_items:parseInt($('qty').value)||1},dmcEvt('InitiateCheckout'));ctk=true;}});
 
 /* ═══════════ MATCHING AVANCÉ : capture du téléphone ═══════════ */
-$('phone').addEventListener('change',function(){const cp=this.value.replace(/[\s\-\(\)\.]/g,'');if(cp.replace(/\D/g,'').length>=7){try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ph=cp;localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}if(typeof fbq!=='undefined')fbq('init',PIXEL_ID,dmcMatch({ph:cp}));}});
+$('phone').addEventListener('change',function(){const d=snPhone(this.value);if(d){try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ph='221'+d;localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}if(typeof fbq!=='undefined')fbq('init',PIXEL_ID,dmcMatch({ph:'221'+d}));}});
 
 /* ═══════════ FAQ ═══════════ */
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
 
 /* ═══════════ PANIERS ABANDONNÉS ═══════════ */
-/* Si le client tape son numéro puis quitte sans valider → alerte Telegram pour le relancer */
-let orderSubmitted=false, abandonSent=false;
+/* Si le client tape un numéro valide puis quitte sans valider → alerte Telegram pour le relancer */
 function sendAbandonAlert(){
     if(orderSubmitted||abandonSent)return;
-    const phone=$('phone').value.trim();
-    const cleanPhone=phone.replace(/[\s\-\(\)\.]/g,'');
-    if(cleanPhone.replace(/\D/g,'').length<7)return;
+    if(!snPhone($('phone').value))return;
     abandonSent=true;
-    const name=$('name').value.trim()||'(non renseigné)';
-    const address=$('address').value.trim()||'(non renseigné)';
-    const qty=$('qty').value;
-    const total=fmt($('total').value);
-    const digits=cleanPhone.replace(/\D/g,'');
-    const wa=digits.startsWith('221')?digits:('221'+digits);
-    const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
-    const msg=`⚠️ *PANIER ABANDONNÉ — DMC Store*\n\nCe client a rempli le formulaire mais n'a pas validé. Relance-le vite !\n\n👤 *Nom :* ${name}\n📞 *Téléphone :* ${phone}\n📍 *Adresse :* ${address}\n📦 *Quantité :* ${qty} déboucheur(s)\n💰 *Total :* ${total} FCFA\n\n📊 *Source :* ${src.source||'—'}\n🕐 *${new Date().toLocaleString('fr-SN',{timeZone:'Africa/Dakar'})}*\n\n💬 [Relancer sur WhatsApp](https://wa.me/${wa})`;
-    CHAT_IDS.forEach(id=>{
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
-            method:'POST',keepalive:true,
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({chat_id:id,text:msg,parse_mode:'Markdown'})
-        });
-    });
+    fetch(ORDER_ENDPOINT,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify(orderPayload('abandon'))}).catch(()=>{});
 }
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')sendAbandonAlert();});
 window.addEventListener('pagehide',sendAbandonAlert);
