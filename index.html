@@ -237,28 +237,6 @@ select.inp:invalid{color:#AAB6C4}
 .success-tel{display:inline-flex;margin-top:22px;gap:9px;align-items:center;background:var(--green-soft);color:#0F7A38;border:1px solid #BFE9CF;padding:13px 22px;border-radius:30px;font-weight:700;text-decoration:none}
 
 /* ── PROBLEM / SOLUTION ── */
-.anchor{display:flex;align-items:center;gap:12px;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin:-6px 0 20px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
-.anchor .e{font-size:22px;flex-shrink:0}
-.anchor b{color:var(--ink)}
-.anchor s{color:var(--muted)}
-.cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r-lg);border:1px solid var(--line);box-shadow:var(--sh-sm);background:#fff}
-.cmp{width:100%;min-width:520px;border-collapse:collapse;font-size:14px}
-.cmp th,.cmp td{padding:13px 12px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle}
-.cmp tr:last-child td{border-bottom:none}
-.cmp th{font-family:'Poppins',sans-serif;font-size:13.5px;font-weight:700;color:var(--ink-2);background:var(--soft)}
-.cmp td:first-child,.cmp th:first-child{text-align:left;font-weight:600;color:var(--ink)}
-.cmp .us{background:var(--brand-soft);color:var(--brand-dk);font-weight:700}
-.cmp th.us{background:var(--brand);color:#fff}
-.cmp .no{color:#B42318}
-.cmp-note{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
-.order-no{display:inline-block;margin:4px 0 18px;background:var(--soft);border:1px dashed var(--line);border-radius:10px;padding:7px 14px;font-size:14px;color:var(--ink-2)}
-.order-no b{font-family:'Poppins',sans-serif;color:var(--ink);letter-spacing:.5px}
-.upsell{text-align:left;border:2px solid var(--accent);background:var(--accent-soft);border-radius:var(--r-lg);padding:18px 16px;margin:6px 0 20px}
-.up-tag{display:inline-block;background:var(--accent);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:10px}
-.up-title{font-family:'Poppins',sans-serif;font-size:19px;font-weight:800;line-height:1.25;margin-bottom:6px}
-.up-sub{font-size:14px;color:var(--ink-2);margin-bottom:14px;line-height:1.55}
-.up-no{display:block;width:100%;margin-top:8px;background:none;border:none;color:var(--muted);font-size:14px;padding:10px;cursor:pointer;text-decoration:underline}
-.up-done{background:var(--green-soft);border:1px solid #BFE9CF;color:#0F7A38;border-radius:var(--r);padding:14px;font-size:15px;font-weight:600;margin:6px 0 20px}
 .ps-grid{display:grid;gap:16px}
 @media(min-width:760px){.ps-grid{grid-template-columns:1fr 1fr}}
 .ps-card{border-radius:var(--r-lg);padding:24px 22px;border:1px solid var(--line);background:#fff;box-shadow:var(--sh-sm)}
@@ -382,7 +360,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                 <span class="p-now">9 000 F</span>
             </div>
             <p class="p-note">Prix TTC · Livraison offerte partout au Sénégal</p>
-            <div class="anchor"><span class="e">🔧</span><div>Un plombier : <s>20 000 à 30 000 F</s> et plusieurs jours d'attente.<br><b>Avec DMC : 9 000 F, réglé aujourd'hui, par vous-même.</b></div></div>
 
             <ul class="usp">
                 <li><span class="ic">⚡</span><div>Débouche évier, douche, lavabo et WC <b>en 5 minutes</b></div></li>
@@ -440,7 +417,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">1 Déboucheur</div>
-                                <div class="bundle-sub plain">🚰 Pour un bouchon</div>
+                                <div class="bundle-sub plain">Pour dépanner une fois</div>
                             </div>
                             <div class="bundle-price-wrap">
                                 <div class="bundle-price">9 000 F</div>
@@ -452,7 +429,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">2 Déboucheurs</div>
-                                <div class="bundle-sub plain">🍳 Cuisine + 🚿 salle de bain</div>
                                 <div class="bundle-sub">💰 Vous économisez 3 000 F</div>
                             </div>
                             <div class="bundle-price-wrap">
@@ -465,7 +441,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">3 Déboucheurs</div>
-                                <div class="bundle-sub plain">🏠 Toute la maison + prévention</div>
                                 <div class="bundle-sub">💰 Vous économisez 7 000 F</div>
                             </div>
                             <div class="bundle-price-wrap">
@@ -555,17 +530,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                 <div id="successState">
                     <div class="success-ico">✅</div>
                     <div class="success-title">Commande enregistrée !</div>
-                    <div class="order-no">N° de commande : <b id="sOrder">—</b></div>
-
-                    <div class="upsell" id="upsell" hidden>
-                        <span class="up-tag">🎁 Prix pack</span>
-                        <div class="up-title" id="upTitle"></div>
-                        <p class="up-sub" id="upSub"></p>
-                        <button type="button" class="btn btn-lg btn-buy" id="upYes"></button>
-                        <button type="button" class="up-no" id="upNo">Non merci, je garde ma commande</button>
-                    </div>
-                    <div class="up-done" id="upDone" hidden></div>
-
                     <p class="success-msg">Merci <strong id="sName"></strong> !<br><br>Notre équipe vous appelle au <strong id="sPhone"></strong> pour confirmer votre livraison.<br>Gardez votre téléphone à portée de main.</p>
                     <a href="tel:+221764163415" class="success-tel">📞 Une question ? 76 416 34 15</a>
                 </div>
@@ -606,35 +570,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
     </div>
 </section>
 
-<!-- ══════ COMPARATIF ══════ -->
-<section class="sec soft">
-    <div class="wrap">
-        <div class="narrow center">
-            <span class="eyebrow rv">Comparez</span>
-            <h2 class="rv">Pourquoi choisir DMC</h2>
-            <p class="lead rv">Face au plombier ou aux astuces maison, le calcul est vite fait.</p>
-        </div>
-        <div class="narrow">
-            <div class="cmp-wrap rv">
-                <table class="cmp">
-                    <thead><tr><th></th><th class="us">DMC Pro</th><th>Plombier</th><th>Ventouse / eau bouillante</th></tr></thead>
-                    <tbody>
-                        <tr><td>Prix</td><td class="us">9 000 F</td><td>20 000 – 30 000 F</td><td>Gratuit</td></tr>
-                        <tr><td>Quand ?</td><td class="us">Aujourd'hui</td><td>Selon sa disponibilité</td><td>Tout de suite</td></tr>
-                        <tr><td>Dissout cheveux et graisse</td><td class="us">✔</td><td>✔</td><td class="no">✘ pousse le bouchon</td></tr>
-                        <tr><td>Supprime les odeurs</td><td class="us">✔</td><td>Pas toujours</td><td class="no">✘</td></tr>
-                        <tr><td>Le bouchon revient vite ?</td><td class="us">Non, avec 1 dose / mois</td><td>Possible</td><td class="no">Souvent</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="cmp-note">↔️ Faites glisser le tableau sur téléphone</p>
-            <a href="#commander" class="btn btn-lg btn-buy rv" data-cta style="margin-top:22px">🛒 Je commande à 9 000 F</a>
-        </div>
-    </div>
-</section>
-
 <!-- ══════ AVANT / APRÈS ══════ -->
-<section class="sec" id="avant-apres">
+<section class="sec soft" id="avant-apres">
     <div class="wrap">
         <div class="narrow center">
             <span class="eyebrow rv">Résultats</span>
@@ -907,8 +844,6 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
             fbq('track','Purchase',{value:parseInt($('total').value),currency:'XOF',content_name:p.name,content_ids:[p.id],content_type:'product',num_items:parseInt($('qty').value)},dmcEvt('Purchase'));
         }
         $('sName').textContent=name;$('sPhone').textContent=phone.replace(/^(\d{2})(\d{3})(\d{2})(\d{2})$/,'$1 $2 $3 $4');
-        $('sOrder').textContent=data.orderId||'—';
-        showUpsell({orderId:data.orderId,name,phone,qty:parseInt($('qty').value)||1});
         $('formWrap').style.display='none';
         const s=$('successState');s.classList.add('show');s.scrollIntoView({behavior:'smooth',block:'center'});
         sticky.classList.add('hide');
@@ -919,35 +854,6 @@ document.getElementById('orderForm').addEventListener('submit',async e=>{
         alert('Une erreur est survenue. Merci de réessayer, ou appelez le 76 416 34 15.');
     }
 });
-
-/* ═══════════ OFFRE APRÈS COMMANDE : +1 flacon au prix pack ═══════════ */
-const PACK_PRICES={1:9000,2:15000,3:20000};
-const UPSELL_COPY={
-    1:{title:'Ajoutez un 2e flacon pour seulement 6 000 F',sub:'Un pour la cuisine, un pour la salle de bain. Livré dans le même colis, sans frais de livraison en plus. Au lieu de 9 000 F le flacon seul.'},
-    2:{title:'Passez à 3 flacons pour seulement 5 000 F de plus',sub:'Toute la maison couverte, plus un flacon d\'avance pour la prévention. Livré dans le même colis.'}
-};
-function showUpsell(order){
-    if(!order.orderId||!UPSELL_COPY[order.qty])return;
-    const next=order.qty+1,c=UPSELL_COPY[order.qty];
-    $('upTitle').textContent=c.title;
-    $('upSub').textContent=c.sub;
-    $('upYes').textContent='✅ Oui · total '+fmt(PACK_PRICES[next])+' F';
-    $('upsell').hidden=false;
-    $('upNo').onclick=()=>{$('upsell').hidden=true;};
-    $('upYes').onclick=async()=>{
-        const b=$('upYes');b.disabled=true;b.textContent='⏳ Ajout en cours…';
-        try{
-            const res=await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'upsell',orderId:order.orderId,name:order.name,phone:order.phone,fromQty:order.qty,qty:next})});
-            const d=await res.json().catch(()=>({}));
-            if(!res.ok||!d.ok)throw new Error(d.error||'HTTP '+res.status);
-            $('upDone').textContent='✅ C\'est ajouté ! Vous recevrez '+next+' flacons. Total : '+fmt(PACK_PRICES[next])+' F, payé à la livraison.';
-        }catch(e){
-            console.error(e);
-            $('upDone').textContent='Petit souci technique : dites simplement « je veux '+next+' flacons » quand on vous appelle, on s\'en occupe.';
-        }
-        $('upsell').hidden=true;$('upDone').hidden=false;
-    };
-}
 
 /* ═══════════ BOUTONS "COMMANDER" ═══════════ */
 document.querySelectorAll('a[href="#commander"]').forEach(a=>{
