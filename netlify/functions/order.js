@@ -83,7 +83,11 @@ exports.handler = async (event) => {
         text: buildMessage(type, o),
         parse_mode: 'HTML',
         disable_web_page_preview: true,
-        reply_markup: { inline_keyboard: [[{ text: type === 'abandon' ? '💬 Relancer sur WhatsApp' : '💬 Écrire au client sur WhatsApp', url: whatsappUrl(type, o) }]] },
+        reply_markup: { inline_keyboard: [
+            [{ text: type === 'abandon' ? '💬 Relancer sur WhatsApp' : '💬 Écrire au client sur WhatsApp', url: whatsappUrl(type, o) }],
+            // Rappels clients : gérés par netlify/functions/telegram-webhook.mjs
+            [{ text: '⏰ Demain', callback_data: 'r|1' }, { text: '⏰ Dans 3 jours', callback_data: 'r|3' }, { text: '📅 Autre date', callback_data: 'r|ask' }],
+        ] },
     };
 
     const results = await Promise.all(CHAT_IDS.map(chat_id =>

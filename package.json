@@ -1,0 +1,8 @@
+{
+  "name": "dmc-store",
+  "private": true,
+  "description": "Landing DMC Store — fonctions Netlify (commandes Telegram, rappels clients)",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.6"
+  }
+}
