@@ -8,8 +8,13 @@ const LEGACY_TOKEN = '8993836003:AAFRa8Lgm0WnapvbTTaDwTYDidNiGJT2I-M';
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || LEGACY_TOKEN;
 const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '8224396442').split(',').map(s => s.trim()).filter(Boolean);
 
-const PRODUCT = { name: 'Déboucheur DMC Pro', label: 'déboucheur(s)' };
-const PRICES = { 1: 9000, 2: 15000, 3: 20000 };
+const PRODUCTS = {
+    deboucheur: { name: 'Déboucheur DMC Pro', label: 'déboucheur(s)', short: 'déboucheur', prices: { 1: 9000, 2: 15000, 3: 20000 } },
+    peluche: { name: 'Ours en Peluche Géant', label: 'peluche(s)', short: 'ours en peluche', prices: { 1: 50000 }, colors: ['Rose', 'Beige', 'Blanc', 'Marron'] },
+};
+// Rétro-compatibilité (tests, rappels) : le déboucheur reste le produit par défaut
+const PRODUCT = PRODUCTS.deboucheur;
+const PRICES = PRODUCT.prices;
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const clip = (s, n) => String(s ?? '').trim().slice(0, n);
@@ -25,17 +30,20 @@ function normalizePhone(raw) {
 const prettyPhone = d => `${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5, 7)} ${d.slice(7)}`;
 
 function buildMessage(type, o) {
-    const total = money(PRICES[o.qty]);
+    const P = PRODUCTS[o.product] || PRODUCT;
+    const total = money(P.prices[o.qty]);
     const date = new Date().toLocaleString('fr-FR', { timeZone: 'Africa/Dakar', dateStyle: 'short', timeStyle: 'short' });
     const lines = type === 'abandon'
         ? [`⚠️ <b>PANIER ABANDONNÉ — DMC Store</b>`, ``, `Ce client a rempli le formulaire mais n'a pas validé. Relance-le vite !`, ``]
-        : [`🛒 <b>NOUVELLE COMMANDE — DMC Store</b>`, ``, `🏷️ <b>Produit :</b> ${esc(PRODUCT.name)}`];
+        : [`🛒 <b>NOUVELLE COMMANDE — DMC Store</b>`, ``, `🏷️ <b>Produit :</b> ${esc(P.name)}`];
     lines.push(
         `👤 <b>Nom :</b> ${esc(o.name || '(non renseigné)')}`,
         `📞 <b>Téléphone :</b> ${prettyPhone(o.phone)}`,
         `🏙️ <b>Ville :</b> ${esc(o.city || '(non renseignée)')}`,
         `📍 <b>Quartier / adresse :</b> ${esc(o.address || '(non renseigné)')}`,
-        `📦 <b>Quantité :</b> ${o.qty} ${PRODUCT.label}`,
+        ...(type === 'abandon' ? [`🏷️ <b>Produit :</b> ${esc(P.name)}`] : []),
+        ...(o.color ? [`🎨 <b>Couleur :</b> ${esc(o.color)}`] : []),
+        `📦 <b>Quantité :</b> ${o.qty} ${P.label}`,
         `💰 <b>Total :</b> ${total} FCFA`,
         ``,
         `📊 <b>Source :</b> ${esc(o.source || '—')}`,
@@ -47,10 +55,11 @@ function buildMessage(type, o) {
 
 function whatsappUrl(type, o) {
     const firstName = (o.name || '').split(/\s+/)[0];
-    const pack = `${o.qty} déboucheur${o.qty > 1 ? 's' : ''}`;
+    const P = PRODUCTS[o.product] || PRODUCT;
+    const pack = `${o.qty} ${P.short}${o.qty > 1 ? 's' : ''}${o.color ? ' (' + o.color + ')' : ''}`;
     const text = type === 'abandon'
-        ? `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Vous avez commencé une commande de ${pack} (${money(PRICES[o.qty])} F) sur notre site. Souhaitez-vous qu'on vous livre ?`
-        : `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Nous avons bien reçu votre commande de ${pack} pour ${money(PRICES[o.qty])} F. Êtes-vous disponible pour la livraison ?`;
+        ? `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Vous avez commencé une commande de ${pack} (${money(P.prices[o.qty])} F) sur notre site. Souhaitez-vous qu'on vous livre ?`
+        : `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Nous avons bien reçu votre commande de ${pack} pour ${money(P.prices[o.qty])} F. Êtes-vous disponible pour la livraison ?`;
     return `https://wa.me/221${o.phone}?text=${encodeURIComponent(text)}`;
 }
 
@@ -66,12 +75,16 @@ exports.handler = async (event) => {
     if (b.website) return json(200, { ok: true });
 
     const type = b.type === 'abandon' ? 'abandon' : 'order';
+    const product = PRODUCTS[b.product] ? b.product : 'deboucheur';
+    const P = PRODUCTS[product];
     const o = {
+        product,
+        color: P.colors && P.colors.includes(b.color) ? b.color : '',
         name: clip(b.name, 80),
         phone: normalizePhone(b.phone),
         city: clip(b.city, 40),
         address: clip(b.address, 160),
-        qty: PRICES[parseInt(b.qty)] ? parseInt(b.qty) : 1,
+        qty: P.prices[parseInt(b.qty)] ? parseInt(b.qty) : 1,
         source: clip(b.source, 60),
         campaign: clip(b.campaign, 80),
     };
@@ -102,7 +115,7 @@ exports.handler = async (event) => {
         console.error('Telegram a refusé le message', results);
         return json(502, { ok: false, error: 'telegram' });
     }
-    return json(200, { ok: true, total: PRICES[o.qty] });
+    return json(200, { ok: true, total: P.prices[o.qty] });
 };
 
 // Exposé pour les tests locaux
