@@ -404,27 +404,50 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                     <!-- ÉTAPE 1 -->
                     <div class="stepline">
                         <span class="n">1</span>
-                        <h3>Choisissez votre couleur<small>Rose, beige, blanc ou marron</small></h3>
+                        <h3>Choisissez votre formule<small>Plus vous en prenez, moins c'est cher</small></h3>
                     </div>
 
                     <div class="bundles">
-                        <div class="bundle on" data-qty="1" data-price="50000" data-label="1 Ours en peluche géant">
+                        <div class="bundle on" data-qty="1" data-price="50000" data-label="Solo — 1 peluche">
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
-                                <div class="bundle-title">1 Ours en peluche géant</div>
-                                <div class="bundle-sub plain">Environ 1,50 m · livraison gratuite</div>
+                                <div class="bundle-title">Solo — 1 peluche</div>
+                                <div class="bundle-sub plain">1 ours géant, livraison gratuite</div>
                             </div>
                             <div class="bundle-price-wrap">
                                 <div class="bundle-price">50 000 F</div>
+                                <div class="bundle-unit">50 000 F / peluche</div>
+                            </div>
+                        </div>
+                        <div class="bundle" data-qty="2" data-price="95000" data-label="Duo — 2 peluches">
+                            <span class="bundle-tag">🔥 Le plus populaire</span>
+                            <span class="bundle-radio"></span>
+                            <div class="bundle-info">
+                                <div class="bundle-title">Duo — 2 peluches</div>
+                                <div class="bundle-sub">💰 Vous économisez 5 000 F</div>
+                            </div>
+                            <div class="bundle-price-wrap">
+                                <div class="bundle-price">95 000 F</div>
+                                <div class="bundle-unit">47 500 F / peluche</div>
+                            </div>
+                        </div>
+                        <div class="bundle" data-qty="3" data-price="140000" data-label="Trio — 3 peluches">
+                            <span class="bundle-tag gold">💎 Meilleure valeur</span>
+                            <span class="bundle-radio"></span>
+                            <div class="bundle-info">
+                                <div class="bundle-title">Trio — 3 peluches</div>
+                                <div class="bundle-sub">💰 Vous économisez 10 000 F</div>
+                            </div>
+                            <div class="bundle-price-wrap">
+                                <div class="bundle-price">140 000 F</div>
+                                <div class="bundle-unit">46 667 F / peluche</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="fg" id="fgColor" style="margin-top:14px">
-                        <label for="color">Couleur <em>*</em></label>
-                        <select class="inp" id="color" required>
-                            <option>Rose</option><option>Beige</option><option>Blanc</option><option>Marron</option>
-                        </select>
+                        <label>Couleur de chaque peluche <em>*</em> <span class="hint">— vous pouvez mélanger</span></label>
+                        <div id="colorList"></div>
                     </div>
 
                     <div class="notice"><span class="e">⚠️</span><div>Merci de ne commander que si vous êtes prêt(e) à réceptionner et à payer votre colis à la livraison.</div></div>
@@ -486,9 +509,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
 
                         <!-- RÉCAP -->
                         <div class="recap">
-                            <div class="recap-row"><span>Votre pack</span><b id="recapPack">1 Ours en peluche géant</b></div>
+                            <div class="recap-row"><span>Votre pack</span><b id="recapPack">Solo — 1 peluche</b></div>
                             <div class="recap-row" id="recapCityRow" hidden><span>Livraison à</span><b id="recapCity"></b></div>
-                            <div class="recap-row"><span>Couleur</span><b id="recapColor">Rose</b></div>
+                            <div class="recap-row"><span>Couleur(s)</span><b id="recapColor">Rose</b></div>
                             <div class="recap-row"><span>Livraison</span><b class="free">GRATUITE</b></div>
                             <div class="recap-row"><span>Paiement</span><b>À la livraison</b></div>
                             <div class="recap-row recap-total"><span>Total à payer</span><b id="recapTotal">50 000 F</b></div>
@@ -645,7 +668,7 @@ document.querySelectorAll('#galThumbs button').forEach(b=>{
         document.querySelectorAll('#galThumbs button').forEach(x=>x.classList.remove('on'));
         b.classList.add('on');
         $('galMain').src=b.dataset.src;
-        if(b.dataset.color){$('color').value=b.dataset.color;refreshRecap();}
+        if(b.dataset.color){const f=document.querySelector('#colorList select');if(f){f.value=b.dataset.color;refreshRecap();}}
     });
 });
 
@@ -663,7 +686,7 @@ function refreshRecap(){
     $('stickyTotal').textContent=fmt(price)+' F';
     const c=$('city').value;
     $('recapCityRow').hidden=!c;
-    if($('recapColor'))$('recapColor').textContent=$('color').value;
+    if($('recapColor')&&$('colorList').children.length)$('recapColor').textContent=chosenColors().join(' + ');
     $('recapCity').textContent=c;
 }
 function trackAddToCart(){
@@ -676,11 +699,22 @@ document.querySelectorAll('.bundle').forEach(btn=>{
         btn.classList.add('on');
         $('qty').value=btn.dataset.qty;
         $('total').value=btn.dataset.price;
-        refreshRecap();
+        buildColors();
         trackAddToCart();
     });
 });
-$('color').addEventListener('change',()=>{refreshRecap();const m={Rose:'peluche-rose.webp',Beige:'peluche-beige.webp',Blanc:'peluche-blanc.webp',Marron:'peluche-marron.webp'};$('galMain').src=m[$('color').value];document.querySelectorAll('#galThumbs button').forEach(x=>x.classList.toggle('on',x.dataset.color===$('color').value));});
+const COLORS=['Rose','Beige','Blanc','Marron'];const IMG={Rose:'peluche-rose.webp',Beige:'peluche-beige.webp',Blanc:'peluche-blanc.webp',Marron:'peluche-marron.webp'};
+function showColor(c){$('galMain').src=IMG[c];document.querySelectorAll('#galThumbs button').forEach(x=>x.classList.toggle('on',x.dataset.color===c));}
+function chosenColors(){return [...document.querySelectorAll('#colorList select')].map(x=>x.value);}
+function buildColors(){
+    const q=parseInt($('qty').value)||1,prev=chosenColors(),box=$('colorList');box.innerHTML='';
+    for(let i=0;i<q;i++){
+        const sel=document.createElement('select');sel.className='inp';sel.style.marginBottom='8px';sel.setAttribute('aria-label','Couleur peluche '+(i+1));
+        COLORS.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=(q>1?'Peluche '+(i+1)+' : ':'')+c;sel.appendChild(o);});
+        sel.value=prev[i]||prev[0]||'Rose';sel.addEventListener('change',()=>{showColor(sel.value);refreshRecap();});box.appendChild(sel);
+    }
+    refreshRecap();
+}
 $('city').addEventListener('change',()=>{
     refreshRecap();
     const c=$('city').value;
@@ -688,7 +722,7 @@ $('city').addEventListener('change',()=>{
         try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ct=metaCity(c);localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}
     }
 });
-refreshRecap();
+buildColors();
 
 /* ═══════════ VALIDATION SIMPLE ET CLAIRE ═══════════ */
 function setErr(groupId,bad){const g=$(groupId);g.classList.toggle('bad',bad);g.querySelector('.inp').classList.toggle('err',bad);}
@@ -700,7 +734,7 @@ $('phone').addEventListener('blur',function(){if(this.value.trim())setErr('fgPho
 /* ═══════════ ENVOI AU SERVEUR ═══════════ */
 function orderPayload(type){
     const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
-    return {type,product:'peluche',color:$('color').value,name:$('name').value.trim(),phone:$('phone').value.trim(),city:$('city').value,address:$('address').value.trim(),qty:parseInt($('qty').value)||1,source:src.source||'',campaign:src.campaign||'',website:$('website').value};
+    return {type,product:'peluche',color:chosenColors().join(' + '),name:$('name').value.trim(),phone:$('phone').value.trim(),city:$('city').value,address:$('address').value.trim(),qty:parseInt($('qty').value)||1,source:src.source||'',campaign:src.campaign||'',website:$('website').value};
 }
 
 let orderSubmitted=false, abandonSent=false;

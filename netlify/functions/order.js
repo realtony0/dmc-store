@@ -10,7 +10,7 @@ const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '8224396442').split(',').map(
 
 const PRODUCTS = {
     deboucheur: { name: 'Déboucheur DMC Pro', label: 'déboucheur(s)', short: 'déboucheur', prices: { 1: 9000, 2: 15000, 3: 20000 } },
-    peluche: { name: 'Ours en Peluche Géant', label: 'peluche(s)', short: 'ours en peluche', prices: { 1: 50000 }, colors: ['Rose', 'Beige', 'Blanc', 'Marron'] },
+    peluche: { name: 'Ours en Peluche Géant', label: 'peluche(s)', short: 'ours en peluche', plural: 'ours en peluche', prices: { 1: 50000, 2: 95000, 3: 140000 }, colors: ['Rose', 'Beige', 'Blanc', 'Marron'] },
 };
 // Rétro-compatibilité (tests, rappels) : le déboucheur reste le produit par défaut
 const PRODUCT = PRODUCTS.deboucheur;
@@ -56,7 +56,7 @@ function buildMessage(type, o) {
 function whatsappUrl(type, o) {
     const firstName = (o.name || '').split(/\s+/)[0];
     const P = PRODUCTS[o.product] || PRODUCT;
-    const pack = `${o.qty} ${P.short}${o.qty > 1 ? 's' : ''}${o.color ? ' (' + o.color + ')' : ''}`;
+    const pack = `${o.qty} ${o.qty > 1 ? (P.plural || P.short + 's') : P.short}${o.color ? ' (' + o.color + ')' : ''}`;
     const text = type === 'abandon'
         ? `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Vous avez commencé une commande de ${pack} (${money(P.prices[o.qty])} F) sur notre site. Souhaitez-vous qu'on vous livre ?`
         : `Bonjour${firstName ? ' ' + firstName : ''}, c'est DMC Store. Nous avons bien reçu votre commande de ${pack} pour ${money(P.prices[o.qty])} F. Êtes-vous disponible pour la livraison ?`;
@@ -79,7 +79,7 @@ exports.handler = async (event) => {
     const P = PRODUCTS[product];
     const o = {
         product,
-        color: P.colors && P.colors.includes(b.color) ? b.color : '',
+        color: P.colors ? String(b.color || '').split('+').map(c => c.trim()).filter(c => P.colors.includes(c)).slice(0, 3).join(' + ') : '',
         name: clip(b.name, 80),
         phone: normalizePhone(b.phone),
         city: clip(b.city, 40),
