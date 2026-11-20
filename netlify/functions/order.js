@@ -10,7 +10,7 @@ const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '8224396442').split(',').map(
 
 const PRODUCTS = {
     deboucheur: { name: 'Déboucheur DMC Pro', label: 'déboucheur(s)', short: 'déboucheur', prices: { 1: 9000, 2: 15000, 3: 20000 } },
-    peluche: { name: 'Ours en Peluche Géant', label: 'peluche(s)', short: 'ours en peluche', plural: 'ours en peluche', prices: { 1: 50000, 2: 95000, 3: 140000 }, colors: ['Rose', 'Beige', 'Blanc', 'Marron'] },
+    peluche: { name: 'Ours en Peluche Géant', label: 'peluche(s)', short: 'ours en peluche', plural: 'ours en peluche', prices: { 1: 40000, 2: 75000, 3: 110000 }, colors: ['Rose', 'Beige', 'Blanc', 'Marron'] },
 };
 // Rétro-compatibilité (tests, rappels) : le déboucheur reste le produit par défaut
 const PRODUCT = PRODUCTS.deboucheur;
