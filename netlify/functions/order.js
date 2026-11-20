@@ -111,33 +111,28 @@ exports.handler = async (event) => {
         }).then(r => r.json()).catch(e => ({ ok: false, description: String(e) }))
     ));
 
-    // Enregistrement pour l'espace de gestion (gestion.html). Ne bloque jamais la commande :
-    // si l'enregistrement échoue, le message Telegram est déjà parti et le client voit quand même la confirmation.
+    // Enregistrement pour l'espace de gestion (gestion.html), fait par la fonction /api/gestion.
+    // Ne bloque jamais la commande : si l'enregistrement échoue, le message Telegram est déjà parti.
     let saved = false;
     try {
-        const { getStore, connectLambda } = require('@netlify/blobs');
-        connectLambda(event);
-        const store = getStore({ name: 'commandes', consistency: 'strong' });
-        const now = new Date();
-        const cle = 'mois/' + now.toISOString().slice(0, 7);
-        const liste = (await store.get(cle, { type: 'json' })) || [];
-        liste.push({
-            id: now.getTime().toString(36) + Math.random().toString(36).slice(2, 6),
-            t: now.toISOString(), type, ...o, total: P.prices[o.qty],
-            statut: type === 'abandon' ? 'abandon' : 'nouvelle',
-            telegram: results.some(r => r.ok),
+        const base = process.env.URL || `https://${event.headers.host}`;
+        const cle = require('node:crypto').createHash('sha256').update('dmc-gestion:' + BOT_TOKEN).digest('hex').slice(0, 48);
+        const r = await fetch(base + '/api/gestion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'enregistrer', cle, commande: { type, ...o, total: P.prices[o.qty], telegram: results.some(x => x.ok) } }),
+            signal: AbortSignal.timeout(6000),
         });
-        await store.setJSON(cle, liste);
-        saved = true;
+        saved = r.ok;
     } catch (e) {
-        console.error('Enregistrement de la commande impossible', e); global.__saveErr = e && e.message;
+        console.error('Enregistrement de la commande impossible', e);
     }
 
     if (!results.some(r => r.ok)) {
         console.error('Telegram a refusé le message', results);
         return json(502, { ok: false, error: 'telegram' });
     }
-    return json(200, { ok: true, total: P.prices[o.qty], saved, why: saved ? undefined : String(global.__saveErr || '').slice(0, 200) });
+    return json(200, { ok: true, total: P.prices[o.qty], saved });
 };
 
 // Exposé pour les tests locaux

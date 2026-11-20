@@ -1,7 +1,11 @@
 // Espace de gestion DMC Store (gestion.html) : lecture et suivi des commandes enregistrées par order.js.
 // Accès par code à chiffres. Seule une empreinte du code est stockée (scrypt + sel), jamais le code lui-même.
 import { getStore } from '@netlify/blobs';
-import { scryptSync, randomBytes, timingSafeEqual } from 'node:crypto';
+import { scryptSync, randomBytes, timingSafeEqual, createHash } from 'node:crypto';
+import { BOT_TOKEN } from '../lib/rappels.mjs';
+
+// Clé interne partagée avec order.js (dérivée de la clé du bot, jamais envoyée au navigateur)
+const CLE_INTERNE = createHash('sha256').update('dmc-gestion:' + BOT_TOKEN).digest('hex').slice(0, 48);
 
 const J = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 const empreinte = (sel, code) => scryptSync(code, sel, 32).toString('hex');
@@ -12,6 +16,25 @@ export default async (req) => {
     if (req.method !== 'POST') return J({ ok: false, error: 'method' }, 405);
     let b;
     try { b = await req.json(); } catch { return J({ ok: false, error: 'json' }, 400); }
+
+    if (b.action === 'enregistrer') {
+        if (b.cle !== CLE_INTERNE || !b.commande || typeof b.commande !== 'object') return J({ ok: false, error: 'interdit' }, 403);
+        const store = getStore({ name: 'commandes', consistency: 'strong' });
+        const now = new Date();
+        const cle = 'mois/' + now.toISOString().slice(0, 7);
+        const liste = (await store.get(cle, { type: 'json' })) || [];
+        const c = b.commande;
+        liste.push({
+            id: now.getTime().toString(36) + Math.random().toString(36).slice(2, 6), t: now.toISOString(),
+            type: c.type === 'abandon' ? 'abandon' : 'order', product: String(c.product || ''), color: String(c.color || ''),
+            name: String(c.name || '').slice(0, 80), phone: String(c.phone || '').slice(0, 12), city: String(c.city || '').slice(0, 40),
+            address: String(c.address || '').slice(0, 160), qty: Number(c.qty) || 1, total: Number(c.total) || 0,
+            source: String(c.source || '').slice(0, 60), campaign: String(c.campaign || '').slice(0, 80),
+            statut: c.type === 'abandon' ? 'abandon' : 'nouvelle', telegram: !!c.telegram,
+        });
+        await store.setJSON(cle, liste);
+        return J({ ok: true });
+    }
 
     const reglages = getStore({ name: 'gestion', consistency: 'strong' });
     const auth = await reglages.get('auth', { type: 'json' });
