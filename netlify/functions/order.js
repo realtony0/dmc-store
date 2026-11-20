@@ -111,11 +111,33 @@ exports.handler = async (event) => {
         }).then(r => r.json()).catch(e => ({ ok: false, description: String(e) }))
     ));
 
+    // Enregistrement pour l'espace de gestion (gestion.html). Ne bloque jamais la commande :
+    // si l'enregistrement échoue, le message Telegram est déjà parti et le client voit quand même la confirmation.
+    let saved = false;
+    try {
+        const { getStore, connectLambda } = require('@netlify/blobs');
+        connectLambda(event);
+        const store = getStore({ name: 'commandes', consistency: 'strong' });
+        const now = new Date();
+        const cle = 'mois/' + now.toISOString().slice(0, 7);
+        const liste = (await store.get(cle, { type: 'json' })) || [];
+        liste.push({
+            id: now.getTime().toString(36) + Math.random().toString(36).slice(2, 6),
+            t: now.toISOString(), type, ...o, total: P.prices[o.qty],
+            statut: type === 'abandon' ? 'abandon' : 'nouvelle',
+            telegram: results.some(r => r.ok),
+        });
+        await store.setJSON(cle, liste);
+        saved = true;
+    } catch (e) {
+        console.error('Enregistrement de la commande impossible', e);
+    }
+
     if (!results.some(r => r.ok)) {
         console.error('Telegram a refusé le message', results);
         return json(502, { ok: false, error: 'telegram' });
     }
-    return json(200, { ok: true, total: P.prices[o.qty] });
+    return json(200, { ok: true, total: P.prices[o.qty], saved });
 };
 
 // Exposé pour les tests locaux

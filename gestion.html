@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0C1B2A">
+<title>DMC Store — Gestion</title>
+<!-- Pas de pixel Meta ici : cette page est réservée au vendeur. -->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0C1B2A;--bg:#F3F6FA;--card:#fff;--line:#DCE3EC;--txt:#0C1B2A;--mut:#5C6B7C;--or:#FF7A00;--ok:#16794C;--bad:#B3261E;--warn:#9A6400;--blue:#1B62C4}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--txt);font-size:15px;line-height:1.45;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+[hidden]{display:none!important}
+header{background:var(--navy);color:#fff;padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:5}
+header h1{font-size:17px;font-weight:700}
+header button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:8px;padding:8px 12px;font-size:14px}
+main{max-width:720px;margin:0 auto;padding:14px 14px 0;display:flex;flex-direction:column;gap:12px}
+.login{max-width:360px;margin:12vh auto 0;padding:0 20px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.login h2{font-size:22px}.login p{color:var(--mut)}
+input,select,textarea{font:inherit;width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--txt)}
+.login input{text-align:center;font-size:24px;letter-spacing:.3em}
+.btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:13px 16px;background:var(--or);color:#fff;width:100%}
+.btn:disabled{opacity:.5}
+.err{color:var(--bad);font-size:14px;min-height:20px}
+.seg{display:flex;background:#E4EAF2;border-radius:10px;padding:3px;gap:3px}
+.seg button{flex:1;font:inherit;font-size:14px;border:0;background:transparent;border-radius:8px;padding:8px 4px;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--txt);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.kpi small{color:var(--mut);font-size:12.5px;display:block}
+.kpi b{font-size:22px;font-variant-numeric:tabular-nums;display:block;margin-top:2px}
+.kpi span{font-size:12.5px;color:var(--mut)}
+h3{font-size:14px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-top:6px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 14px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.row:last-child{border-bottom:0}.row span:first-child{min-width:0;overflow-wrap:anywhere}
+.cmd{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c,var(--line));border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.cmd .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cmd .nom{font-weight:700;font-size:16px;overflow-wrap:anywhere;min-width:0}
+.cmd .tot{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cmd .inf{color:var(--mut);font-size:14px;overflow-wrap:anywhere}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;color:#fff;background:var(--c,var(--mut))}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts a,.acts button{flex:1 1 0;min-width:96px;text-align:center;text-decoration:none;font:inherit;font-size:14px;font-weight:600;padding:10px 8px;border-radius:9px;border:1.5px solid var(--line);background:#fff;color:var(--txt)}
+.acts a.wa{background:#1F9D55;border-color:#1F9D55;color:#fff}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.st button{font:inherit;font-size:12.5px;font-weight:600;padding:9px 2px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--mut)}
+.st button.on{color:#fff;border-color:transparent;background:var(--c)}
+.vide{text-align:center;color:var(--mut);padding:34px 10px}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;padding:12px 4px 13px;color:var(--mut);border-top:3px solid transparent}
+nav button.on{color:var(--or);border-top-color:var(--or)}
+.confirm{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--bad)}
+.confirm button{font:inherit;font-size:13px;padding:7px 10px;border-radius:8px;border:1.5px solid var(--line);background:#fff}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><h1>DMC Store · Gestion</h1><button id="refresh" hidden>Actualiser</button></header>
+
+<section class="login" id="login">
+  <h2 id="loginTitre">Code d'accès</h2>
+  <p id="loginTexte">Entre ton code pour voir les commandes.</p>
+  <input id="code" type="password" inputmode="numeric" autocomplete="off" maxlength="8" aria-label="Code d'accès">
+  <input id="code2" type="password" inputmode="numeric" autocomplete="off" maxlength="8" aria-label="Répéter le code" placeholder="Répéter" hidden>
+  <button class="btn" id="entrer">Entrer</button>
+  <div class="err" id="loginErr" role="alert"></div>
+</section>
+
+<main id="app" hidden>
+  <section id="vue-bilan">
+    <div class="seg" id="periode"><button data-p="jour" class="on">Aujourd'hui</button><button data-p="hier">Hier</button><button data-p="7j">7 jours</button><button data-p="mois">Ce mois</button></div>
+    <div class="kpis" id="kpis" style="margin-top:12px"></div>
+    <h3 style="margin-top:16px">Par produit</h3><div class="box" id="parProduit"></div>
+    <h3 style="margin-top:16px">Par campagne</h3><div class="box" id="parCampagne"></div>
+  </section>
+  <section id="vue-commandes" hidden>
+    <div class="seg" id="filtre"><button data-f="a-traiter" class="on">À traiter</button><button data-f="toutes">Toutes</button><button data-f="livree">Livrées</button><button data-f="abandon">Paniers</button></div>
+    <div id="liste" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
+  </section>
+</main>
+
+<nav id="nav" hidden><button data-v="bilan" class="on">Bilan</button><button data-v="commandes">Commandes <span id="badge"></span></button></nav>
+
+<script>
+const API='/api/gestion', $=id=>document.getElementById(id);
+const F=n=>Math.round(n).toLocaleString('fr-FR').replace(/[  ]/g,' ')+' F';
+const PROD={deboucheur:'Déboucheur',peluche:'Ours en peluche'};
+const ST={nouvelle:['Nouvelle','#1B62C4'],confirmee:['Confirmée','#9A6400'],livree:['Livrée','#16794C'],annulee:['Annulée','#B3261E'],injoignable:['Injoignable','#5C6B7C'],abandon:['Panier abandonné','#8A4FBF']};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let code='',cmds=[],periode='jour',filtre='a-traiter',aCreer=false;
+
+async function api(body){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,...body})});let j={};try{j=await r.json()}catch{}return {status:r.status,...j};}
+const jourDe=d=>d.toISOString().slice(0,10);            // Dakar est à l'heure UTC
+function moisRecents(){const d=new Date(),a=[];for(let i=0;i<2;i++){a.push(new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()-i,1)).toISOString().slice(0,7));}return a;}
+
+async function init(){
+  try{const e=await api({action:'etat'});aCreer=e.ok&&!e.configure;}catch{$('loginErr').textContent='Connexion impossible. Vérifie ta connexion Internet.';return;}
+  if(aCreer){$('loginTitre').textContent='Choisis ton code';$('loginTexte').textContent='Première ouverture : choisis un code de 4 à 8 chiffres. Il te sera demandé à chaque visite.';$('code2').hidden=false;$('entrer').textContent='Créer le code';return;}
+  let s='';try{s=sessionStorage.getItem('dmc_code')||''}catch{}
+  if(s){code=s;charger(true);}
+}
+$('entrer').onclick=async()=>{
+  const c=$('code').value.trim();$('loginErr').textContent='';
+  if(!/^\d{4,8}$/.test(c)){$('loginErr').textContent='Le code doit faire 4 à 8 chiffres.';return;}
+  if(aCreer){if(c!==$('code2').value.trim()){$('loginErr').textContent='Les deux codes ne sont pas identiques.';return;}
+    const r=await api({action:'creer',code:c});if(!r.ok){$('loginErr').textContent=r.error==='deja'?'Un code existe déjà. Recharge la page.':'Création impossible, réessaie.';return;}aCreer=false;}
+  code=c;charger(false);
+};
+$('code').addEventListener('keydown',e=>{if(e.key==='Enter'&&$('code2').hidden)$('entrer').click();});
+
+async function charger(silencieux){
+  $('entrer').disabled=true;
+  let r;try{r=await api({action:'liste',mois:moisRecents()});}catch{r={status:0}}
+  $('entrer').disabled=false;
+  if(!r.ok){code='';try{sessionStorage.removeItem('dmc_code')}catch{}
+    $('login').hidden=false;$('app').hidden=true;$('nav').hidden=true;$('refresh').hidden=true;
+    if(!silencieux||r.status===429)$('loginErr').textContent=r.status===429?'Trop d\'essais. Réessaie dans 15 minutes.':r.status===401?'Code incorrect.':'Chargement impossible, réessaie.';return;}
+  try{sessionStorage.setItem('dmc_code',code)}catch{}
+  cmds=r.commandes.sort((a,b)=>b.t.localeCompare(a.t));
+  $('login').hidden=true;$('app').hidden=false;$('nav').hidden=false;$('refresh').hidden=false;rendre();
+}
+$('refresh').onclick=()=>charger(false);
+
+// Un panier abandonné est « récupéré » si le même numéro a commandé ensuite : on ne le compte plus.
+function paniersOuverts(l){return l.filter(c=>c.statut==='abandon'&&!cmds.some(o=>o.type==='order'&&o.phone===c.phone&&o.t>=c.t));}
+function dansPeriode(c){const j=c.t.slice(0,10),now=new Date();
+  if(periode==='jour')return j===jourDe(now);
+  if(periode==='hier')return j===jourDe(new Date(now-864e5));
+  if(periode==='7j')return c.t>=new Date(now-7*864e5).toISOString();
+  return c.t.slice(0,7)===now.toISOString().slice(0,7);}
+
+function rendre(){
+  const l=cmds.filter(dansPeriode),ord=l.filter(c=>c.type==='order'),val=ord.filter(c=>c.statut!=='annulee'),liv=ord.filter(c=>c.statut==='livree'),ann=ord.filter(c=>c.statut==='annulee'),pan=paniersOuverts(l);
+  const som=a=>a.reduce((s,c)=>s+(c.total||0),0);
+  $('kpis').innerHTML=[['Commandes',val.length,ann.length?ann.length+' annulée(s) en plus':'hors annulées'],['Montant commandé',F(som(val)),'à encaisser à la livraison'],['Livrées',liv.length,val.length?Math.round(liv.length/val.length*100)+' % des commandes':'—'],['Encaissé (livré)',F(som(liv)),'commandes marquées livrées'],['À traiter',ord.filter(c=>c.statut==='nouvelle').length,'nouvelles, pas encore appelées'],['Paniers abandonnés',pan.length,'non récupérés']].map(k=>`<div class="kpi"><small>${k[0]}</small><b>${k[1]}</b><span>${k[2]}</span></div>`).join('');
+  const grp=(key,lab)=>{const m={};val.forEach(c=>{const k=lab(c[key]);(m[k]=m[k]||{n:0,s:0}).n++;m[k].s+=c.total||0;});const e=Object.entries(m).sort((a,b)=>b[1].s-a[1].s);return e.length?e.map(([k,v])=>`<div class="row"><span>${esc(k)}</span><span>${v.n} · ${F(v.s)}</span></div>`).join(''):'<div class="row"><span style="color:var(--mut)">Aucune commande sur cette période</span><span></span></div>';};
+  $('parProduit').innerHTML=grp('product',p=>PROD[p]||p||'—');
+  $('parCampagne').innerHTML=grp('campaign',c=>c||'Sans campagne');
+  const aT=cmds.filter(c=>c.type==='order'&&(c.statut==='nouvelle'||c.statut==='confirmee'||c.statut==='injoignable'));
+  $('badge').textContent=aT.length?'('+aT.length+')':'';
+  let v=filtre==='a-traiter'?aT:filtre==='livree'?cmds.filter(c=>c.statut==='livree'):filtre==='abandon'?paniersOuverts(cmds):cmds.filter(c=>c.type==='order');
+  $('liste').innerHTML=v.length?v.slice(0,150).map(carte).join(''):`<div class="vide">${filtre==='a-traiter'?'Rien à traiter pour le moment.':'Aucune commande ici.'}</div>`;
+}
+function carte(c){
+  const s=ST[c.statut]||ST.nouvelle,d=new Date(c.t),quand=d.toLocaleString('fr-FR',{timeZone:'Africa/Dakar',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+  const tel=String(c.phone||''),telAff=tel.replace(/^(\d\d)(\d\d\d)(\d\d)(\d\d)$/,'$1 $2 $3 $4');
+  const etats=c.type==='order'?`<div class="st">${['nouvelle','confirmee','livree','annulee'].map(k=>`<button data-act="st" data-id="${c.id}" data-st="${k}" class="${c.statut===k?'on':''}" style="--c:${ST[k][1]}">${ST[k][0]}</button>`).join('')}</div>`:'';
+  return `<article class="cmd" style="--c:${s[1]}" data-id="${c.id}">
+    <div class="top"><span class="nom">${esc(c.name||'(sans nom)')}</span><span class="tot">${F(c.total||0)}</span></div>
+    <div><span class="pill" style="--c:${s[1]}">${s[0]}</span> <span class="inf">${quand}</span></div>
+    <div class="inf">${c.qty} × ${esc(PROD[c.product]||c.product)}${c.color?' · '+esc(c.color):''}</div>
+    <div class="inf">${esc([c.city,c.address].filter(Boolean).join(' · ')||'Adresse non renseignée')}</div>
+    <div class="inf">${telAff}${c.campaign?' · '+esc(c.campaign):''}</div>
+    <div class="acts"><a href="tel:+221${tel}">Appeler</a><a class="wa" target="_blank" rel="noopener" href="https://wa.me/221${tel}">WhatsApp</a>${c.type==='order'?`<button data-act="st" data-id="${c.id}" data-st="injoignable">Injoignable</button>`:''}<button data-act="suppr" data-id="${c.id}">Supprimer</button></div>
+    ${etats}<div class="confirm" data-zone="${c.id}" hidden></div></article>`;
+}
+$('liste').addEventListener('click',async e=>{
+  const b=e.target.closest('button[data-act]');if(!b)return;const c=cmds.find(x=>x.id===b.dataset.id);if(!c)return;
+  if(b.dataset.act==='st'){const avant=c.statut;c.statut=b.dataset.st;rendre();const r=await api({action:'maj',mois:c.mois,id:c.id,statut:c.statut});if(!r.ok){c.statut=avant;rendre();}}
+  if(b.dataset.act==='suppr'){const z=document.querySelector(`[data-zone="${c.id}"]`);z.hidden=false;z.innerHTML='Supprimer définitivement ? <button data-act="oui" data-id="'+c.id+'">Oui, supprimer</button><button data-act="non" data-id="'+c.id+'">Non</button>';}
+  if(b.dataset.act==='non'){rendre();}
+  if(b.dataset.act==='oui'){const r=await api({action:'supprimer',mois:c.mois,id:c.id});if(r.ok){cmds=cmds.filter(x=>x.id!==c.id);}rendre();}
+});
+function seg(id,attr,set){$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...$(id).children].forEach(x=>x.classList.toggle('on',x===b));set(b.dataset[attr]);rendre();});}
+seg('periode','p',v=>periode=v);seg('filtre','f',v=>filtre=v);
+$('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...$('nav').children].forEach(x=>x.classList.toggle('on',x===b));$('vue-bilan').hidden=b.dataset.v!=='bilan';$('vue-commandes').hidden=b.dataset.v!=='commandes';window.scrollTo(0,0);});
+init();
+</script>
+</body>
+</html>
