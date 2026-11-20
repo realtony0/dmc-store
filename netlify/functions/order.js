@@ -130,14 +130,14 @@ exports.handler = async (event) => {
         await store.setJSON(cle, liste);
         saved = true;
     } catch (e) {
-        console.error('Enregistrement de la commande impossible', e);
+        console.error('Enregistrement de la commande impossible', e); global.__saveErr = e && e.message;
     }
 
     if (!results.some(r => r.ok)) {
         console.error('Telegram a refusé le message', results);
         return json(502, { ok: false, error: 'telegram' });
     }
-    return json(200, { ok: true, total: P.prices[o.qty], saved });
+    return json(200, { ok: true, total: P.prices[o.qty], saved, why: saved ? undefined : String(global.__saveErr || '').slice(0, 200) });
 };
 
 // Exposé pour les tests locaux
