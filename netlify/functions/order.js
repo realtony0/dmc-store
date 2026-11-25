@@ -87,6 +87,9 @@ exports.handler = async (event) => {
         qty: P.prices[parseInt(b.qty)] ? parseInt(b.qty) : 1,
         source: clip(b.source, 60),
         campaign: clip(b.campaign, 80),
+        fbp: clip(b.fbp, 120), fbc: clip(b.fbc, 400), eid: clip(b.eid, 60),
+        ip: clip(event.headers['x-nf-client-connection-ip'] || event.headers['x-forwarded-for'] || '', 60).split(',')[0].trim(),
+        ua: clip(event.headers['user-agent'], 300),
     };
 
     if (!o.phone) return json(400, { ok: false, error: 'phone' });

@@ -832,9 +832,10 @@ function setErr(groupId,bad){const g=$(groupId);g.classList.toggle('bad',bad);g.
 $('phone').addEventListener('blur',function(){if(this.value.trim())setErr('fgPhone',!snPhone(this.value));});
 
 /* ═══════════ ENVOI AU SERVEUR ═══════════ */
+function dmcIds(){const ck=n=>(document.cookie.match('(?:^|; )'+n+'=([^;]*)')||[])[1]||'';let fbc=ck('_fbc');if(!fbc){const m=location.search.match(/[?&]fbclid=([^&]+)/);if(m)fbc='fb.1.'+Date.now()+'.'+m[1];}return {fbp:ck('_fbp'),fbc,eid:window.__dmcEid||''};}
 function orderPayload(type){
     const src=JSON.parse(sessionStorage.getItem('dmcAdSource')||'{}');
-    return {type,name:$('name').value.trim(),phone:$('phone').value.trim(),city:$('city').value,address:$('address').value.trim(),qty:parseInt($('qty').value)||1,source:src.source||'',campaign:src.campaign||'',website:$('website').value};
+    return {type,name:$('name').value.trim(),phone:$('phone').value.trim(),city:$('city').value,address:$('address').value.trim(),qty:parseInt($('qty').value)||1,source:src.source||'',campaign:src.campaign||'',website:$('website').value,...dmcIds()};
 }
 
 let orderSubmitted=false, abandonSent=false;
