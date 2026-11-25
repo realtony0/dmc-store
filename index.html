@@ -192,6 +192,9 @@ h2{font-size:clamp(25px,5.2vw,36px);font-weight:800;margin-bottom:10px}
 .bundle-tag{position:absolute;top:-10px;right:13px;background:var(--accent);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.4px;padding:3px 10px;border-radius:20px;text-transform:uppercase}
 .bundle-tag.gold{background:var(--ink)}
 
+.p-duo{margin:4px 0 0;font-size:15px;color:var(--ink-2)}.p-duo b{color:var(--green)}
+.upsell{display:flex;align-items:center;gap:10px;background:var(--green-soft);border:1px solid #BFE8CD;border-radius:12px;padding:11px 13px;font-size:13.5px;line-height:1.45;margin:-4px 0 14px}
+.upsell[hidden]{display:none}.upsell button{flex-shrink:0;font:inherit;font-weight:700;font-size:13px;border:0;border-radius:9px;padding:9px 12px;background:var(--green);color:#fff;cursor:pointer}
 .notice{display:flex;gap:9px;background:#FFF8E8;border:1px solid #F5E3B8;border-radius:12px;padding:11px 13px;font-size:13px;color:#7A5A12;line-height:1.5;margin-bottom:16px}
 .notice .e{flex-shrink:0}
 
@@ -359,6 +362,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
             <div class="price-box">
                 <span class="p-now">9 000 F</span>
             </div>
+            <p class="p-duo">ou <b>2 pour 15 000 F</b> — 7 500 F l'unité</p>
             <p class="p-note">Prix TTC · Livraison offerte partout au Sénégal</p>
 
             <ul class="usp">
@@ -413,23 +417,24 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                     </div>
 
                     <div class="bundles">
-                        <div class="bundle on" data-qty="1" data-price="9000" data-label="1 Déboucheur">
+                        <div class="bundle" data-qty="1" data-price="9000" data-label="1 Déboucheur">
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">1 Déboucheur</div>
-                                <div class="bundle-sub plain">Pour dépanner une fois</div>
+                                <div class="bundle-sub plain">Pour un seul bouchon</div>
                             </div>
                             <div class="bundle-price-wrap">
                                 <div class="bundle-price">9 000 F</div>
                                 <div class="bundle-unit">9 000 F / unité</div>
                             </div>
                         </div>
-                        <div class="bundle" data-qty="2" data-price="15000" data-label="2 Déboucheurs">
-                            <span class="bundle-tag">🔥 Le plus populaire</span>
+                        <div class="bundle on" data-qty="2" data-price="15000" data-label="2 Déboucheurs">
+                            <span class="bundle-tag">👍 Conseillé</span>
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">2 Déboucheurs</div>
-                                <div class="bundle-sub">💰 Vous économisez 3 000 F</div>
+                                <div class="bundle-sub plain">Cuisine + salle de bain</div>
+                                <div class="bundle-sub">💰 Vous économisez 3&nbsp;000&nbsp;F</div>
                             </div>
                             <div class="bundle-price-wrap">
                                 <div class="bundle-price">15 000 F</div>
@@ -441,7 +446,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                             <span class="bundle-radio"></span>
                             <div class="bundle-info">
                                 <div class="bundle-title">3 Déboucheurs</div>
-                                <div class="bundle-sub">💰 Vous économisez 7 000 F</div>
+                                <div class="bundle-sub plain">Toute la maison + entretien</div>
+                                <div class="bundle-sub">💰 Vous économisez 7&nbsp;000&nbsp;F</div>
                             </div>
                             <div class="bundle-price-wrap">
                                 <div class="bundle-price">20 000 F</div>
@@ -449,6 +455,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                             </div>
                         </div>
                     </div>
+
+                    <div class="upsell" id="upsell" hidden><span>Pour <b>6&nbsp;000&nbsp;F de plus</b>, prenez-en 2 : un pour la cuisine, un pour la salle de bain.</span><button type="button" id="upsellBtn">Passer à 2</button></div>
 
                     <div class="notice"><span class="e">⚠️</span><div>Merci de ne commander que si vous êtes prêt(e) à réceptionner et à payer votre colis à la livraison.</div></div>
 
@@ -504,16 +512,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
                         </div>
                         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
-                        <input type="hidden" id="qty" value="1">
-                        <input type="hidden" id="total" value="9000">
+                        <input type="hidden" id="qty" value="2">
+                        <input type="hidden" id="total" value="15000">
 
                         <!-- RÉCAP -->
                         <div class="recap">
-                            <div class="recap-row"><span>Votre pack</span><b id="recapPack">1 Déboucheur</b></div>
+                            <div class="recap-row"><span>Votre pack</span><b id="recapPack">2 Déboucheurs</b></div>
                             <div class="recap-row" id="recapCityRow" hidden><span>Livraison à</span><b id="recapCity"></b></div>
                             <div class="recap-row"><span>Livraison</span><b class="free">GRATUITE</b></div>
                             <div class="recap-row"><span>Paiement</span><b>À la livraison</b></div>
-                            <div class="recap-row recap-total"><span>Total à payer</span><b id="recapTotal">9 000 F</b></div>
+                            <div class="recap-row recap-total"><span>Total à payer</span><b id="recapTotal">15 000 F</b></div>
                         </div>
 
                         <!-- ÉTAPE 3 -->
@@ -722,7 +730,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 18px 34px;
 <div class="sticky" id="sticky">
     <div class="sticky-price">
         <div class="t">Total</div>
-        <div class="v" id="stickyTotal">9 000 F</div>
+        <div class="v" id="stickyTotal">15 000 F</div>
     </div>
     <a href="#commander" class="btn btn-buy" data-cta>🛒 Commander</a>
 </div>
@@ -785,6 +793,7 @@ function refreshRecap(){
     const sel=document.querySelector('.bundle.on');
     const price=parseInt(sel.dataset.price);
     $('recapPack').textContent=sel.dataset.label;
+    $('upsell').hidden=sel.dataset.qty!=='1';
     $('recapTotal').textContent=fmt(price)+' F';
     $('stickyTotal').textContent=fmt(price)+' F';
     const c=$('city').value;
@@ -812,6 +821,7 @@ $('city').addEventListener('change',()=>{
         try{const s=JSON.parse(localStorage.getItem('dmc_match')||'{}');s.ct=metaCity(c);localStorage.setItem('dmc_match',JSON.stringify(s));}catch(e){}
     }
 });
+$('upsellBtn').addEventListener('click',()=>document.querySelector('.bundle[data-qty="2"]').click());
 refreshRecap();
 
 /* ═══════════ VALIDATION SIMPLE ET CLAIRE ═══════════ */
